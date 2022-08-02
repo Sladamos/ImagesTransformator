@@ -1,14 +1,8 @@
-#include <iostream>
-#include <string>
-#include "Bitmaps24BitLoader.h"
-using namespace std;
+//Author: Slawomir Adamowicz
+#include "Menu.h"
 
 int main()
 {
-	string name;
-	cin >> name;
-	BitmapsLoader* loader = new Bitmaps24BitLoader;
-	loader->loadBmp(name);
-	delete loader;
+	Menu().startProgram();
 	return 0;
 }
