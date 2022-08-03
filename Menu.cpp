@@ -1,12 +1,14 @@
 #include <iostream>
 #include <iomanip>
 #include "Menu.h"
-#include "HeadersLoader.h"
+#include "HeadersOperator.h"
+#include "PixelsLoader.h"
 using namespace std;
 
 void Menu::startProgram()
 {
 	cout << "Welcome to the Sobel converter\n";
+	output.setName("defaultOutput.bmp");
 	while (isProgramLaunched)
 	{
 		printMenu();
@@ -32,15 +34,22 @@ void Menu::handleOption()
 	{
 	case 1:
 		source.setName(readNameFromInput());
+		source.resetHeaders();
 		break;
 	case 2:
-		HeadersLoader::loadHeaders(source);
+		HeadersOperator::loadHeaders(source);
 		cout << source.getFileHeader() << source.getInfoHeader();
 		break;
 	case 3:
 		output.setName(readNameFromInput());
 		break;
 	case 4:
+		if (HeadersOperator::areHeadersValidate(source))
+		{
+			PixelsLoader::createAndLoadPixels(source);
+			//output.sobelTransformationFrom(source); 3
+			//BitmapsSaver::save(output); 2
+		}
 		break;
 	case 9:
 		isProgramLaunched = false;
@@ -51,8 +60,10 @@ void Menu::handleOption()
 string Menu::readNameFromInput()
 {
 	string name;
-	cout << "New name: ";
-	cin >> name;
+	cout << "New name: "; 
+	cin.ignore();
+	getline(cin, name);
+	name += ".bmp";
 	return name;
 }
 

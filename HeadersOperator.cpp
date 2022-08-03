@@ -1,7 +1,7 @@
-#include "HeadersLoader.h"
+#include "HeadersOperator.h"
 using namespace std;
 
-void HeadersLoader::loadHeaders(Bitmap& bitmap)
+void HeadersOperator::loadHeaders(Bitmap& bitmap)
 {
 	string bitmapName = bitmap.getName();
 	ifstream bitmapFile(bitmapName.c_str(), ios_base::binary);
@@ -14,7 +14,7 @@ void HeadersLoader::loadHeaders(Bitmap& bitmap)
 	}
 }
 
-BitmapFileHeader HeadersLoader::loadBmpFileHeader(ifstream& bitmapFile)
+BitmapFileHeader HeadersOperator::loadBmpFileHeader(ifstream& bitmapFile)
 {
 	BitmapFileHeader fileHeader;
 	bitmapFile.read(reinterpret_cast<char*>(&fileHeader.fileType), 2);
@@ -25,7 +25,7 @@ BitmapFileHeader HeadersLoader::loadBmpFileHeader(ifstream& bitmapFile)
 	return fileHeader;
 }
 
-BitmapInfoHeader HeadersLoader::loadBmpInfoHeader(ifstream& bitmapFile)
+BitmapInfoHeader HeadersOperator::loadBmpInfoHeader(ifstream& bitmapFile)
 {
 	BitmapInfoHeader infoHeader;
 	bitmapFile.read(reinterpret_cast<char*>(&infoHeader.headerSize), 4);
@@ -40,4 +40,11 @@ BitmapInfoHeader HeadersLoader::loadBmpInfoHeader(ifstream& bitmapFile)
 	bitmapFile.read(reinterpret_cast<char*>(&infoHeader.colorsUsed), 4);
 	bitmapFile.read(reinterpret_cast<char*>(&infoHeader.colorsImportant), 4);
 	return infoHeader;
+}
+
+bool HeadersOperator::areHeadersValidate(const Bitmap& bitmap)
+{
+	BitmapFileHeader fileHeader = bitmap.getFileHeader();
+	BitmapInfoHeader infoHeader = bitmap.getInfoHeader();
+	return fileHeader.fileSize > 0 && fileHeader.fileType == 0x4D42 && infoHeader.planes == 1 && fileHeader.offsetData <= sizeof(fileHeader) + sizeof(infoHeader);
 }
