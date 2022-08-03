@@ -3,6 +3,7 @@
 #include "Menu.h"
 #include "HeadersOperator.h"
 #include "PixelsLoader.h"
+#include "BitmapsSaver.h"
 using namespace std;
 
 void Menu::startProgram()
@@ -48,7 +49,9 @@ void Menu::handleOption()
 		{
 			PixelsLoader::createAndLoadPixels(source);
 			//output.sobelTransformationFrom(source); 3
-			//BitmapsSaver::save(output); 2
+			//BitmapsSaver::saveBitmap(output);
+
+			cout << "Transformation done!\n";
 		}
 		break;
 	case 9:
