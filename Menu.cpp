@@ -2,6 +2,7 @@
 #include <iomanip>
 #include "Menu.h"
 #include "HeadersOperator.h"
+#include "MasksOperator.h"
 #include "PixelsLoader.h"
 #include "BitmapsSaver.h"
 using namespace std;
@@ -10,6 +11,7 @@ void Menu::startProgram()
 {
 	cout << "Welcome to the Sobel converter\n";
 	output.setName("defaultOutput.bmp");
+	MasksOperator::initializeMasks();
 	while (isProgramLaunched)
 	{
 		printMenu();
@@ -20,9 +22,9 @@ void Menu::startProgram()
 void Menu::printMenu()
 {
 	cout << endl
-		<< "1." <<  " Source name : " << source.getName() << "\n"
+		<< "1." <<  " Source name: " << source.getName() << "\n"
 		<< "2." <<  " Load headers" << "\n"
-		<< "3." << " Output name : " << output.getName() << "\n"
+		<< "3." << " Output name: " << output.getName() << "\n"
 		<< "4." << " Transform Bitmap" << "\n"
 		<< "9. Exit\n\n\n";
 }
@@ -48,8 +50,8 @@ void Menu::handleOption()
 		if (HeadersOperator::areHeadersValidate(source))
 		{
 			PixelsLoader::createAndLoadPixels(source);
-			//output.sobelTransformationFrom(source); 3
-			//BitmapsSaver::saveBitmap(output);
+			output.sobelTransformationFrom(source);
+			BitmapsSaver::saveBitmap(output);
 
 			cout << "Transformation done!\n";
 		}

@@ -7,18 +7,23 @@ class Bitmap
 {
 public:
 	~Bitmap();
+	void sobelTransformationFrom(const Bitmap& source);
+	int getNumberOfZeroBytes() const;
 	std::string getName() const;
 	BitmapFileHeader getFileHeader() const;
 	BitmapInfoHeader getInfoHeader() const;
 	Pixel** getPixels() const;
-	int getNumberOfZeroBytes() const;
 	void setNumberOfZeroBytes(int numberOfZeroBytes);
-	void setPixels(Pixel** pixels);
 	void setName(const std::string& name);
 	void setFileHeader(const BitmapFileHeader& fileHeader);
 	void setInfoHeader(const BitmapInfoHeader& infoHeader);
+	void createUninitializedPixels();
 	void resetHeaders();
 private:
+	void transformatePixels(Pixel** sourcePixels);
+	void copyValuesFrom(const Bitmap& source);
+	void clearPixelsIfNecessary();
+
 	Pixel** pixels{nullptr};
 	std::string name;
 	BitmapFileHeader fileHeader;

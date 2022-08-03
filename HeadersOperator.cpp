@@ -3,8 +3,7 @@ using namespace std;
 
 void HeadersOperator::loadHeaders(Bitmap& bitmap)
 {
-	string bitmapName = bitmap.getName();
-	ifstream bitmapFile(bitmapName.c_str(), ios_base::binary);
+	ifstream bitmapFile(string("./gfx/") + bitmap.getName(), ios_base::binary);
 	bitmap.resetHeaders();
 	if (bitmapFile.is_open())
 	{

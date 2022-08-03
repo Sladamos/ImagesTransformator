@@ -1,5 +1,52 @@
 #include "Bitmap.h"
 
+void Bitmap::sobelTransformationFrom(const Bitmap& source)
+{
+	copyValuesFrom(source);
+	transformatePixels(source.pixels);
+}
+
+void Bitmap::copyValuesFrom(const Bitmap& source)
+{
+	clearPixelsIfNecessary();
+	fileHeader = source.fileHeader;
+	infoHeader = source.infoHeader;
+	numberOfZeroBytes = source.numberOfZeroBytes;
+	createUninitializedPixels();
+}
+
+void Bitmap::clearPixelsIfNecessary()
+{
+	if (pixels != nullptr)
+	{
+		for (int i = 0; i < infoHeader.bitmapHeight; i++)
+			delete[] pixels[i];
+		delete[] pixels;
+	}
+}
+
+void Bitmap::createUninitializedPixels()
+{
+	pixels = new Pixel* [infoHeader.bitmapHeight];
+	for (int y = 0; y < infoHeader.bitmapHeight; y++)
+	{
+		pixels[y] = new Pixel[infoHeader.bitmapWidth];
+		for (int x = 0; x < infoHeader.bitmapWidth; x++)
+		{
+			pixels[y][x].x = x;
+			pixels[y][x].y = y;
+		}
+	}
+}
+
+void Bitmap::transformatePixels(Pixel** sourcePixels)
+{
+	for (int y = 0; y < infoHeader.bitmapHeight; y++)
+		for (int x = 0; x < infoHeader.bitmapWidth; x++)
+			pixels[y][x].transformate(sourcePixels, infoHeader.bitmapWidth, infoHeader.bitmapHeight);
+			
+}
+
 std::string Bitmap::getName() const
 {
 	return name;
@@ -30,11 +77,6 @@ void Bitmap::setNumberOfZeroBytes(int numberOfZeroBytes)
 	this->numberOfZeroBytes = numberOfZeroBytes;
 }
 
-void Bitmap::setPixels(Pixel** pixels)
-{
-	this->pixels = pixels;
-}
-
 void Bitmap::setName(const std::string& name)
 {
 	this->name = name;
@@ -58,10 +100,5 @@ void Bitmap::resetHeaders()
 
 Bitmap::~Bitmap()
 {
-	if (pixels != nullptr)
-	{
-		for (int i = 0; i < infoHeader.bitmapHeight; i++)
-			delete [] pixels[i];
-		delete [] pixels;
-	}
+	clearPixelsIfNecessary();
 }

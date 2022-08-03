@@ -7,7 +7,7 @@ public:
 	static void createAndLoadPixels(Bitmap& bitmap);
 private:
 	static void loadPixels(std::ifstream& bitmapFile, Bitmap& bitmap);
+	static void loadPixel(std::ifstream& bitmapFile, Pixel& bitmap);
 	static void loadFromFile(Bitmap& bitmap);
-	static Pixel** createUninitializedPixels(int width, int height);
 };
 

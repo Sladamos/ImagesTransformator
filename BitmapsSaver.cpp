@@ -3,7 +3,7 @@ using namespace std;
 
 void BitmapsSaver::saveBitmap(const Bitmap& bitmap)
 {
-	ofstream bitmapFile(bitmap.getName(), ios::binary | ios::out | ios::trunc);
+	ofstream bitmapFile(string("./newGfx/") + bitmap.getName(), ios::binary | ios::out | ios::trunc);
 	if (bitmapFile.is_open())
 	{
 		writeFileHeader(bitmapFile, bitmap.getFileHeader());
@@ -45,11 +45,14 @@ void BitmapsSaver::writePixels(std::ofstream& bitmapFile, const Bitmap& bitmap)
 	for (int y = 0; y < bitmapHeight; y++)
 	{
 		for (int x = 0; x < bitmapWidth; x++)
-		{
-			bitmapFile.write(reinterpret_cast<const char*>(&pixels[y][x].B), sizeof(pixels[y][x].B));
-			bitmapFile.write(reinterpret_cast<const char*>(&pixels[y][x].G), sizeof(pixels[y][x].G));
-			bitmapFile.write(reinterpret_cast<const char*>(&pixels[y][x].R), sizeof(pixels[y][x].R));
-		}
+			writePixel(bitmapFile, pixels[y][x]);
 		bitmapFile.write(zeroBytes.c_str(), bitmap.getNumberOfZeroBytes());
 	}
+}
+
+void BitmapsSaver::writePixel(std::ofstream& bitmapFile, const Pixel& pixel)
+{
+	bitmapFile.write(reinterpret_cast<const char*>(&pixel.B), sizeof(pixel.B));
+	bitmapFile.write(reinterpret_cast<const char*>(&pixel.G), sizeof(pixel.G));
+	bitmapFile.write(reinterpret_cast<const char*>(&pixel.R), sizeof(pixel.R));
 }
