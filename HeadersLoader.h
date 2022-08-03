@@ -1,19 +1,13 @@
 #pragma once
 #include <string>
 #include <fstream>
-#include "BitmapFileHeader.h"
-#include "BitmapInfoHeader.h"
+#include "Bitmap.h"
 class HeadersLoader
 {
 public:
-	static void loadHeaders(const std::string& bitmapName);
-	static BitmapFileHeader getFileHeader();
-	static BitmapInfoHeader getInfoHeader();
+	static void loadHeaders(Bitmap& bitmap);
 private:
-	static void resetHeaders();
-	static void loadBmpFileHeader(std::ifstream& bitmapFile);
-	static void loadBmpInfoHeader(std::ifstream& bitmapFile);
-	static BitmapFileHeader fileHeader;
-	static BitmapInfoHeader infoHeader;
+	static BitmapFileHeader loadBmpFileHeader(std::ifstream& bitmapFile);
+	static BitmapInfoHeader loadBmpInfoHeader(std::ifstream& bitmapFile);
 };
 

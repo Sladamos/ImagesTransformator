@@ -1,48 +1,33 @@
 #include "HeadersLoader.h"
 using namespace std;
 
-BitmapFileHeader HeadersLoader::fileHeader{};
-BitmapInfoHeader HeadersLoader::infoHeader{};
-
-BitmapFileHeader HeadersLoader::getFileHeader()
+void HeadersLoader::loadHeaders(Bitmap& bitmap)
 {
-	return fileHeader;
-}
-
-BitmapInfoHeader HeadersLoader::getInfoHeader()
-{
-	return infoHeader;
-}
-
-void HeadersLoader::loadHeaders(const string& bitmapName)
-{
+	string bitmapName = bitmap.getName();
 	ifstream bitmapFile(bitmapName.c_str(), ios_base::binary);
-	resetHeaders();
+	bitmap.resetHeaders();
 	if (bitmapFile.is_open())
 	{
-		loadBmpFileHeader(bitmapFile);
-		loadBmpInfoHeader(bitmapFile);
+		bitmap.setFileHeader(loadBmpFileHeader(bitmapFile));
+		bitmap.setInfoHeader(loadBmpInfoHeader(bitmapFile));
 		bitmapFile.close();
 	}
 }
 
-void HeadersLoader::resetHeaders()
+BitmapFileHeader HeadersLoader::loadBmpFileHeader(ifstream& bitmapFile)
 {
-	fileHeader = BitmapFileHeader();
-	infoHeader = BitmapInfoHeader();
-}
-
-void HeadersLoader::loadBmpFileHeader(ifstream& bitmapFile)
-{
+	BitmapFileHeader fileHeader;
 	bitmapFile.read(reinterpret_cast<char*>(&fileHeader.fileType), 2);
 	bitmapFile.read(reinterpret_cast<char*>(&fileHeader.fileSize), 4);
 	bitmapFile.read(reinterpret_cast<char*>(&fileHeader.reservedField1), 2);
 	bitmapFile.read(reinterpret_cast<char*>(&fileHeader.reservedField2), 2);
 	bitmapFile.read(reinterpret_cast<char*>(&fileHeader.offsetData), 4);
+	return fileHeader;
 }
 
-void HeadersLoader::loadBmpInfoHeader(ifstream& bitmapFile)
+BitmapInfoHeader HeadersLoader::loadBmpInfoHeader(ifstream& bitmapFile)
 {
+	BitmapInfoHeader infoHeader;
 	bitmapFile.read(reinterpret_cast<char*>(&infoHeader.headerSize), 4);
 	bitmapFile.read(reinterpret_cast<char*>(&infoHeader.bitmapWidth), 4);
 	bitmapFile.read(reinterpret_cast<char*>(&infoHeader.bitmapHeight), 4);
@@ -54,4 +39,5 @@ void HeadersLoader::loadBmpInfoHeader(ifstream& bitmapFile)
 	bitmapFile.read(reinterpret_cast<char*>(&infoHeader.verticalResolution), 4);
 	bitmapFile.read(reinterpret_cast<char*>(&infoHeader.colorsUsed), 4);
 	bitmapFile.read(reinterpret_cast<char*>(&infoHeader.colorsImportant), 4);
+	return infoHeader;
 }

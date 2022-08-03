@@ -1,5 +1,5 @@
 #pragma once
-#include <string>
+#include "Bitmap.h"
 class Menu
 {
 public:
@@ -8,9 +8,10 @@ private:
 	void printMenu();
 	void handleOption();
 	void clearConsole();
+	std::string readNameFromInput();
 
 	int option;
 	bool isProgramLaunched{ 1 };
-	std::string sourceName, outputName;
+	Bitmap source, output;
 };
 
