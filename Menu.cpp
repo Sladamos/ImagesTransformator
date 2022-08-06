@@ -1,10 +1,8 @@
 #include <iostream>
 #include <iomanip>
 #include "Menu.h"
-#include "HeadersOperator.h"
 #include "MasksOperator.h"
 #include "PixelsLoader.h"
-#include "BitmapsSaver.h"
 using namespace std;
 
 void Menu::startProgram()
@@ -40,19 +38,18 @@ void Menu::handleOption()
 		source.resetHeaders();
 		break;
 	case 2:
-		HeadersOperator::loadHeaders(source);
+		headersOperator.loadHeaders(source);
 		cout << source.getFileHeader() << source.getInfoHeader();
 		break;
 	case 3:
 		output.setName(readNameFromInput());
 		break;
 	case 4:
-		if (HeadersOperator::areHeadersValidate(source))
+		if (headersOperator.areHeadersValidate(source))
 		{
 			PixelsLoader::createAndLoadPixels(source);
 			output.sobelTransformationFrom(source);
-			BitmapsSaver::saveBitmap(output);
-
+			bitmapsSaver.saveBitmap(output);
 			cout << "Transformation done!\n";
 		}
 		break;

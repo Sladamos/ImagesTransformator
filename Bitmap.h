@@ -20,7 +20,7 @@ public:
 	void createUninitializedPixels();
 	void resetHeaders();
 private:
-	void transformatePixels(Pixel** sourcePixels);
+	void transformatePixels(const Bitmap& source);
 	void copyValuesFrom(const Bitmap& source);
 	void clearPixelsIfNecessary();
 

@@ -3,7 +3,7 @@
 void Bitmap::sobelTransformationFrom(const Bitmap& source)
 {
 	copyValuesFrom(source);
-	transformatePixels(source.pixels);
+	transformatePixels(source);
 }
 
 void Bitmap::copyValuesFrom(const Bitmap& source)
@@ -39,11 +39,11 @@ void Bitmap::createUninitializedPixels()
 	}
 }
 
-void Bitmap::transformatePixels(Pixel** sourcePixels)
+void Bitmap::transformatePixels(const Bitmap& source)
 {
 	for (int y = 0; y < infoHeader.bitmapHeight; y++)
 		for (int x = 0; x < infoHeader.bitmapWidth; x++)
-			pixels[y][x].transformate(sourcePixels, infoHeader.bitmapWidth, infoHeader.bitmapHeight);
+			pixels[y][x].transformate(source);
 			
 }
 

@@ -1,5 +1,7 @@
 #pragma once
 #include "Bitmap.h"
+#include "HeadersOperator.h"
+#include "BitmapsSaver.h"
 class Menu
 {
 public:
@@ -13,5 +15,7 @@ private:
 	int option;
 	bool isProgramLaunched{ 1 };
 	Bitmap source, output;
+	HeadersOperator headersOperator;
+	BitmapsSaver bitmapsSaver;
 };
 
