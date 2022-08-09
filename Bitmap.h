@@ -6,8 +6,10 @@
 class Bitmap
 {
 public:
+	Bitmap() = default;
+	Bitmap(const Bitmap& source, const std::string& bitmapName);
 	~Bitmap();
-	void sobelTransformationFrom(const Bitmap& source);
+	friend std::ostream& operator<<(std::ostream& os, const Bitmap& fileHeader);
 	int getNumberOfZeroBytes() const;
 	std::string getName() const;
 	BitmapFileHeader getFileHeader() const;
@@ -19,10 +21,9 @@ public:
 	void setInfoHeader(const BitmapInfoHeader& infoHeader);
 	void createUninitializedPixels();
 	void resetHeaders();
+	void clearPixelsIfNecessary();
 private:
 	void transformatePixels(const Bitmap& source);
-	void copyValuesFrom(const Bitmap& source);
-	void clearPixelsIfNecessary();
 
 	Pixel** pixels{nullptr};
 	std::string name;

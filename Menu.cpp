@@ -8,8 +8,6 @@ using namespace std;
 void Menu::startProgram()
 {
 	cout << "Welcome to the Sobel converter\n";
-	output.setName("defaultOutput.bmp");
-	MasksOperator::initializeMasks();
 	while (isProgramLaunched)
 	{
 		printMenu();
@@ -20,10 +18,10 @@ void Menu::startProgram()
 void Menu::printMenu()
 {
 	cout << endl
-		<< "1." <<  " Source name: " << source.getName() << "\n"
-		<< "2." <<  " Load headers" << "\n"
-		<< "3." << " Output name: " << output.getName() << "\n"
-		<< "4." << " Transform Bitmap" << "\n"
+		<< "1." <<  " Source name: " << source << "\n"
+		<< "2." <<  " Load headers for Sobel" << "\n"
+		<< "3." << " Output name: " << outputName << "\n"
+		<< "4." << " Transform Bitmap by Sobel" << "\n"
 		<< "9. Exit\n\n\n";
 }
 
@@ -38,18 +36,23 @@ void Menu::handleOption()
 		source.resetHeaders();
 		break;
 	case 2:
-		headersOperator.loadHeaders(source);
+		clearBeforeHeadersUpdate();
+		headersOperator = new SobelHeadersOperator();
+		bitmapTransformator = new SobelTransformator();
+		headersOperator->loadHeaders(source);
+		if(headersOperator->areHeadersValidate(source))
+			PixelsLoader::createAndLoadPixels(source);
 		cout << source.getFileHeader() << source.getInfoHeader();
 		break;
 	case 3:
-		output.setName(readNameFromInput());
+		outputName = readNameFromInput();
 		break;
 	case 4:
-		if (headersOperator.areHeadersValidate(source))
+		if (headersOperator != nullptr && headersOperator->areHeadersValidate(source))
 		{
-			PixelsLoader::createAndLoadPixels(source);
-			output.sobelTransformationFrom(source);
-			bitmapsSaver.saveBitmap(output);
+			Bitmap* output = bitmapTransformator->transformateBitmap(source, outputName);
+			bitmapsSaver.saveBitmap(*output);
+			delete output;
 			cout << "Transformation done!\n";
 		}
 		break;
@@ -57,6 +60,19 @@ void Menu::handleOption()
 		isProgramLaunched = false;
 		break;
 	}
+}
+
+void Menu::clearBeforeHeadersUpdate()
+{
+	if (headersOperator != nullptr)
+		delete headersOperator;
+	headersOperator = nullptr;
+
+	if (bitmapTransformator != nullptr)
+		delete bitmapTransformator;
+	bitmapTransformator = nullptr;
+
+	source.clearPixelsIfNecessary();
 }
 
 string Menu::readNameFromInput()
@@ -72,4 +88,9 @@ string Menu::readNameFromInput()
 void Menu::clearConsole()
 {
 	system("cls");
+}
+
+Menu::~Menu()
+{
+	clearBeforeHeadersUpdate();
 }

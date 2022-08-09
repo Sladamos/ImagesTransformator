@@ -1,13 +1,15 @@
 #pragma once
 #include <vector>
+#include "Mask.h"
 class MasksOperator
 {
 public:
-	constexpr static int numberOfMasks = 4;
-	constexpr static int maskSize = 3;
-	static std::vector<int> getMask(int maskNumber);
-	static void initializeMasks();
+	int getNumberOfMasks();
+	Mask getMask(int maskNumber);
+	const std::vector<Mask>& getMasks();
+protected:
+	std::vector<Mask> masks;
 private:
-	static std::vector<std::vector<int>> masks;
+	virtual void initializeMasks() = 0;
 };
 

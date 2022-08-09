@@ -1,34 +1,20 @@
 #include "MasksOperator.h"
 
-std::vector<std::vector<int>> MasksOperator::masks = std::vector<std::vector<int>>();
-
-std::vector<int> MasksOperator::getMask(int maskNumber)
+int MasksOperator::getNumberOfMasks()
 {
-	std::vector<int> vec;
-	if (maskNumber < masks.size())
-		vec = masks[maskNumber];
-	return vec;
+	return masks.size();
 }
 
-void MasksOperator::initializeMasks()
+
+const std::vector<Mask>& MasksOperator::getMasks()
 {
-	masks.push_back({
-		1, 0, -1,
-		2, 0, -2,
-		1, 0, -1 });
+	return masks;
+}
 
-	masks.push_back({
-		2, 1, 0,
-		1, 0, -1,
-		0, -1, -2 });
-
-	masks.push_back({
-		1, 2, 1,
-		0, 0, 0,
-		-1, -2, -1 });
-	
-	masks.push_back({
-		0, 1, 2,
-		-1, 0, 1,
-		-2, -1, 0 });
+Mask MasksOperator::getMask(int maskNumber)
+{
+	Mask mask;
+	if (maskNumber < masks.size())
+		mask = masks[maskNumber];
+	return mask;
 }

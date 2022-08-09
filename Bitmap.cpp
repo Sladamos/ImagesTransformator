@@ -1,32 +1,16 @@
 #include "Bitmap.h"
 
-void Bitmap::sobelTransformationFrom(const Bitmap& source)
+Bitmap::Bitmap(const Bitmap& source, const std::string& bitmapName) : name(bitmapName)
 {
-	copyValuesFrom(source);
-	transformatePixels(source);
-}
-
-void Bitmap::copyValuesFrom(const Bitmap& source)
-{
-	clearPixelsIfNecessary();
 	fileHeader = source.fileHeader;
 	infoHeader = source.infoHeader;
 	numberOfZeroBytes = source.numberOfZeroBytes;
 	createUninitializedPixels();
 }
 
-void Bitmap::clearPixelsIfNecessary()
-{
-	if (pixels != nullptr)
-	{
-		for (int i = 0; i < infoHeader.bitmapHeight; i++)
-			delete[] pixels[i];
-		delete[] pixels;
-	}
-}
-
 void Bitmap::createUninitializedPixels()
 {
+	clearPixelsIfNecessary();
 	pixels = new Pixel* [infoHeader.bitmapHeight];
 	for (int y = 0; y < infoHeader.bitmapHeight; y++)
 	{
@@ -39,12 +23,15 @@ void Bitmap::createUninitializedPixels()
 	}
 }
 
-void Bitmap::transformatePixels(const Bitmap& source)
+void Bitmap::clearPixelsIfNecessary()
 {
-	for (int y = 0; y < infoHeader.bitmapHeight; y++)
-		for (int x = 0; x < infoHeader.bitmapWidth; x++)
-			pixels[y][x].transformate(source);
-			
+	if (pixels != nullptr)
+	{
+		for (int i = 0; i < infoHeader.bitmapHeight; i++)
+			delete[] pixels[i];
+		delete[] pixels;
+	}
+	pixels = nullptr;
 }
 
 std::string Bitmap::getName() const
@@ -101,4 +88,10 @@ void Bitmap::resetHeaders()
 Bitmap::~Bitmap()
 {
 	clearPixelsIfNecessary();
+}
+
+std::ostream& operator<<(std::ostream& os, const Bitmap& bitmap)
+{
+	os << bitmap.name;
+	return os;
 }
