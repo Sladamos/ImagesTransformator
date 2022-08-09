@@ -1,16 +1,17 @@
 #include "Transformator.h"
 
-Transformator::Transformator(MasksOperator* masksOperator) : masksOperator(masksOperator) {}
+Transformator::Transformator(MasksOperator* masksOperator, const Bitmap& sourceBitmap) : masksOperator(masksOperator),
+sourceBitmap(sourceBitmap), masks(masksOperator->getMasks()) {}
 
-Bitmap* Transformator::transformateBitmap(const Bitmap& source, const std::string& outputName)
+Bitmap* Transformator::transformateBitmap(const std::string& outputName)
 {
-	Bitmap* output = new Bitmap(source, outputName);
+	Bitmap* output = new Bitmap(sourceBitmap, outputName);
 	BitmapInfoHeader infoHeader = output->getInfoHeader();
 	Pixel** pixels = output->getPixels();
 
 	for (int y = 0; y < infoHeader.bitmapHeight; y++)
 		for (int x = 0; x < infoHeader.bitmapWidth; x++)
-			pixels[y][x] = transformatePixel(source, pixels[y][x]);
+			pixels[y][x] = transformatePixel(pixels[y][x]);
 
 	return output;
 }

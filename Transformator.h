@@ -5,12 +5,14 @@
 class Transformator
 {
 public:
-	Transformator(MasksOperator* masksOperator);
+	Transformator(MasksOperator* masksOperator, const Bitmap& sourceBitmap);
 	virtual ~Transformator();
-	Bitmap* transformateBitmap(const Bitmap& source, const std::string& outputName);
+	Bitmap* transformateBitmap(const std::string& outputName);
 protected:
-	MasksOperator* masksOperator;
+	const MasksOperator* masksOperator;
+	const Bitmap& sourceBitmap;
+	const std::vector<Mask> masks;
 private:
-	virtual Pixel transformatePixel(const Bitmap& sourceBitmap, const Pixel& sourcePixel) = 0;
+	virtual Pixel transformatePixel(const Pixel& sourcePixel) = 0;
 };
 

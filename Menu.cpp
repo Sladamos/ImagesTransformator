@@ -36,25 +36,13 @@ void Menu::handleOption()
 		source.resetHeaders();
 		break;
 	case 2:
-		clearBeforeHeadersUpdate();
-		headersOperator = new SobelHeadersOperator();
-		bitmapTransformator = new SobelTransformator();
-		headersOperator->loadHeaders(source);
-		if(headersOperator->areHeadersValidate(source))
-			PixelsLoader::createAndLoadPixels(source);
-		cout << source.getFileHeader() << source.getInfoHeader();
+		loadHeadersOption();
 		break;
 	case 3:
 		outputName = readNameFromInput();
 		break;
 	case 4:
-		if (headersOperator != nullptr && headersOperator->areHeadersValidate(source))
-		{
-			Bitmap* output = bitmapTransformator->transformateBitmap(source, outputName);
-			bitmapsSaver.saveBitmap(*output);
-			delete output;
-			cout << "Transformation done!\n";
-		}
+		transformateBitmapOption();
 		break;
 	case 9:
 		isProgramLaunched = false;
@@ -62,7 +50,21 @@ void Menu::handleOption()
 	}
 }
 
-void Menu::clearBeforeHeadersUpdate()
+void Menu::clearConsole()
+{
+	system("cls");
+}
+
+void Menu::loadHeadersOption()
+{
+	clearCurrentLoadedThings();
+	headersOperator = new SobelHeadersOperator();
+	headersOperator->loadHeaders(source);
+	createBitmapAndTransformatorIfPossible();
+	printHeaders();
+}
+
+void Menu::clearCurrentLoadedThings()
 {
 	if (headersOperator != nullptr)
 		delete headersOperator;
@@ -75,6 +77,20 @@ void Menu::clearBeforeHeadersUpdate()
 	source.clearPixelsIfNecessary();
 }
 
+void Menu::createBitmapAndTransformatorIfPossible()
+{
+	if (headersOperator->areHeadersValidate(source))
+	{
+		PixelsLoader::createAndLoadPixels(source);
+		bitmapTransformator = new SobelTransformator(source);
+	}
+}
+
+void Menu::printHeaders()
+{
+	cout << source.getFileHeader() << source.getInfoHeader();
+}
+
 string Menu::readNameFromInput()
 {
 	string name;
@@ -85,12 +101,20 @@ string Menu::readNameFromInput()
 	return name;
 }
 
-void Menu::clearConsole()
+void Menu::transformateBitmapOption()
 {
-	system("cls");
+	if (headersOperator != nullptr && headersOperator->areHeadersValidate(source))
+	{
+		Bitmap* output = bitmapTransformator->transformateBitmap(outputName);
+		bitmapsSaver.saveBitmap(*output);
+		delete output;
+		cout << "Transformation done!\n";
+	}
+	else
+		cout << "Transformation failed!\n";
 }
 
 Menu::~Menu()
 {
-	clearBeforeHeadersUpdate();
+	clearCurrentLoadedThings();
 }

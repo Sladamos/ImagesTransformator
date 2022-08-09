@@ -10,9 +10,13 @@ public:
 	void startProgram();
 private:
 	void printMenu();
+	void printHeaders();
 	void handleOption();
 	void clearConsole();
-	void clearBeforeHeadersUpdate();
+	void clearCurrentLoadedThings();
+	void createBitmapAndTransformatorIfPossible();
+	void loadHeadersOption();
+	void transformateBitmapOption();
 	std::string readNameFromInput();
 
 	int option;
