@@ -4,7 +4,6 @@ using namespace std;
 void SobelHeadersOperator::loadHeaders(Bitmap& bitmap)
 {
 	ifstream bitmapFile(string("./gfx/") + bitmap.getName(), ios_base::binary);
-	bitmap.resetHeaders();
 	if (bitmapFile.is_open())
 	{
 		bitmap.setFileHeader(loadBmpFileHeader(bitmapFile));

@@ -11,20 +11,21 @@ public:
 private:
 	void printMenu();
 	void printHeaders();
+	void printTransformationResult(bool transformationCorrect);
+	void updateMode();
 	void handleOption();
 	void clearConsole();
-	void clearCurrentLoadedThings();
-	void createBitmapAndTransformatorIfPossible();
+	void createBitmapIfPossible();
 	void loadHeadersOption();
 	void transformateBitmapOption();
 	std::string readNameFromInput();
 
 	int option;
-	bool isProgramLaunched{1};
+	bool programLaunched{true};
 	Bitmap source;
-	std::string outputName{ "defaultOutput.bmp" };
-	HeadersOperator* headersOperator{nullptr};
-	Transformator* bitmapTransformator{nullptr};
+	std::string outputName{ "defaultOutput.bmp" }, currentMode{ "Sobel" };
+	HeadersOperator* headersOperator;
+	Transformator* bitmapTransformator;
 	BitmapsSaver bitmapsSaver;
 };
 

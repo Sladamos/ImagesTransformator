@@ -3,25 +3,33 @@
 #include "Menu.h"
 #include "MasksOperator.h"
 #include "PixelsLoader.h"
+#include "Parser.h"
 using namespace std;
 
 void Menu::startProgram()
 {
-	cout << "Welcome to the Sobel converter\n";
-	while (isProgramLaunched)
+	Parser::initialize(source);
+	updateMode();
+	while (programLaunched)
 	{
 		printMenu();
 		handleOption();
 	}
 }
 
+void Menu::updateMode()
+{
+	bitmapTransformator = Parser::getTransformator(currentMode);
+	headersOperator = Parser::getHeadersOperator(currentMode);
+}
+
 void Menu::printMenu()
 {
 	cout << endl
 		<< "1." <<  " Source name: " << source << "\n"
-		<< "2." <<  " Load headers for Sobel" << "\n"
+		<< "2." <<  " Load source" << "\n"
 		<< "3." << " Output name: " << outputName << "\n"
-		<< "4." << " Transform Bitmap by Sobel" << "\n"
+		<< "4." << " Transform bitmap" << "\n"
 		<< "9. Exit\n\n\n";
 }
 
@@ -33,7 +41,6 @@ void Menu::handleOption()
 	{
 	case 1:
 		source.setName(readNameFromInput());
-		source.resetHeaders();
 		break;
 	case 2:
 		loadHeadersOption();
@@ -45,7 +52,7 @@ void Menu::handleOption()
 		transformateBitmapOption();
 		break;
 	case 9:
-		isProgramLaunched = false;
+		programLaunched = false;
 		break;
 	}
 }
@@ -57,33 +64,16 @@ void Menu::clearConsole()
 
 void Menu::loadHeadersOption()
 {
-	clearCurrentLoadedThings();
-	headersOperator = new SobelHeadersOperator();
+	source.clearPixelsIfNecessary();
 	headersOperator->loadHeaders(source);
-	createBitmapAndTransformatorIfPossible();
+	createBitmapIfPossible();
 	printHeaders();
 }
 
-void Menu::clearCurrentLoadedThings()
-{
-	if (headersOperator != nullptr)
-		delete headersOperator;
-	headersOperator = nullptr;
-
-	if (bitmapTransformator != nullptr)
-		delete bitmapTransformator;
-	bitmapTransformator = nullptr;
-
-	source.clearPixelsIfNecessary();
-}
-
-void Menu::createBitmapAndTransformatorIfPossible()
+void Menu::createBitmapIfPossible()
 {
 	if (headersOperator->areHeadersValidate(source))
-	{
 		PixelsLoader::createAndLoadPixels(source);
-		bitmapTransformator = new SobelTransformator(source);
-	}
 }
 
 void Menu::printHeaders()
@@ -103,18 +93,26 @@ string Menu::readNameFromInput()
 
 void Menu::transformateBitmapOption()
 {
-	if (headersOperator != nullptr && headersOperator->areHeadersValidate(source))
+	bool transformationCorrect = false;
+	if (headersOperator->areHeadersValidate(source))
 	{
 		Bitmap* output = bitmapTransformator->transformateBitmap(outputName);
 		bitmapsSaver.saveBitmap(*output);
 		delete output;
-		cout << "Transformation done!\n";
+		transformationCorrect = true;
 	}
+	printTransformationResult(transformationCorrect);
+}
+
+void Menu::printTransformationResult(bool transformationCorrect)
+{
+	if(transformationCorrect)
+		cout << "Transformation done!\n";
 	else
 		cout << "Transformation failed!\n";
 }
 
 Menu::~Menu()
 {
-	clearCurrentLoadedThings();
+	Parser::clear();
 }

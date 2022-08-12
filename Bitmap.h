@@ -20,10 +20,7 @@ public:
 	void setFileHeader(const BitmapFileHeader& fileHeader);
 	void setInfoHeader(const BitmapInfoHeader& infoHeader);
 	void createUninitializedPixels();
-	void resetHeaders();
 	void clearPixelsIfNecessary();
-private:
-	void transformatePixels(const Bitmap& source);
 
 	Pixel** pixels{nullptr};
 	std::string name;
