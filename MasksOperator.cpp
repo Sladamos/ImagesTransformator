@@ -5,7 +5,6 @@ int MasksOperator::getNumberOfMasks()
 	return masks.size();
 }
 
-
 const std::vector<Mask>& MasksOperator::getMasks()
 {
 	return masks;

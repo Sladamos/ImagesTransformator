@@ -1,9 +1,9 @@
 #include <iostream>
 #include <iomanip>
 #include "Menu.h"
-#include "MasksOperator.h"
 #include "PixelsLoader.h"
 #include "Parser.h"
+#include "ModeSelector.h"
 using namespace std;
 
 void Menu::startProgram()
@@ -29,8 +29,9 @@ void Menu::printMenu()
 		<< "1." <<  " Source name: " << source << "\n"
 		<< "2." <<  " Load source" << "\n"
 		<< "3." << " Output name: " << outputName << "\n"
-		<< "4." << " Transform bitmap" << "\n"
-		<< "9. Exit\n\n\n";
+		<< "4." << " Current mode: " << currentMode << "\n"
+		<< "5." << " Transform bitmap" << "\n"
+		<< "9. Exit\n\n";
 }
 
 void Menu::handleOption()
@@ -49,6 +50,10 @@ void Menu::handleOption()
 		outputName = readNameFromInput();
 		break;
 	case 4:
+		currentMode = ModeSelector::selectNewMode(currentMode);
+		clearConsole();
+		break;
+	case 5:
 		transformateBitmapOption();
 		break;
 	case 9:

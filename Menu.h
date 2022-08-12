@@ -1,8 +1,8 @@
 #pragma once
 #include "Bitmap.h"
-#include "SobelHeadersOperator.h"
-#include "SobelTransformator.h"
 #include "BitmapsSaver.h"
+#include "HeadersOperator.h"
+#include "Transformator.h"
 class Menu
 {
 public:

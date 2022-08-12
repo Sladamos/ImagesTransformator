@@ -1,6 +1,17 @@
 #include "HeadersOperator.h"
 using namespace std;
 
+void HeadersOperator::loadHeaders(Bitmap& bitmap)
+{
+	ifstream bitmapFile(string("./gfx/") + bitmap.getName(), ios_base::binary);
+	if (bitmapFile.is_open())
+	{
+		bitmap.setFileHeader(loadBmpFileHeader(bitmapFile));
+		bitmap.setInfoHeader(loadBmpInfoHeader(bitmapFile));
+		bitmapFile.close();
+	}
+}
+
 BitmapFileHeader HeadersOperator::loadBmpFileHeader(ifstream& bitmapFile)
 {
 	BitmapFileHeader fileHeader;
