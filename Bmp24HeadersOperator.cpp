@@ -1,7 +1,7 @@
-#include "SobelHeadersOperator.h"
+#include "Bmp24HeadersOperator.h"
 using namespace std;
 
-bool SobelHeadersOperator::areHeadersValidate(const Bitmap& bitmap)
+bool Bmp24HeadersOperator::areHeadersValidate(const Bitmap& bitmap)
 {
 	BitmapFileHeader fileHeader = bitmap.getFileHeader();
 	BitmapInfoHeader infoHeader = bitmap.getInfoHeader();

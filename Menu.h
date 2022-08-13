@@ -23,7 +23,7 @@ private:
 	int option;
 	bool programLaunched{true};
 	Bitmap source;
-	std::string outputName{ "defaultOutput.bmp" }, currentMode{ "Sobel" };
+	std::string outputName{ "defaultOutput.bmp" }, currentMode{ "Sobel" }, imageType{ "Bmp24" };
 	HeadersOperator* headersOperator;
 	Transformator* bitmapTransformator;
 	BitmapsSaver bitmapsSaver;

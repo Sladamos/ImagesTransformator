@@ -1,7 +1,8 @@
 #include "Bitmap.h"
 
-Bitmap::Bitmap(const Bitmap& source, const std::string& bitmapName) : name(bitmapName)
+Bitmap::Bitmap(const Bitmap& source, const std::string& bitmapName)
 {
+	name = bitmapName;
 	fileHeader = source.fileHeader;
 	infoHeader = source.infoHeader;
 	numberOfZeroBytes = source.numberOfZeroBytes;
@@ -34,11 +35,6 @@ void Bitmap::clearPixelsIfNecessary()
 	pixels = nullptr;
 }
 
-std::string Bitmap::getName() const
-{
-	return name;
-}
-
 BitmapFileHeader Bitmap::getFileHeader() const
 {
 	return fileHeader;
@@ -64,11 +60,6 @@ void Bitmap::setNumberOfZeroBytes(int numberOfZeroBytes)
 	this->numberOfZeroBytes = numberOfZeroBytes;
 }
 
-void Bitmap::setName(const std::string& name)
-{
-	this->name = name;
-}
-
 void Bitmap::setFileHeader(const BitmapFileHeader& fileHeader)
 {
 	this->fileHeader = fileHeader;
@@ -82,10 +73,4 @@ void Bitmap::setInfoHeader(const BitmapInfoHeader& infoHeader)
 Bitmap::~Bitmap()
 {
 	clearPixelsIfNecessary();
-}
-
-std::ostream& operator<<(std::ostream& os, const Bitmap& bitmap)
-{
-	os << bitmap.name;
-	return os;
 }

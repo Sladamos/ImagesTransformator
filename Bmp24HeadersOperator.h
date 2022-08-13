@@ -1,6 +1,6 @@
 #pragma once
 #include "HeadersOperator.h"
-class SobelHeadersOperator : public HeadersOperator
+class Bmp24HeadersOperator : public HeadersOperator
 {
 public:
 	bool areHeadersValidate(const Bitmap& bitmap) override;

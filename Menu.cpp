@@ -19,8 +19,8 @@ void Menu::startProgram()
 
 void Menu::updateMode()
 {
-	bitmapTransformator = Parser::getTransformator(currentMode);
-	headersOperator = Parser::getHeadersOperator(currentMode);
+	bitmapTransformator = Parser::getTransformator(imageType, currentMode);
+	headersOperator = Parser::getHeadersOperator(imageType);
 }
 
 void Menu::printMenu()
@@ -50,7 +50,7 @@ void Menu::handleOption()
 		outputName = readNameFromInput();
 		break;
 	case 4:
-		currentMode = ModeSelector::selectNewMode(currentMode);
+		currentMode = ModeSelector::selectNewMode(currentMode, Parser::getTransformators(imageType));
 		clearConsole();
 		break;
 	case 5:
@@ -99,7 +99,7 @@ string Menu::readNameFromInput()
 void Menu::transformateBitmapOption()
 {
 	bool transformationCorrect = false;
-	if (headersOperator->areHeadersValidate(source))
+	if (headersOperator->areHeadersValidate(source) && bitmapTransformator != nullptr)
 	{
 		Bitmap* output = bitmapTransformator->transformateBitmap(outputName);
 		bitmapsSaver.saveBitmap(*output);
