@@ -1,11 +1,11 @@
 #include "Bitmap.h"
 
-Bitmap::Bitmap(const Bitmap& source, const std::string& bitmapName)
+Bitmap::Bitmap(Bitmap* source, const std::string& bitmapName)
 {
 	name = bitmapName;
-	fileHeader = source.fileHeader;
-	infoHeader = source.infoHeader;
-	numberOfZeroBytes = source.numberOfZeroBytes;
+	fileHeader = source->fileHeader;
+	infoHeader = source->infoHeader;
+	numberOfZeroBytes = source->numberOfZeroBytes;
 	createUninitializedPixels();
 }
 

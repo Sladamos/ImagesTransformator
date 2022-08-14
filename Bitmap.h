@@ -7,7 +7,7 @@ class Bitmap : public Image
 {
 public:
 	Bitmap() = default;
-	Bitmap(const Bitmap& source, const std::string& bitmapName);
+	Bitmap(Bitmap* source, const std::string& bitmapName);
 	~Bitmap();
 	int getNumberOfZeroBytes() const;
 	BitmapFileHeader getFileHeader() const;

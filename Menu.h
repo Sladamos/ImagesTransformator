@@ -1,11 +1,12 @@
 #pragma once
-#include "Bitmap.h"
-#include "BitmapsSaver.h"
+#include "ImagesSaver.h"
 #include "HeadersOperator.h"
+#include "ImagesLoader.h"
 #include "Transformator.h"
 class Menu
 {
 public:
+	Menu();
 	~Menu();
 	void startProgram();
 private:
@@ -13,19 +14,24 @@ private:
 	void printHeaders();
 	void printTransformationResult(bool transformationCorrect);
 	void updateMode();
+	void updateFormat();
 	void handleOption();
 	void clearConsole();
 	void createBitmapIfPossible();
 	void loadHeadersOption();
-	void transformateBitmapOption();
+	void changeFormatOption();
+	void changeModeOption();
+	void transformateImageOption();
 	std::string readNameFromInput();
+	std::string getImageExtension();
 
 	int option;
 	bool programLaunched{true};
-	Bitmap source;
-	std::string outputName{ "defaultOutput.bmp" }, currentMode{ "Sobel" }, imageType{ "Bmp24" };
+	Bitmap* source{nullptr};
+	std::string outputName{ "defaultOutput.bmp" }, currentMode{ "Sobel" }, imageFormat{ "Bmp24" };
 	HeadersOperator* headersOperator;
-	Transformator* bitmapTransformator;
-	BitmapsSaver bitmapsSaver;
+	Transformator* imagesTransformator;
+	ImagesSaver* imagesSaver;
+	ImagesLoader* contentLoader;
 };
 

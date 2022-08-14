@@ -1,19 +1,14 @@
-#include "BitmapsSaver.h"
+#include "Bmp24Saver.h"
 using namespace std;
 
-void BitmapsSaver::saveBitmap(const Bitmap& bitmap)
+void Bmp24Saver::save(ofstream& bitmapFile, Bitmap* bitmap)
 {
-	ofstream bitmapFile(string("./newGfx/") + bitmap.getName(), ios::binary | ios::out | ios::trunc);
-	if (bitmapFile.is_open())
-	{
-		writeFileHeader(bitmapFile, bitmap.getFileHeader());
-		writeInfoHeader(bitmapFile, bitmap.getInfoHeader());
-		writePixels(bitmapFile, bitmap);
-		bitmapFile.close();
-	}
+	writeFileHeader(bitmapFile, bitmap->getFileHeader());
+	writeInfoHeader(bitmapFile, bitmap->getInfoHeader());
+	writePixels(bitmapFile, bitmap);
 }
 
-void BitmapsSaver::writeFileHeader(ofstream& bitmapFile, const BitmapFileHeader& fileHeader)
+void Bmp24Saver::writeFileHeader(ofstream& bitmapFile, const BitmapFileHeader& fileHeader)
 {
 	bitmapFile.write(reinterpret_cast<const char*>(&fileHeader.fileType), sizeof(fileHeader.fileType));
 	bitmapFile.write(reinterpret_cast<const char*>(&fileHeader.fileSize), sizeof(fileHeader.fileSize));
@@ -22,7 +17,7 @@ void BitmapsSaver::writeFileHeader(ofstream& bitmapFile, const BitmapFileHeader&
 	bitmapFile.write(reinterpret_cast<const char*>(&fileHeader.offsetData), sizeof(fileHeader.offsetData));
 }
 
-void BitmapsSaver::writeInfoHeader(ofstream& bitmapFile, const BitmapInfoHeader& infoHeader)
+void Bmp24Saver::writeInfoHeader(ofstream& bitmapFile, const BitmapInfoHeader& infoHeader)
 {
 	bitmapFile.write(reinterpret_cast<const char*>(&infoHeader.headerSize), sizeof(infoHeader.headerSize));
 	bitmapFile.write(reinterpret_cast<const char*>(&infoHeader.bitmapWidth), sizeof(infoHeader.bitmapWidth));
@@ -37,20 +32,20 @@ void BitmapsSaver::writeInfoHeader(ofstream& bitmapFile, const BitmapInfoHeader&
 	bitmapFile.write(reinterpret_cast<const char*>(&infoHeader.colorsImportant), sizeof(infoHeader.colorsImportant));
 }
 
-void BitmapsSaver::writePixels(std::ofstream& bitmapFile, const Bitmap& bitmap)
+void Bmp24Saver::writePixels(std::ofstream& bitmapFile, Bitmap* bitmap)
 {
-	string zeroBytes(bitmap.getNumberOfZeroBytes(), '0');
-	Pixel** pixels = bitmap.getPixels();
-	int bitmapWidth = bitmap.getInfoHeader().bitmapWidth, bitmapHeight = bitmap.getInfoHeader().bitmapHeight;
+	string zeroBytes(bitmap->getNumberOfZeroBytes(), '0');
+	Pixel** pixels = bitmap->getPixels();
+	int bitmapWidth = bitmap->getInfoHeader().bitmapWidth, bitmapHeight = bitmap->getInfoHeader().bitmapHeight;
 	for (int y = 0; y < bitmapHeight; y++)
 	{
 		for (int x = 0; x < bitmapWidth; x++)
 			writePixel(bitmapFile, pixels[y][x]);
-		bitmapFile.write(zeroBytes.c_str(), bitmap.getNumberOfZeroBytes());
+		bitmapFile.write(zeroBytes.c_str(), bitmap->getNumberOfZeroBytes());
 	}
 }
 
-void BitmapsSaver::writePixel(std::ofstream& bitmapFile, const Pixel& pixel)
+void Bmp24Saver::writePixel(std::ofstream& bitmapFile, const Pixel& pixel)
 {
 	bitmapFile.write(reinterpret_cast<const char*>(&pixel.B), sizeof(pixel.B));
 	bitmapFile.write(reinterpret_cast<const char*>(&pixel.G), sizeof(pixel.G));

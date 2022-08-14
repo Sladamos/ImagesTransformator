@@ -1,15 +1,28 @@
 #include <iostream>
 #include <iomanip>
 #include "Menu.h"
-#include "PixelsLoader.h"
+#include "Bmp24Loader.h"
 #include "Parser.h"
 #include "ModeSelector.h"
+#include "ImagesCreator.h"
 using namespace std;
+
+Menu::Menu()
+{
+	Parser::initialize(source);
+	updateFormat();
+}
+
+void Menu::updateMode()
+{
+	imagesTransformator = Parser::getTransformator(currentMode);
+	headersOperator = Parser::getHeadersOperator(imageFormat);
+	imagesSaver = Parser::getImagesSaver(imageFormat);
+	contentLoader = Parser::getImagesLoader(imageFormat);
+}
 
 void Menu::startProgram()
 {
-	Parser::initialize(source);
-	updateMode();
 	while (programLaunched)
 	{
 		printMenu();
@@ -17,20 +30,15 @@ void Menu::startProgram()
 	}
 }
 
-void Menu::updateMode()
-{
-	bitmapTransformator = Parser::getTransformator(imageType, currentMode);
-	headersOperator = Parser::getHeadersOperator(imageType);
-}
-
 void Menu::printMenu()
 {
 	cout << endl
-		<< "1." <<  " Source name: " << source << "\n"
+		<< "1." <<  " Source name: " << source->getName() << "\n"
 		<< "2." <<  " Load source" << "\n"
 		<< "3." << " Output name: " << outputName << "\n"
-		<< "4." << " Current mode: " << currentMode << "\n"
-		<< "5." << " Transform bitmap" << "\n"
+		<< "4." << " Current format: " << imageFormat << "\n"
+		<< "5." << " Current mode: " << currentMode << "\n"
+		<< "6." << " Transform image" << "\n"
 		<< "9. Exit\n\n";
 }
 
@@ -41,7 +49,7 @@ void Menu::handleOption()
 	switch (option)
 	{
 	case 1:
-		source.setName(readNameFromInput());
+		source->setName(readNameFromInput());
 		break;
 	case 2:
 		loadHeadersOption();
@@ -50,11 +58,13 @@ void Menu::handleOption()
 		outputName = readNameFromInput();
 		break;
 	case 4:
-		currentMode = ModeSelector::selectNewMode(currentMode, Parser::getTransformators(imageType));
-		clearConsole();
+		changeFormatOption();
 		break;
 	case 5:
-		transformateBitmapOption();
+		changeModeOption();
+		break;
+	case 6:
+		transformateImageOption();
 		break;
 	case 9:
 		programLaunched = false;
@@ -69,7 +79,7 @@ void Menu::clearConsole()
 
 void Menu::loadHeadersOption()
 {
-	source.clearPixelsIfNecessary();
+	source->clearPixelsIfNecessary();
 	headersOperator->loadHeaders(source);
 	createBitmapIfPossible();
 	printHeaders();
@@ -78,12 +88,12 @@ void Menu::loadHeadersOption()
 void Menu::createBitmapIfPossible()
 {
 	if (headersOperator->areHeadersValidate(source))
-		PixelsLoader::createAndLoadPixels(source);
+		contentLoader->loadImageContent(source);
 }
 
 void Menu::printHeaders()
 {
-	cout << source.getFileHeader() << source.getInfoHeader();
+	cout << source->getFileHeader() << source->getInfoHeader();
 }
 
 string Menu::readNameFromInput()
@@ -92,17 +102,49 @@ string Menu::readNameFromInput()
 	cout << "New name: "; 
 	cin.ignore();
 	getline(cin, name);
-	name += ".bmp";
+	name += getImageExtension();
 	return name;
 }
 
-void Menu::transformateBitmapOption()
+string Menu::getImageExtension()
+{
+	string imageExtension;
+	if (imageFormat == "Bmp24")
+		imageExtension = ".bmp";
+	return imageExtension;
+}
+
+void Menu::changeFormatOption()
+{
+	string userInput = "Undo";	//TODO: string userInput = FormatSelector::selectNewFormat(Parser::getImagesFormats());
+	if (userInput != "Undo")
+	{
+		imageFormat = userInput;
+		updateFormat();
+	}
+}
+
+void Menu::updateFormat()
+{
+	ImagesCreator::updateImage(source, imageFormat);
+	currentMode = "Sobel";
+	updateMode();
+}
+
+void Menu::changeModeOption()
+{
+	currentMode = ModeSelector::selectNewMode(currentMode, Parser::getTransformatorsWhichSupport(imageFormat));
+	updateMode();
+	clearConsole();
+}
+
+void Menu::transformateImageOption()
 {
 	bool transformationCorrect = false;
-	if (headersOperator->areHeadersValidate(source) && bitmapTransformator != nullptr)
+	if (headersOperator->areHeadersValidate(source) && imagesTransformator != nullptr)
 	{
-		Bitmap* output = bitmapTransformator->transformateBitmap(outputName);
-		bitmapsSaver.saveBitmap(*output);
+		Bitmap* output = imagesTransformator->transformateImage(outputName);
+		imagesSaver->saveImage(output);
 		delete output;
 		transformationCorrect = true;
 	}
