@@ -1,10 +1,11 @@
 #pragma once
 #include <cstdint>
-#include <iostream>
-class BitmapFileHeader
+#include <string>
+class Bmp24FileHeader
 {
 public:    
-	friend std::ostream& operator<<(std::ostream& os, const BitmapFileHeader& fileHeader);
+	std::string toString();
+
 	uint16_t fileType;
 	uint32_t fileSize;               
 	uint16_t reservedField1;              

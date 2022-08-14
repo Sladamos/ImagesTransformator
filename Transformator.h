@@ -1,18 +1,19 @@
 #pragma once
 #include <string>
-#include "Bitmap.h"
+#include "Bmp24.h"
 #include "MasksOperator.h"
 class Transformator
 {
 public:
-	Transformator(MasksOperator* masksOperator, Bitmap*& sourceBitmap);
+	Transformator(MasksOperator* masksOperator, Image*& sourceImage);
 	virtual ~Transformator();
-	Bitmap* transformateImage(const std::string& outputName);
+	Image* transformateImage(const std::string& outputName, const std::string& imageFormat);
 protected:
 	const MasksOperator* masksOperator;
-	Bitmap*& sourceBitmap;
+	Image*& sourceImage;
 	const std::vector<Mask> masks;
 private:
-	virtual Pixel transformatePixel(const Pixel& sourcePixel) = 0;
+	Bmp24* transformateBmp24(const std::string& outputName);
+	virtual Pixel transformatePixel(const Pixel& sourcePixel);
 };
 

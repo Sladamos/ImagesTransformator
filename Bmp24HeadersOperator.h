@@ -3,8 +3,8 @@
 class Bmp24HeadersOperator : public HeadersOperator
 {
 public:
-	bool areHeadersValidate(Bitmap* bitmap) override;
+	bool areHeadersValidate(Image* image) override;
 private:
-	void load(std::ifstream& bitmapFile, Bitmap* bitmap) override;
+	void load(std::ifstream& bitmapFile, Image* bitmap) override;
 };
 

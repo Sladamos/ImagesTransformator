@@ -1,14 +1,15 @@
 #include "Bmp24Saver.h"
 using namespace std;
 
-void Bmp24Saver::save(ofstream& bitmapFile, Bitmap* bitmap)
+void Bmp24Saver::save(ofstream& bitmapFile, Image* image)
 {
+	Bmp24* bitmap = reinterpret_cast<Bmp24*>(image);
 	writeFileHeader(bitmapFile, bitmap->getFileHeader());
 	writeInfoHeader(bitmapFile, bitmap->getInfoHeader());
 	writePixels(bitmapFile, bitmap);
 }
 
-void Bmp24Saver::writeFileHeader(ofstream& bitmapFile, const BitmapFileHeader& fileHeader)
+void Bmp24Saver::writeFileHeader(ofstream& bitmapFile, const Bmp24FileHeader& fileHeader)
 {
 	bitmapFile.write(reinterpret_cast<const char*>(&fileHeader.fileType), sizeof(fileHeader.fileType));
 	bitmapFile.write(reinterpret_cast<const char*>(&fileHeader.fileSize), sizeof(fileHeader.fileSize));
@@ -17,7 +18,7 @@ void Bmp24Saver::writeFileHeader(ofstream& bitmapFile, const BitmapFileHeader& f
 	bitmapFile.write(reinterpret_cast<const char*>(&fileHeader.offsetData), sizeof(fileHeader.offsetData));
 }
 
-void Bmp24Saver::writeInfoHeader(ofstream& bitmapFile, const BitmapInfoHeader& infoHeader)
+void Bmp24Saver::writeInfoHeader(ofstream& bitmapFile, const Bmp24InfoHeader& infoHeader)
 {
 	bitmapFile.write(reinterpret_cast<const char*>(&infoHeader.headerSize), sizeof(infoHeader.headerSize));
 	bitmapFile.write(reinterpret_cast<const char*>(&infoHeader.bitmapWidth), sizeof(infoHeader.bitmapWidth));
@@ -32,7 +33,7 @@ void Bmp24Saver::writeInfoHeader(ofstream& bitmapFile, const BitmapInfoHeader& i
 	bitmapFile.write(reinterpret_cast<const char*>(&infoHeader.colorsImportant), sizeof(infoHeader.colorsImportant));
 }
 
-void Bmp24Saver::writePixels(std::ofstream& bitmapFile, Bitmap* bitmap)
+void Bmp24Saver::writePixels(std::ofstream& bitmapFile, Bmp24* bitmap)
 {
 	string zeroBytes(bitmap->getNumberOfZeroBytes(), '0');
 	Pixel** pixels = bitmap->getPixels();

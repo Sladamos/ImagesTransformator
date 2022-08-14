@@ -1,12 +1,12 @@
 #include "ImagesSaver.h"
 using namespace std;
 
-void ImagesSaver::saveImage(Bitmap* bitmap)
+void ImagesSaver::saveImage(Image* image)
 {
-	ofstream bitmapFile(string("./newGfx/") + bitmap->getName(), ios::binary | ios::out | ios::trunc);
-	if (bitmapFile.is_open())
+	ofstream imageFile(string("./newGfx/") + image->getName(), ios::binary | ios::out | ios::trunc);
+	if (imageFile.is_open())
 	{
-		save(bitmapFile, bitmap);
-		bitmapFile.close();
+		save(imageFile, image);
+		imageFile.close();
 	}
 }

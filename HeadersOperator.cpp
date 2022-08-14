@@ -1,19 +1,19 @@
 #include "HeadersOperator.h"
 using namespace std;
 
-void HeadersOperator::loadHeaders(Bitmap* bitmap)
+void HeadersOperator::loadHeaders(Image* image)
 {
-	ifstream bitmapFile(string("./gfx/") + bitmap->getName(), ios_base::binary);
-	if (bitmapFile.is_open())
+	ifstream imageFile(string("./gfx/") + image->getName(), ios_base::binary);
+	if (imageFile.is_open())
 	{
-		load(bitmapFile, bitmap);
-		bitmapFile.close();
+		load(imageFile, image);
+		imageFile.close();
 	}
 }
 
-BitmapFileHeader HeadersOperator::loadBmpFileHeader(ifstream& bitmapFile)
+Bmp24FileHeader HeadersOperator::loadBmpFileHeader(ifstream& bitmapFile)
 {
-	BitmapFileHeader fileHeader;
+	Bmp24FileHeader fileHeader;
 	bitmapFile.read(reinterpret_cast<char*>(&fileHeader.fileType), sizeof(fileHeader.fileType));
 	bitmapFile.read(reinterpret_cast<char*>(&fileHeader.fileSize), sizeof(fileHeader.fileSize));
 	bitmapFile.read(reinterpret_cast<char*>(&fileHeader.reservedField1), sizeof(fileHeader.reservedField1));
@@ -22,9 +22,9 @@ BitmapFileHeader HeadersOperator::loadBmpFileHeader(ifstream& bitmapFile)
 	return fileHeader;
 }
 
-BitmapInfoHeader HeadersOperator::loadBmpInfoHeader(ifstream& bitmapFile)
+Bmp24InfoHeader HeadersOperator::loadBmpInfoHeader(ifstream& bitmapFile)
 {
-	BitmapInfoHeader infoHeader;
+	Bmp24InfoHeader infoHeader;
 	bitmapFile.read(reinterpret_cast<char*>(&infoHeader.headerSize), sizeof(infoHeader.headerSize));
 	bitmapFile.read(reinterpret_cast<char*>(&infoHeader.bitmapWidth), sizeof(infoHeader.bitmapWidth));
 	bitmapFile.read(reinterpret_cast<char*>(&infoHeader.bitmapHeight), sizeof(infoHeader.bitmapHeight));

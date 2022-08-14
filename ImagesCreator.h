@@ -1,9 +1,9 @@
 #pragma once
 #include <string>
-#include "Bitmap.h"
+#include "Image.h"
 class ImagesCreator
 {
 public:
-	static void updateImage(Bitmap*& image, const std::string& imageFormat);
+	static void updateImage(Image*& image, const std::string& imageFormat);
 };
 

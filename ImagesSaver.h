@@ -1,11 +1,11 @@
 #pragma once
 #include <fstream>
-#include "Bitmap.h"
+#include "Image.h"
 class ImagesSaver
 {
 public:
-	void saveImage(Bitmap* bitmap);
+	void saveImage(Image* image);
 private:
-	virtual void save(std::ofstream& bitmapFile, Bitmap* bitmap) = 0;
+	virtual void save(std::ofstream& imageFile, Image* image) = 0;
 };
 

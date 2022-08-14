@@ -72,13 +72,13 @@ vector<string> Parser::getTransformatorsWhichSupport(const std::string& imageFor
 	return transformatorsNames;
 }
 
-void Parser::initialize(Bitmap*& source)
+void Parser::initialize(Image*& source)
 {
 	initializeTransformators(source);
 	initializeBmp24();
 }
 
-void Parser::initializeTransformators(Bitmap*& source)
+void Parser::initializeTransformators(Image*& source)
 {
 	transformators.insert(pair <string, pair <Transformator*, vector<string>>>("Sobel",
 		pair <Transformator*, vector<string>>(new SobelTransformator(source), vector<string>())));
@@ -103,6 +103,7 @@ void Parser::clear()
 	clearHeadersOperators();
 	clearTransformators();
 	clearSavers();
+	clearLoaders();
 }
 
 void Parser::clearHeadersOperators()
@@ -122,6 +123,13 @@ void Parser::clearTransformators()
 void Parser::clearSavers()
 {
 	for (auto saver : imagesSavers)
+		delete saver.second;
+	imagesSavers.clear();
+}
+
+void Parser::clearLoaders()
+{
+	for (auto saver : imagesLoaders)
 		delete saver.second;
 	imagesSavers.clear();
 }

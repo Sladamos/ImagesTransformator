@@ -1,16 +1,16 @@
 #pragma once
 #include <string>
 #include <fstream>
-#include "Bitmap.h"
+#include "Bmp24.h"
 class HeadersOperator
 {
 public:
-	void loadHeaders(Bitmap* bitmap);
-	virtual bool areHeadersValidate(Bitmap* bitmap) = 0;
+	void loadHeaders(Image* image);
+	virtual bool areHeadersValidate(Image* image) = 0;
 protected:
-	BitmapFileHeader loadBmpFileHeader(std::ifstream& bitmapFile);
-	BitmapInfoHeader loadBmpInfoHeader(std::ifstream& bitmapFile);
+	Bmp24FileHeader loadBmpFileHeader(std::ifstream& bitmapFile);
+	Bmp24InfoHeader loadBmpInfoHeader(std::ifstream& bitmapFile);
 private:
-	virtual void load(std::ifstream& bitmapFile, Bitmap* bitmap) = 0;
+	virtual void load(std::ifstream& imageFile, Image* image) = 0;
 };
 

@@ -1,10 +1,11 @@
 #pragma once
 #include <cstdint>
-#include <iostream>
-class BitmapInfoHeader
+#include <string>
+class Bmp24InfoHeader
 {
 public:
-	friend std::ostream& operator<<(std::ostream& os, const BitmapInfoHeader& infoHeader);
+	std::string toString();
+
 	uint32_t headerSize;
 	int32_t bitmapWidth;
 	int32_t bitmapHeight;

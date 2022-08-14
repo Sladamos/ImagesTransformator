@@ -2,7 +2,7 @@
 #include "SobelTransformator.h"
 #include "SobelMasksOperator.h"
 
-SobelTransformator::SobelTransformator(Bitmap*& sourceBitmap) : Transformator(new SobelMasksOperator(), sourceBitmap) {}
+SobelTransformator::SobelTransformator(Image*& sourceImage) : Transformator(new SobelMasksOperator(), sourceImage) {}
 
 Pixel SobelTransformator::transformatePixel(const Pixel& sourcePixel)
 {	
@@ -37,9 +37,10 @@ int SobelTransformator::transformateColorByMask(const Pixel& sourcePixel, const 
 
 Pixel SobelTransformator::getNeighbourPixel(int row, int column)
 {
+	Bmp24* sourceBmp24 = reinterpret_cast<Bmp24*>(sourceImage);
 	Pixel sourcePixel, blackPixel;
-	if (row < 0 || column < 0 || column >= sourceBitmap->getInfoHeader().bitmapWidth || row >= sourceBitmap->getInfoHeader().bitmapHeight)
+	if (row < 0 || column < 0 || column >= sourceBmp24->getInfoHeader().bitmapWidth || row >= sourceBmp24->getInfoHeader().bitmapHeight)
 		return Pixel();
 	else
-		return sourceBitmap->getPixels()[row][column];
+		return sourceBmp24->getPixels()[row][column];
 }

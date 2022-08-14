@@ -1,15 +1,17 @@
 #include "Bmp24HeadersOperator.h"
 using namespace std;
 
-bool Bmp24HeadersOperator::areHeadersValidate(Bitmap* bitmap)
+bool Bmp24HeadersOperator::areHeadersValidate(Image* image)
 {
-	BitmapFileHeader fileHeader = bitmap->getFileHeader();
-	BitmapInfoHeader infoHeader = bitmap->getInfoHeader();
+	Bmp24* bitmap = reinterpret_cast<Bmp24*>(image);
+	Bmp24FileHeader fileHeader = bitmap->getFileHeader();
+	Bmp24InfoHeader infoHeader = bitmap->getInfoHeader();
 	return fileHeader.fileSize > 0 && fileHeader.fileType == 0x4D42 && infoHeader.planes == 1 && fileHeader.offsetData <= sizeof(fileHeader) + sizeof(infoHeader);
 }
 
-void Bmp24HeadersOperator::load(ifstream& bitmapFile, Bitmap* bitmap)
+void Bmp24HeadersOperator::load(ifstream& bitmapFile, Image* image)
 {
+	Bmp24* bitmap = reinterpret_cast<Bmp24*>(image);
 	bitmap->setFileHeader(loadBmpFileHeader(bitmapFile));
 	bitmap->setInfoHeader(loadBmpInfoHeader(bitmapFile));
 }

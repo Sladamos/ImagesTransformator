@@ -60,7 +60,7 @@ void Menu::handleOption()
 		source->setName(readNameFromInput());
 		break;
 	case 2:
-		loadHeadersOption();
+		loadSourceOption();
 		break;
 	case 3:
 		outputName = readNameFromInput();
@@ -85,23 +85,18 @@ void Menu::clearConsole()
 	system("cls");
 }
 
-void Menu::loadHeadersOption()
+void Menu::loadSourceOption()
 {
 	source->clear();
 	headersOperator->loadHeaders(source);
 	loadContentIfPossible();
-	printHeaders();
+	cout << source->toString();
 }
 
 void Menu::loadContentIfPossible()
 {
 	if (headersOperator->areHeadersValidate(source))
 		contentLoader->loadImageContent(source);
-}
-
-void Menu::printHeaders()
-{
-	cout << source->getFileHeader() << source->getInfoHeader();
 }
 
 string Menu::readNameFromInput()
@@ -145,7 +140,7 @@ void Menu::transformateImageOption()
 	bool transformationCorrect = false;
 	if (headersOperator->areHeadersValidate(source) && imagesTransformator != nullptr)
 	{
-		Bitmap* output = imagesTransformator->transformateImage(outputName);	//TODO Image*
+		Image* output = imagesTransformator->transformateImage(outputName, imageFormat);
 		imagesSaver->saveImage(output);
 		delete output;
 		transformationCorrect = true;
@@ -164,4 +159,5 @@ void Menu::printTransformationResult(bool transformationCorrect)
 Menu::~Menu()
 {
 	Parser::clear();
+	delete source;
 }

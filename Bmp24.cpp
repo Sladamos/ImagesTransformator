@@ -1,6 +1,6 @@
-#include "Bitmap.h"
+#include "Bmp24.h"
 
-Bitmap::Bitmap(Bitmap* source, const std::string& bitmapName)
+Bmp24::Bmp24(Bmp24* source, const std::string& bitmapName)
 {
 	name = bitmapName;
 	fileHeader = source->fileHeader;
@@ -9,7 +9,7 @@ Bitmap::Bitmap(Bitmap* source, const std::string& bitmapName)
 	createUninitializedPixels();
 }
 
-void Bitmap::createUninitializedPixels()
+void Bmp24::createUninitializedPixels()
 {
 	clearPixelsIfNecessary();
 	pixels = new Pixel* [infoHeader.bitmapHeight];
@@ -24,7 +24,7 @@ void Bitmap::createUninitializedPixels()
 	}
 }
 
-void Bitmap::clearPixelsIfNecessary()
+void Bmp24::clearPixelsIfNecessary()
 {
 	if (pixels != nullptr)
 	{
@@ -35,49 +35,54 @@ void Bitmap::clearPixelsIfNecessary()
 	pixels = nullptr;
 }
 
-BitmapFileHeader Bitmap::getFileHeader() const
+Bmp24FileHeader Bmp24::getFileHeader() const
 {
 	return fileHeader;
 }
 
-BitmapInfoHeader Bitmap::getInfoHeader() const
+Bmp24InfoHeader Bmp24::getInfoHeader() const
 {
 	return infoHeader;
 }
 
-Pixel** Bitmap::getPixels() const
+Pixel** Bmp24::getPixels() const
 {
 	return pixels;
 }
 
-int Bitmap::getNumberOfZeroBytes() const
+int Bmp24::getNumberOfZeroBytes() const
 {
 	return numberOfZeroBytes;
 }
 
-void Bitmap::setNumberOfZeroBytes(int numberOfZeroBytes)
+void Bmp24::setNumberOfZeroBytes(int numberOfZeroBytes)
 {
 	this->numberOfZeroBytes = numberOfZeroBytes;
 }
 
-void Bitmap::setFileHeader(const BitmapFileHeader& fileHeader)
+void Bmp24::setFileHeader(const Bmp24FileHeader& fileHeader)
 {
 	this->fileHeader = fileHeader;
 }
 
-void Bitmap::setInfoHeader(const BitmapInfoHeader& infoHeader)
+void Bmp24::setInfoHeader(const Bmp24InfoHeader& infoHeader)
 {
 	this->infoHeader = infoHeader;
 }
 
-void Bitmap::clear()
+void Bmp24::clear()
 {
 	clearPixelsIfNecessary();
-	fileHeader = BitmapFileHeader();
-	infoHeader = BitmapInfoHeader();
+	fileHeader = Bmp24FileHeader();
+	infoHeader = Bmp24InfoHeader();
 }
 
-Bitmap::~Bitmap()
+std::string Bmp24::toString()
+{
+	return fileHeader.toString() + infoHeader.toString();
+}
+
+Bmp24::~Bmp24()
 {
 	clearPixelsIfNecessary();
 }

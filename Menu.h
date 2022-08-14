@@ -11,14 +11,13 @@ public:
 	void startProgram();
 private:
 	void printMenu();
-	void printHeaders();
 	void printTransformationResult(bool transformationCorrect);
 	void updateMode();
 	void updateFormat();
 	void handleOption();
 	void clearConsole();
 	void loadContentIfPossible();
-	void loadHeadersOption();
+	void loadSourceOption();
 	void changeFormatOption();
 	void changeModeOption();
 	void transformateImageOption();
@@ -27,7 +26,7 @@ private:
 
 	int option;
 	bool programLaunched{true};
-	Bitmap* source{nullptr};
+	Image* source{nullptr};
 	std::string outputName{ "defaultOutput.bmp" }, currentMode{ "Sobel" }, imageFormat{ "Bmp24" };
 	HeadersOperator* headersOperator;
 	Transformator* imagesTransformator;

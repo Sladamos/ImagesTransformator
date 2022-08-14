@@ -3,7 +3,7 @@
 class SobelTransformator : public Transformator
 {
 public:
-	SobelTransformator(Bitmap*& sourceBitmap);
+	SobelTransformator(Image*& sourceImage);
 private:
 	Pixel transformatePixel(const Pixel& sourcePixel) override;
 	int transformateColorByMask(const Pixel& sourcePixel, const Mask& mask, Pixel::Color color);
