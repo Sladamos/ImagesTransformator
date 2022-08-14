@@ -17,6 +17,8 @@ public:
 	void setFileHeader(const BitmapFileHeader& fileHeader);
 	void setInfoHeader(const BitmapInfoHeader& infoHeader);
 	void createUninitializedPixels();
+	void clear() override;
+private:
 	void clearPixelsIfNecessary();
 
 	Pixel** pixels{nullptr};

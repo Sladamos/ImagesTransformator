@@ -70,6 +70,13 @@ void Bitmap::setInfoHeader(const BitmapInfoHeader& infoHeader)
 	this->infoHeader = infoHeader;
 }
 
+void Bitmap::clear()
+{
+	clearPixelsIfNecessary();
+	fileHeader = BitmapFileHeader();
+	infoHeader = BitmapInfoHeader();
+}
+
 Bitmap::~Bitmap()
 {
 	clearPixelsIfNecessary();

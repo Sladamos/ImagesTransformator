@@ -14,6 +14,7 @@ public:
 	static ImagesLoader* getImagesLoader(const std::string& imageFormat);
 	static Transformator* getTransformator(const std::string& mode);
 	static std::vector<std::string>& getSupportedFormats(const std::string& mode);
+	static std::vector<std::string> getImagesFormats();
 	static std::vector<std::string> getTransformatorsWhichSupport(const std::string& imageFormat);
 	static void initialize(Bitmap*& source);
 	static void clear();

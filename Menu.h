@@ -17,7 +17,7 @@ private:
 	void updateFormat();
 	void handleOption();
 	void clearConsole();
-	void createBitmapIfPossible();
+	void loadContentIfPossible();
 	void loadHeadersOption();
 	void changeFormatOption();
 	void changeModeOption();

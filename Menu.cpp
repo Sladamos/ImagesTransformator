@@ -4,6 +4,7 @@
 #include "Bmp24Loader.h"
 #include "Parser.h"
 #include "ModeSelector.h"
+#include "FormatSelector.h"
 #include "ImagesCreator.h"
 using namespace std;
 
@@ -11,6 +12,13 @@ Menu::Menu()
 {
 	Parser::initialize(source);
 	updateFormat();
+}
+
+void Menu::updateFormat()
+{
+	ImagesCreator::updateImage(source, imageFormat);
+	currentMode = "Sobel";
+	updateMode();
 }
 
 void Menu::updateMode()
@@ -79,13 +87,13 @@ void Menu::clearConsole()
 
 void Menu::loadHeadersOption()
 {
-	source->clearPixelsIfNecessary();
+	source->clear();
 	headersOperator->loadHeaders(source);
-	createBitmapIfPossible();
+	loadContentIfPossible();
 	printHeaders();
 }
 
-void Menu::createBitmapIfPossible()
+void Menu::loadContentIfPossible()
 {
 	if (headersOperator->areHeadersValidate(source))
 		contentLoader->loadImageContent(source);
@@ -116,19 +124,13 @@ string Menu::getImageExtension()
 
 void Menu::changeFormatOption()
 {
-	string userInput = "Undo";	//TODO: string userInput = FormatSelector::selectNewFormat(Parser::getImagesFormats());
+	string userInput = FormatSelector::selectNewFormat(Parser::getImagesFormats());
 	if (userInput != "Undo")
 	{
 		imageFormat = userInput;
 		updateFormat();
 	}
-}
-
-void Menu::updateFormat()
-{
-	ImagesCreator::updateImage(source, imageFormat);
-	currentMode = "Sobel";
-	updateMode();
+	clearConsole();
 }
 
 void Menu::changeModeOption()
@@ -143,7 +145,7 @@ void Menu::transformateImageOption()
 	bool transformationCorrect = false;
 	if (headersOperator->areHeadersValidate(source) && imagesTransformator != nullptr)
 	{
-		Bitmap* output = imagesTransformator->transformateImage(outputName);
+		Bitmap* output = imagesTransformator->transformateImage(outputName);	//TODO Image*
 		imagesSaver->saveImage(output);
 		delete output;
 		transformationCorrect = true;

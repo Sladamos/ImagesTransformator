@@ -52,6 +52,14 @@ vector<string>& Parser::getSupportedFormats(const std::string& mode)
 	return transformators.find(mode)->second.second;
 }
 
+vector<string> Parser::getImagesFormats()
+{
+	vector<string> imagesFormats;
+	for (auto pairs : headersOperators)
+		imagesFormats.push_back(pairs.first);
+	return imagesFormats;
+}
+
 vector<string> Parser::getTransformatorsWhichSupport(const std::string& imageFormat)
 {
 	vector<string> transformatorsNames;

@@ -11,4 +11,3 @@ private:
 	static std::string updateMode(const std::string& currentMode, const std::vector<std::string>& transformators);
 	static std::string readModeFromInput(const std::vector<std::string>& transformators);
 };
-
