@@ -9,13 +9,13 @@ A simple C++ program used to transform images.
 - Transform
 - Get the transformed image from /newGfx directory
 ## Examples of usage
-![catSourceScreenshot!](gfx/Cat.bmp "Cat source")
-![catOutputScreenshot!](newGfx/Cat.bmp "Cat output")
-![bugInputScreenshot!](gfx/AromiaMoschata.bmp "Bug source")
-![bugOutputScreenshot!](newGfx/AromiaMoschata.bmp "Bug output")
+![catSourceScreenshot](gfx/Cat.bmp "Cat source")
+![catOutputScreenshot](newGfx/Cat.bmp "Cat output")
+![bugInputScreenshot](gfx/AromiaMoschata.bmp "Bug source")
+![bugOutputScreenshot](newGfx/AromiaMoschata.bmp "Bug output")
 ## Development Possibilities
-- [] Add new images formats
-- [] Add or update operators
+- [x] Add new images formats
+- [x] Add or update operators
 ## License
 Distributed under the MIT License. See 'LICENSE.txt' for more information.
 ## Your ideas
