@@ -1,4 +1,6 @@
-*
+/*
+!/gfx/
+!/newGfx/
 !.gitattributes
 !.gitignore
 !readme.md
