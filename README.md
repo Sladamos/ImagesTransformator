@@ -2,17 +2,17 @@
 A simple C++ program used to transform images.
 ## How to transform
 - Put a source image to /gfx directory
-- Launch ImagesTransformator and choose correct format & transformator
+- Launch the program and choose a correct format & transformator
 - Set the source image name
-- Load the source
+- Use the Load source command
 - Set a transformed image name
-- Transform
+- Use the transform image command
 - Get the transformed image from /newGfx directory
 ## Examples of usage
 ![catSourceScreenshot](gfx/Cat.bmp "Cat source")
 ![catOutputScreenshot](newGfx/Cat.bmp "Cat output")
-![bugInputScreenshot](gfx/AromiaMoschata.bmp "Bug source")
-![bugOutputScreenshot](newGfx/AromiaMoschata.bmp "Bug output")
+![bugInputScreenshot](gfx/AromiaMoschata.bmp "Aromia Moschata source")
+![bugOutputScreenshot](newGfx/AromiaMoschata.bmp "Aromia Moschata output")
 ## Development Possibilities
 - [x] Add new images formats
 - [x] Add or update operators
