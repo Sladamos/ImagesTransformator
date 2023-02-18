@@ -1,6 +1,7 @@
 #include <algorithm>
 #include "Parser.h"
 #include "SobelTransformator.h"
+#include "DampelTransformator.h"
 #include "Bmp24HeadersOperator.h"
 #include "Bmp24Saver.h"
 #include "Bmp24Loader.h"
@@ -82,6 +83,8 @@ void Parser::initializeTransformators(Image*& source)
 {
 	transformators.insert(pair <string, pair <Transformator*, vector<string>>>("Sobel",
 		pair <Transformator*, vector<string>>(new SobelTransformator(source), vector<string>())));
+	transformators.insert(pair <string, pair <Transformator*, vector<string>>>("Dampel",
+		pair <Transformator*, vector<string>>(new DampelTransformator(source), vector<string>())));
 }
 
 void Parser::initializeBmp24()
@@ -91,6 +94,7 @@ void Parser::initializeBmp24()
 	imagesSavers.insert(pair <string, ImagesSaver*>(imageFormat, new Bmp24Saver()));
 	imagesLoaders.insert(pair <string, ImagesLoader*>(imageFormat, new Bmp24Loader()));
 	addFormat("Sobel", imageFormat);
+	addFormat("Dampel", imageFormat);
 }
 
 void Parser::addFormat(const string& mode, const string& imageFormat)
