@@ -1,10 +1,7 @@
 #include "Bmp24.h"
 
-Bmp24::Bmp24(Bmp24* source, const std::string& bitmapName)
+Bmp24::Bmp24(Bmp24* source, const std::string& bitmapName) : Image::Image(source, bitmapName)
 {
-	name = bitmapName;
-	fileHeader = source->fileHeader;
-	infoHeader = source->infoHeader;
 	numberOfZeroBytes = source->numberOfZeroBytes;
 	createUninitializedPixels();
 }
@@ -58,23 +55,6 @@ int Bmp24::getNumberOfZeroBytes() const
 void Bmp24::setNumberOfZeroBytes(int numberOfZeroBytes)
 {
 	this->numberOfZeroBytes = numberOfZeroBytes;
-}
-
-void Bmp24::setFileHeader(const Bmp24FileHeader& fileHeader)
-{
-	this->fileHeader = fileHeader;
-}
-
-void Bmp24::setInfoHeader(const Bmp24InfoHeader& infoHeader)
-{
-	this->infoHeader = infoHeader;
-}
-
-void Bmp24::clear()
-{
-	clearPixelsIfNecessary();
-	fileHeader = Bmp24FileHeader();
-	infoHeader = Bmp24InfoHeader();
 }
 
 std::string Bmp24::toString()
