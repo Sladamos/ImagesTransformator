@@ -2,7 +2,7 @@
 #include <cstdint>
 #include <string>
 #include "ImageHeader.h"
-class Bmp24FileHeader : public ImageHeader
+class Bmp24Header : public ImageHeader
 {
 public:    
 	virtual std::string toString() override;
@@ -26,3 +26,4 @@ public:
 	uint32_t colorsImportant;
 };
 
+typedef std::unique_ptr<Bmp24Header> Bmp24HeaderPtr;

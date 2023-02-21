@@ -9,11 +9,12 @@ Bmp24::Bmp24(Bmp24* source, const std::string& bitmapName) : Image::Image(source
 void Bmp24::createUninitializedPixels()
 {
 	clearPixelsIfNecessary();
-	pixels = new Pixel* [infoHeader.bitmapHeight];
-	for (int y = 0; y < infoHeader.bitmapHeight; y++)
+	const Bmp24Header& bmp24Header = dynamic_cast<const Bmp24Header&>(getImageHeader());
+	pixels = new Pixel* [bmp24Header.bitmapHeight];
+	for (int y = 0; y < bmp24Header.bitmapHeight; y++)
 	{
-		pixels[y] = new Pixel[infoHeader.bitmapWidth];
-		for (int x = 0; x < infoHeader.bitmapWidth; x++)
+		pixels[y] = new Pixel[bmp24Header.bitmapWidth];
+		for (int x = 0; x < bmp24Header.bitmapWidth; x++)
 		{
 			pixels[y][x].x = x;
 			pixels[y][x].y = y;
@@ -23,23 +24,14 @@ void Bmp24::createUninitializedPixels()
 
 void Bmp24::clearPixelsIfNecessary()
 {
+	const Bmp24Header& bmp24Header = dynamic_cast<const Bmp24Header&>(getImageHeader());
 	if (pixels != nullptr)
 	{
-		for (int i = 0; i < infoHeader.bitmapHeight; i++)
+		for (int i = 0; i < bmp24Header.bitmapHeight; i++)
 			delete[] pixels[i];
 		delete[] pixels;
 	}
 	pixels = nullptr;
-}
-
-Bmp24FileHeader Bmp24::getFileHeader() const
-{
-	return fileHeader;
-}
-
-Bmp24InfoHeader Bmp24::getInfoHeader() const
-{
-	return infoHeader;
 }
 
 Pixel** Bmp24::getPixels() const
@@ -55,11 +47,6 @@ int Bmp24::getNumberOfZeroBytes() const
 void Bmp24::setNumberOfZeroBytes(int numberOfZeroBytes)
 {
 	this->numberOfZeroBytes = numberOfZeroBytes;
-}
-
-std::string Bmp24::toString()
-{
-	return fileHeader.toString() + infoHeader.toString();
 }
 
 Bmp24::~Bmp24()

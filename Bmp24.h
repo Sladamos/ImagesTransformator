@@ -1,7 +1,7 @@
 #pragma once
 #include "Image.h"
 #include "Pixel.h"
-#include "Bmp24FileHeader.h"
+#include "Bmp24Header.h"
 class Bmp24 : public Image
 {
 public:
@@ -12,7 +12,6 @@ public:
 	Pixel** getPixels() const;
 	void setNumberOfZeroBytes(int numberOfZeroBytes);
 	void createUninitializedPixels();
-	std::string toString() override;
 private:
 	void clearPixelsIfNecessary();
 

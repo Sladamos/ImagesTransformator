@@ -1,7 +1,7 @@
 #include <sstream>
-#include "Bmp24FileHeader.h"
+#include "Bmp24Header.h"
 
-std::string Bmp24FileHeader::toString()
+std::string Bmp24Header::toString()
 {
     std::stringstream output;
     output

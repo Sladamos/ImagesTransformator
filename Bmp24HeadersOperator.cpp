@@ -4,7 +4,7 @@ using namespace std;
 bool Bmp24HeadersOperator::areHeadersValidate(Image* image)
 {
 	Bmp24* bitmap = reinterpret_cast<Bmp24*>(image);
-	Bmp24FileHeader fileHeader = bitmap->getFileHeader();
+	Bmp24Header fileHeader = bitmap->getFileHeader();
 	Bmp24InfoHeader infoHeader = bitmap->getInfoHeader();
 	return fileHeader.fileSize > 0 && fileHeader.fileType == 0x4D42 && infoHeader.planes == 1 && fileHeader.offsetData <= sizeof(fileHeader) + sizeof(infoHeader);
 }

@@ -1,13 +1,18 @@
 #include "Image.h"
 
+Image::Image(Image* source, const std::string& imageName) : name(imageName)
+{
+	imageHeader = std::move(source->imageHeader);
+}
+
 std::string Image::getName() const
 {
 	return name;
 }
 
-ImageHeaderPtr Image::getImageHeader() const
+const ImageHeader& Image::getImageHeader() const
 {
-	return imageHeader;
+	return *imageHeader;
 }
 
 void Image::setName(const std::string& name)
@@ -17,10 +22,15 @@ void Image::setName(const std::string& name)
 
 void Image::setImageHeader(ImageHeaderPtr imageHeader)
 {
-	this->imageHeader = imageHeader;
+	this->imageHeader = std::move(imageHeader);
 }
 
 void Image::setName(const std::string& name)
 {
 	this->name = name;
+}
+
+std::string Image::toString()
+{
+	return imageHeader->toString();
 }

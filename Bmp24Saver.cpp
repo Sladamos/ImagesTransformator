@@ -9,7 +9,7 @@ void Bmp24Saver::save(ofstream& bitmapFile, Image* image)
 	writePixels(bitmapFile, bitmap);
 }
 
-void Bmp24Saver::writeFileHeader(ofstream& bitmapFile, const Bmp24FileHeader& fileHeader)
+void Bmp24Saver::writeFileHeader(ofstream& bitmapFile, const Bmp24Header& fileHeader)
 {
 	bitmapFile.write(reinterpret_cast<const char*>(&fileHeader.fileType), sizeof(fileHeader.fileType));
 	bitmapFile.write(reinterpret_cast<const char*>(&fileHeader.fileSize), sizeof(fileHeader.fileSize));

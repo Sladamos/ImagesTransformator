@@ -11,9 +11,9 @@ void HeadersOperator::loadHeaders(Image* image)
 	}
 }
 
-Bmp24FileHeader HeadersOperator::loadBmpFileHeader(ifstream& bitmapFile)
+Bmp24Header HeadersOperator::loadBmpFileHeader(ifstream& bitmapFile)
 {
-	Bmp24FileHeader fileHeader;
+	Bmp24Header fileHeader;
 	bitmapFile.read(reinterpret_cast<char*>(&fileHeader.fileType), sizeof(fileHeader.fileType));
 	bitmapFile.read(reinterpret_cast<char*>(&fileHeader.fileSize), sizeof(fileHeader.fileSize));
 	bitmapFile.read(reinterpret_cast<char*>(&fileHeader.reservedField1), sizeof(fileHeader.reservedField1));
