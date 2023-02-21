@@ -2,7 +2,7 @@
 
 Image::Image(Image* source, const std::string& imageName) : name(imageName)
 {
-	imageHeader = std::move(source->imageHeader);
+	imageHeader = source->imageHeader;
 }
 
 std::string Image::getName() const
@@ -22,7 +22,7 @@ void Image::setName(const std::string& name)
 
 void Image::setImageHeader(ImageHeaderPtr imageHeader)
 {
-	this->imageHeader = std::move(imageHeader);
+	this->imageHeader = imageHeader;
 }
 
 void Image::setName(const std::string& name)
