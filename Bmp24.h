@@ -2,6 +2,7 @@
 #include "Image.h"
 #include "Pixel.h"
 #include "Bmp24Header.h"
+#include "Bmp24Content.h"
 class Bmp24 : public Image
 {
 public:
