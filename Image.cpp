@@ -6,6 +6,12 @@ Image::Image(Image* source, const std::string& imageName) : name(imageName)
 	imageContent = source->imageContent;
 }
 
+Image::Image() : name("EMPTY IMAGE")
+{
+	imageHeader = nullptr;
+	imageContent = nullptr;
+}
+
 std::string Image::getName() const
 {
 	return name;
@@ -16,14 +22,9 @@ const ImageHeader& Image::getImageHeader() const
 	return *imageHeader;
 }
 
-const ImageContent& Image::getImageContent() const
+ImageContent& Image::getImageContent() const
 {
 	return *imageContent;
-}
-
-void Image::setName(const std::string& name)
-{
-	this->name = name;
 }
 
 void Image::setImageHeader(ImageHeaderPtr imageHeader)

@@ -6,11 +6,12 @@
 class Image
 {
 public:
-	virtual ~Image() = default;
 	Image(Image* source, const std::string& imageName);
+	Image();
+	virtual ~Image() = default;
 	std::string getName() const;
 	const ImageHeader& getImageHeader() const;
-	const ImageContent& getImageContent() const;
+	ImageContent& getImageContent() const;
 	void setName(const std::string& name);
 	void setImageHeader(ImageHeaderPtr imageHeader);
 	virtual std::string toString();

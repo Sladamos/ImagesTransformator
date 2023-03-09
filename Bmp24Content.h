@@ -1,18 +1,19 @@
 #pragma once
+#include <memory>
 #include "ImageContent.h"
+#include "Pixel.h"
 class Bmp24Content : public ImageContent
 {
 public:
 	int getNumberOfZeroBytes() const;
-	Pixel** getPixels() const;
+	Pixels getPixels() const;
 	void setNumberOfZeroBytes(int numberOfZeroBytes);
 	void createUninitializedPixels();
 
 	Pixel& operator()(int y, int x) const;
 private:
-	void clearPixelsIfNecessary();
-
-	Pixel** pixels{ nullptr };
+	Pixels pixels;
 	int numberOfZeroBytes{ 0 };
 };
+
 
