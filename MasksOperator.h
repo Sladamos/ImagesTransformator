@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
+#include <string>
 #include "Mask.h"
+#include "MasksParser.h"
 class MasksOperator
 {
 public:
@@ -10,6 +12,7 @@ public:
 protected:
 	std::vector<Mask> masks;
 private:
-	virtual void initializeMasks() = 0;
+	void initializeMasks();
+	virtual std::string getName() = 0;
 };
 

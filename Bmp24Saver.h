@@ -4,9 +4,8 @@
 class Bmp24Saver : public ImagesSaver
 {
 private:
-	void save(std::ofstream& bitmapFile, Image* image) override;
-	void writeFileHeader(std::ofstream& bitmapFile, const Bmp24FileHeader& fileHeader);
-	void writeInfoHeader(std::ofstream& bitmapFile, const Bmp24InfoHeader& infoHeader);
+	void writeImageHeader(std::ofstream& imageFile, const ImageHeader& imageHeader) override;
+	void writeImageContent(std::ofstream& imageFile, const ImageContent& imageContent) override;
 	void writePixels(std::ofstream& bitmapFile, Bmp24* bitmap);
 	void writePixel(std::ofstream& bitmapFile, const Pixel& pixel);
 };
