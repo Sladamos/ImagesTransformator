@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Transformators>
+<Transformators xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:noNamespaceSchemaLocation="MasksSchema.xsd">
 	<Transformator name="Sobel">
 		<Masks>
 			<Mask>
-				<Row len="3">1;0;-1</Row>
-				<Row len="3">2;0;-2</Row>
-				<Row len="3">1;0;-1</Row>
+				<Row>1;0;-1</Row>
+				<Row>2;0;-2</Row>
+				<Row>1;0;-1</Row>
 			</Mask>
 			<Mask>
-				<Row len="3">2;1;0</Row>
-				<Row len="3">1;0;-1</Row>
-				<Row len="3">0;-1;-2</Row>
+				<Row>2;1;0</Row>
+				<Row>1;0;-1</Row>
+				<Row>0;-1;-2</Row>
 			</Mask>
 			<Mask>
-				<Row len="3">1;2;1</Row>
-				<Row len="3">0;0;0</Row>
-				<Row len="3">-1;-2;-1</Row>
+				<Row>1;2;1</Row>
+				<Row>0;0;0</Row>
+				<Row>-1;-2;-1</Row>
 			</Mask>
 			<Mask>
-				<Row len="3">0;1;2</Row>
-				<Row len="3">-1;0;1</Row>
-				<Row len="3">-2;-1;0</Row>
+				<Row>0;1;2</Row>
+				<Row>-1;0;1</Row>
+				<Row>-2;-1;0</Row>
 			</Mask>
 		</Masks>
 	</Transformator>
 	<Transformator name="Dampel">
 		<Masks>
 			<Mask>
-				<Row len="3">0;-1;0</Row>
-				<Row len="3">-1;5;-1</Row>
-				<Row len="3">0;-1;0</Row>
+				<Row>0;-1;0</Row>
+				<Row>-1;5;-1</Row>
+				<Row>0;-1;0</Row>
 			</Mask>
 		</Masks>
 	</Transformator>
