@@ -10,6 +10,12 @@ const std::vector<Mask>& MasksOperator::getMasks()
 	return masks;
 }
 
+void MasksOperator::initializeMasks()
+{
+	MasksParser parser;
+	masks = parser.loadMasks(getName());
+}
+
 Mask MasksOperator::getMask(int maskNumber)
 {
 	Mask mask;

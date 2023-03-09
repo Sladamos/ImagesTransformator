@@ -5,6 +5,6 @@ class DampelMasksOperator : public MasksOperator
 public:
 	DampelMasksOperator();
 private:
-	void initializeMasks() override;
+	std::string getName() override;
 };
 
