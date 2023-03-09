@@ -7,3 +7,5 @@
 !.gitkeep
 !*.cpp
 !*.h
+!*.xml
+!*.hpp
