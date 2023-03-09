@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+	<xs:element name="Transformators">
+		<xs:complexType>
+			<xs:sequence  minOccurs="1" maxOccurs="unbounded">
+				<xs:element name="Transformator" type="TransformatorType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="TransformatorType">
+		<xs:sequence minOccurs="1" maxOccurs="1">
+			<xs:element name="Masks" type="MasksType"/>
+		</xs:sequence>
+		<xs:attribute name="name">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="Sobel|Dampel"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="MasksType">
+		<xs:sequence minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="Mask" type="MaskType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="MaskType">
+		<xs:sequence minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="Row" type="RowType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	
+	<xs:simpleType name="RowType">
+	<xs:restriction base="xs:string">
+		<xs:pattern value="(-?[0-9]+;?)+"/>
+	</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>
