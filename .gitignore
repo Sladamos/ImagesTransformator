@@ -10,3 +10,5 @@
 !*.hpp
 !*.xml
 !*.xsd
+!*.vcxproj
+!*.vcxproj.filters

@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="DampelTransformator.cpp" />
+    <ClCompile Include="FormatSelector.cpp" />
+    <ClCompile Include="ImagesCreator.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mask.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="ModeSelector.cpp" />
+    <ClCompile Include="Pixel.cpp" />
+    <ClCompile Include="SobelTransformator.cpp" />
+    <ClCompile Include="Transformator.cpp" />
+    <ClCompile Include="Image.cpp">
+      <Filter>Images</Filter>
+    </ClCompile>
+    <ClCompile Include="Bmp24.cpp">
+      <Filter>Images</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageHeader.cpp">
+      <Filter>Images\Headers</Filter>
+    </ClCompile>
+    <ClCompile Include="Bmp24Header.cpp">
+      <Filter>Images\Headers</Filter>
+    </ClCompile>
+    <ClCompile Include="Bmp24HeadersOperator.cpp">
+      <Filter>HeadersOperators</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadersOperator.cpp">
+      <Filter>HeadersOperators</Filter>
+    </ClCompile>
+    <ClCompile Include="BitmapHeadersOperator.cpp">
+      <Filter>HeadersOperators</Filter>
+    </ClCompile>
+    <ClCompile Include="BitmapHeader.cpp">
+      <Filter>Images\Headers</Filter>
+    </ClCompile>
+    <ClCompile Include="Bmp24Loader.cpp">
+      <Filter>Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="ImagesLoader.cpp">
+      <Filter>Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Bmp24Saver.cpp">
+      <Filter>Savers</Filter>
+    </ClCompile>
+    <ClCompile Include="ImagesSaver.cpp">
+      <Filter>Savers</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageContent.cpp">
+      <Filter>Images\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="Bmp24Content.cpp">
+      <Filter>Images\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="DampelMasksOperator.cpp">
+      <Filter>MasksOperator</Filter>
+    </ClCompile>
+    <ClCompile Include="SobelMasksOperator.cpp">
+      <Filter>MasksOperator</Filter>
+    </ClCompile>
+    <ClCompile Include="MasksOperator.cpp">
+      <Filter>MasksOperator</Filter>
+    </ClCompile>
+    <ClCompile Include="Parser.cpp">
+      <Filter>Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="MasksParser.cpp">
+      <Filter>Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="Splitter.cpp">
+      <Filter>Parsers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DampelTransformator.h" />
+    <ClInclude Include="FormatSelector.h" />
+    <ClInclude Include="ImagesCreator.h" />
+    <ClInclude Include="Mask.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="ModeSelector.h" />
+    <ClInclude Include="Pixel.h" />
+    <ClInclude Include="SobelTransformator.h" />
+    <ClInclude Include="Transformator.h" />
+    <ClInclude Include="Image.h">
+      <Filter>Images</Filter>
+    </ClInclude>
+    <ClInclude Include="Bmp24.h">
+      <Filter>Images</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageHeader.h">
+      <Filter>Images\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Bmp24Header.h">
+      <Filter>Images\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Bmp24HeadersOperator.h">
+      <Filter>HeadersOperators</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadersOperator.h">
+      <Filter>HeadersOperators</Filter>
+    </ClInclude>
+    <ClInclude Include="BitmapHeadersOperator.h">
+      <Filter>HeadersOperators</Filter>
+    </ClInclude>
+    <ClInclude Include="BitmapHeader.h">
+      <Filter>Images\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Bmp24Loader.h">
+      <Filter>Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="ImagesLoader.h">
+      <Filter>Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Bmp24Saver.h">
+      <Filter>Savers</Filter>
+    </ClInclude>
+    <ClInclude Include="ImagesSaver.h">
+      <Filter>Savers</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageContent.h">
+      <Filter>Images\Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="Bmp24Content.h">
+      <Filter>Images\Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="DampelMasksOperator.h">
+      <Filter>MasksOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="SobelMasksOperator.h">
+      <Filter>MasksOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="MasksOperator.h">
+      <Filter>MasksOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser.h">
+      <Filter>Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="MasksParser.h">
+      <Filter>Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="Splitter.h">
+      <Filter>Parsers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Images">
+      <UniqueIdentifier>{b815d718-0a13-4cfc-85a6-a629f62af764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Images\Headers">
+      <UniqueIdentifier>{f7168a85-4e0d-4d7a-a890-0c8153a66ba6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeadersOperators">
+      <UniqueIdentifier>{7b2782d7-de25-4494-a16d-be0bd9b99084}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Loaders">
+      <UniqueIdentifier>{14fe36e9-7eac-4aa5-a1d9-1d1e1dfe50d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Savers">
+      <UniqueIdentifier>{d100d657-2e29-4b69-a419-29a9098db42e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Images\Contents">
+      <UniqueIdentifier>{4a6d7245-bc74-4c79-957b-a20d94d58f5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MasksOperator">
+      <UniqueIdentifier>{16adce6f-d0df-4a3b-9ea0-91f7d7f2e6ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parsers">
+      <UniqueIdentifier>{9fb3b699-b80c-4554-ae37-6b063010aeff}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Masks.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xsd Include="MasksSchema.xsd" />
+  </ItemGroup>
+</Project>
