@@ -143,6 +143,7 @@
     <ClCompile Include="BitmapHeadersOperator.cpp" />
     <ClCompile Include="Bmp24.cpp" />
     <ClCompile Include="Bmp24Content.cpp" />
+    <ClCompile Include="Bmp24Creator.cpp" />
     <ClCompile Include="Bmp24Header.cpp" />
     <ClCompile Include="Bmp24HeadersOperator.cpp" />
     <ClCompile Include="Bmp24Loader.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="BitmapHeadersOperator.h" />
     <ClInclude Include="Bmp24.h" />
     <ClInclude Include="Bmp24Content.h" />
+    <ClInclude Include="Bmp24Creator.h" />
     <ClInclude Include="Bmp24Header.h" />
     <ClInclude Include="Bmp24HeadersOperator.h" />
     <ClInclude Include="Bmp24Loader.h" />

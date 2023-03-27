@@ -1,43 +1,51 @@
 #include "Image.h"
 
-Image::Image(Image* source, const std::string& imageName) : name(imageName)
+template<class H, class C>
+Image<H, C>::Image(Image* source, const std::string& imageName) : name(imageName)
 {
 	imageHeader = source->imageHeader;
 	imageContent = source->imageContent;
 }
 
-Image::Image() : name("EMPTY IMAGE")
+template<class H, class C>
+Image<H,C>::Image() : name("EMPTY IMAGE")
 {
 	imageHeader = nullptr;
 	imageContent = nullptr;
 }
 
-std::string Image::getName() const
+template<class H, class C>
+std::string Image<H,C>::getName() const
 {
 	return name;
 }
 
-const ImageHeader& Image::getImageHeader() const
+template<class H, class C>
+const H& Image<H,C>::getImageHeader() const
 {
 	return *imageHeader;
 }
 
-ImageContent& Image::getImageContent() const
+template<class H, class C>
+C& Image<H,C>::getImageContent() const
 {
 	return *imageContent;
 }
 
-void Image::setImageHeader(ImageHeaderPtr imageHeader)
+template<class H, class C>
+void Image<H,C>::setImageHeader(std::shared_ptr<H> imageHeader)
 {
 	this->imageHeader = imageHeader;
 }
 
-void Image::setName(const std::string& name)
+template<class H, class C>
+void Image<H,C>::setName(const std::string& name)
 {
 	this->name = name;
 }
 
-std::string Image::toString()
+template<class H, class C>
+std::string Image<H,C>::toString()
 {
 	return imageHeader->toString();
 }

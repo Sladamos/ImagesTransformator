@@ -3,13 +3,13 @@ using namespace std;
 
 bool Bmp24HeadersOperator::areHeadersValidate(Bmp24* bitmap)
 {
-	Bmp24Header bitmapHeader = dynamic_cast<const Bmp24Header&>(bitmap->getImageHeader());
+	Bmp24Header bitmapHeader = bitmap->getImageHeader();
 	return bitmapHeader.fileSize > 0 && bitmapHeader.fileType == 0x4D42 && bitmapHeader.planes == 1 && bitmapHeader.offsetData <= sizeof(bitmapHeader);
 }
 
-void Bmp24HeadersOperator::loadDIBHeader(std::ifstream& bitmapFile, BitmapHeaderPtr bitmapHeader)
+void Bmp24HeadersOperator::loadDIBHeader(std::ifstream& bitmapFile, Bmp24HeaderPtr bitmapHeader)
 {
-	Bmp24Header bmp24Header = dynamic_cast<Bmp24Header&>(*bitmapHeader);
+	Bmp24Header bmp24Header = *bitmapHeader;
 	bitmapFile.read(reinterpret_cast<char*>(&bmp24Header.infoHeaderSize), sizeof(bmp24Header.infoHeaderSize));
 	bitmapFile.read(reinterpret_cast<char*>(&bmp24Header.bitmapWidth), sizeof(bmp24Header.bitmapWidth));
 	bitmapFile.read(reinterpret_cast<char*>(&bmp24Header.bitmapHeight), sizeof(bmp24Header.bitmapHeight));
@@ -23,7 +23,7 @@ void Bmp24HeadersOperator::loadDIBHeader(std::ifstream& bitmapFile, BitmapHeader
 	bitmapFile.read(reinterpret_cast<char*>(&bmp24Header.colorsImportant), sizeof(bmp24Header.colorsImportant));
 }
 
-BitmapHeaderPtr Bmp24HeadersOperator::createHeaderPtr()
+Bmp24HeaderPtr Bmp24HeadersOperator::createHeaderPtr()
 {
 	return Bmp24HeaderPtr(new Bmp24Header());
 }

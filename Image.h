@@ -3,6 +3,7 @@
 #include <string>
 #include "ImageHeader.h"
 #include "ImageContent.h"
+template<class H, class C>
 class Image
 {
 public:
@@ -10,14 +11,14 @@ public:
 	Image();
 	virtual ~Image() = default;
 	std::string getName() const;
-	const ImageHeader& getImageHeader() const;
-	ImageContent& getImageContent() const;
+	const H& getImageHeader() const;
+	C& getImageContent() const;
 	void setName(const std::string& name);
-	void setImageHeader(ImageHeaderPtr imageHeader);
+	void setImageHeader(std::shared_ptr<H> imageHeader);
 	virtual std::string toString();
 private:
-	ImageHeaderPtr imageHeader;
-	ImageContentPtr imageContent;
+	std::shared_ptr<H> imageHeader;
+	std::shared_ptr<C> imageContent;
 	std::string name;
 };
 

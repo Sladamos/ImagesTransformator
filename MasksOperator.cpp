@@ -12,7 +12,7 @@ const std::vector<Mask>& MasksOperator::getMasks()
 
 void MasksOperator::initializeMasks()
 {
-	std::shared_ptr<MasksParser> parser = std::shared_ptr<RapidXMLMasksParser>();
+	std::shared_ptr<MasksParser> parser = std::shared_ptr<RapidXMLMasksParser>(new RapidXMLMasksParser());
 	masks = parser->loadMasks(getName());
 }
 

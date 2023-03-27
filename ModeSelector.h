@@ -5,9 +5,10 @@
 class ModeSelector
 {
 public:
-	static std::string selectNewMode(const std::string& currentMode, const std::vector<std::string>& transformators);
+	ModeSelector(const std::string& currentMode, const std::vector<std::string>& modes);
+	std::string selectNewMode();
 private:
-	static void printSelector(const std::vector<std::string>& transformators);
-	static std::string updateMode(const std::string& currentMode, const std::vector<std::string>& transformators);
-	static std::string readModeFromInput(const std::vector<std::string>& transformators);
+	virtual void printModes() = 0;
+	virtual std::string readMode() = 0;
+	std::string updateMode();
 };

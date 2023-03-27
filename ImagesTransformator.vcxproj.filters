@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="DampelTransformator.cpp" />
     <ClCompile Include="FormatSelector.cpp" />
-    <ClCompile Include="ImagesCreator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mask.cpp" />
     <ClCompile Include="Menu.cpp" />
@@ -74,11 +73,14 @@
     <ClCompile Include="MasksParser.cpp">
       <Filter>Parsers\MasksParser</Filter>
     </ClCompile>
+    <ClCompile Include="ImagesCreator.cpp">
+      <Filter>Creators</Filter>
+    </ClCompile>
+    <ClCompile Include="Bmp24Creator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DampelTransformator.h" />
     <ClInclude Include="FormatSelector.h" />
-    <ClInclude Include="ImagesCreator.h" />
     <ClInclude Include="Mask.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="ModeSelector.h" />
@@ -148,6 +150,10 @@
     <ClInclude Include="MasksParser.h">
       <Filter>Parsers\MasksParser</Filter>
     </ClInclude>
+    <ClInclude Include="ImagesCreator.h">
+      <Filter>Creators</Filter>
+    </ClInclude>
+    <ClInclude Include="Bmp24Creator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">
@@ -176,6 +182,9 @@
     </Filter>
     <Filter Include="Parsers\MasksParser">
       <UniqueIdentifier>{4827168d-35fc-4884-9f70-71baf0b68106}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Creators">
+      <UniqueIdentifier>{4cfb5233-b6ca-4f1c-9f76-69a67c22705b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

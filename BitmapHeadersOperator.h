@@ -1,13 +1,13 @@
 #pragma once
 #include "HeadersOperator.h"
 #include "BitmapHeader.h"
-template<class T>
-class BitmapHeadersOperator : public HeadersOperator<T, BitmapHeaderPtr>
+template<class T, typename P>
+class BitmapHeadersOperator : public HeadersOperator<T, P>
 {
 protected:
-	BitmapHeaderPtr loadImageHeader(std::ifstream& bitmapFile) override;
+	P loadImageHeader(std::ifstream& bitmapFile) override;
 private:
-	virtual BitmapHeaderPtr createHeaderPtr() = 0;
-	virtual void loadDIBHeader(std::ifstream& bitmapFile, BitmapHeaderPtr bitmapHeader) = 0;
+	virtual P createHeaderPtr() = 0;
+	virtual void loadDIBHeader(std::ifstream& bitmapFile, P bitmapHeader) = 0;
 };
 

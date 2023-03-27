@@ -3,10 +3,10 @@
 #include "ModeSelector.h"
 using namespace std;
 
-string ModeSelector::selectNewMode(const string& currentMode, const vector<string>& transformators)
+string ModeSelector::selectNewMode(const string& currentMode, const vector<string>& modes)
 {
-	printSelector(transformators);
-	return updateMode(currentMode, transformators);
+	printSelector(modes);
+	return updateMode(currentMode, modes);
 }
 
 void ModeSelector::printSelector(const vector<string>& transformators)

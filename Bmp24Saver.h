@@ -1,7 +1,7 @@
 #pragma once
 #include "ImagesSaver.h"
 #include "Bmp24.h"
-class Bmp24Saver : public ImagesSaver<Bmp24Header, Bmp24Content>
+class Bmp24Saver : public ImagesSaver<Bmp24, Bmp24Header, Bmp24Content>
 {
 private:
 	void writeImageHeader(std::ofstream& imageFile, const Bmp24Header& imageHeader) override;

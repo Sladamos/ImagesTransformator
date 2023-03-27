@@ -1,9 +1,10 @@
 #pragma once
 #include <string>
 #include "Image.h"
+template<class T>
 class ImagesCreator
 {
 public:
-	static void updateImage(Image*& image, const std::string& imageFormat);
+	virtual std::shared_ptr<T> createImage() = 0;
 };
 

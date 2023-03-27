@@ -1,9 +1,9 @@
 #include "BitmapHeadersOperator.h"
 
-template<class T>
-BitmapHeaderPtr BitmapHeadersOperator<T>::loadImageHeader(std::ifstream& bitmapFile)
+template<class T, typename P>
+P BitmapHeadersOperator<T, P>::loadImageHeader(std::ifstream& bitmapFile)
 {
-	BitmapHeaderPtr bitmapHeader = createHeaderPtr();
+	P bitmapHeader = createHeaderPtr();
 	bitmapFile.read(reinterpret_cast<char*>(bitmapHeader->fileType), sizeof(bitmapHeader->fileType));
 	bitmapFile.read(reinterpret_cast<char*>(bitmapHeader->fileSize), sizeof(bitmapHeader->fileSize));
 	bitmapFile.read(reinterpret_cast<char*>(bitmapHeader->reservedField1), sizeof(bitmapHeader->reservedField1));
