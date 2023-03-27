@@ -1,9 +1,8 @@
 #include "Bmp24Saver.h"
 using namespace std;
 
-void Bmp24Saver::writeImageHeader(ofstream& bitmapFile, const ImageHeader& imageHeader)
+void Bmp24Saver::writeImageHeader(ofstream& bitmapFile, const Bmp24Header& bitmapHeader)
 {
-	const Bmp24Header& bitmapHeader = dynamic_cast<const Bmp24Header&>(imageHeader);
 	bitmapFile.write(reinterpret_cast<const char*>(&bitmapHeader.fileType), sizeof(bitmapHeader.fileType));
 	bitmapFile.write(reinterpret_cast<const char*>(&bitmapHeader.fileSize), sizeof(bitmapHeader.fileSize));
 	bitmapFile.write(reinterpret_cast<const char*>(&bitmapHeader.reservedField1), sizeof(bitmapHeader.reservedField1));
@@ -22,9 +21,8 @@ void Bmp24Saver::writeImageHeader(ofstream& bitmapFile, const ImageHeader& image
 	bitmapFile.write(reinterpret_cast<const char*>(&bitmapHeader.colorsImportant), sizeof(bitmapHeader.colorsImportant));
 }
 
-void Bmp24Saver::writeImageContent(ofstream& bitmapFile, const ImageContent& imageContent)
+void Bmp24Saver::writeImageContent(ofstream& bitmapFile, const Bmp24Content& bitmapContent)
 {
-	const Bmp24Content& bitmapContent = dynamic_cast<const Bmp24Content&>(imageContent);
 	string zeroBytes(bitmapContent.getNumberOfZeroBytes(), '0');
 	int bitmapWidth = bitmapContent.getWidth();
 	int bitmapHeight = bitmapContent.getHeight();
