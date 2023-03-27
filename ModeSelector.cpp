@@ -1,11 +1,9 @@
-#include <iostream>
 #include <algorithm>
 #include "ModeSelector.h"
 using namespace std;
 
-ModeSelector::ModeSelector(const vector<string>& modes)
+ModeSelector::ModeSelector(const vector<string>& modes) : modes(modes)
 {
-	this->modes = modes;
 }
 
 string ModeSelector::selectNewMode(const string& currentMode)

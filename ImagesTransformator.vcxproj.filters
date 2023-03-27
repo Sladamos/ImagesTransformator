@@ -85,7 +85,10 @@
     <ClCompile Include="ModeSelector.cpp">
       <Filter>Selectors</Filter>
     </ClCompile>
-    <ClCompile Include="ConsoleModeSelector.cpp" />
+    <ClCompile Include="ConsoleModeSelector.cpp">
+      <Filter>Selectors</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleFormatSelector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DampelTransformator.h" />
@@ -171,7 +174,10 @@
     <ClInclude Include="ModeSelector.h">
       <Filter>Selectors</Filter>
     </ClInclude>
-    <ClInclude Include="ConsoleModeSelector.h" />
+    <ClInclude Include="ConsoleModeSelector.h">
+      <Filter>Selectors</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleFormatSelector.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">
