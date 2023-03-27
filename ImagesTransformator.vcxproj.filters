@@ -65,11 +65,14 @@
     <ClCompile Include="Parser.cpp">
       <Filter>Parsers</Filter>
     </ClCompile>
-    <ClCompile Include="MasksParser.cpp">
-      <Filter>Parsers</Filter>
-    </ClCompile>
     <ClCompile Include="Splitter.cpp">
       <Filter>Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="RapidXMLMasksParser.cpp">
+      <Filter>Parsers\MasksParser</Filter>
+    </ClCompile>
+    <ClCompile Include="MasksParser.cpp">
+      <Filter>Parsers\MasksParser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,11 +139,14 @@
     <ClInclude Include="Parser.h">
       <Filter>Parsers</Filter>
     </ClInclude>
-    <ClInclude Include="MasksParser.h">
-      <Filter>Parsers</Filter>
-    </ClInclude>
     <ClInclude Include="Splitter.h">
       <Filter>Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="RapidXMLMasksParser.h">
+      <Filter>Parsers\MasksParser</Filter>
+    </ClInclude>
+    <ClInclude Include="MasksParser.h">
+      <Filter>Parsers\MasksParser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +173,9 @@
     </Filter>
     <Filter Include="Parsers">
       <UniqueIdentifier>{9fb3b699-b80c-4554-ae37-6b063010aeff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parsers\MasksParser">
+      <UniqueIdentifier>{4827168d-35fc-4884-9f70-71baf0b68106}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

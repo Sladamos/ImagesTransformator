@@ -161,6 +161,7 @@
     <ClCompile Include="Mask.cpp" />
     <ClCompile Include="MasksOperator.cpp" />
     <ClCompile Include="MasksParser.cpp" />
+    <ClCompile Include="RapidXMLMasksParser.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="ModeSelector.cpp" />
     <ClCompile Include="Parser.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Mask.h" />
     <ClInclude Include="MasksOperator.h" />
     <ClInclude Include="MasksParser.h" />
+    <ClInclude Include="RapidXMLMasksParser.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="ModeSelector.h" />
     <ClInclude Include="Parser.h" />

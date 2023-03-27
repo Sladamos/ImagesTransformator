@@ -1,8 +1,9 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <memory>
 #include "Mask.h"
-#include "MasksParser.h"
+#include "RapidXMLMasksParser.h"
 class MasksOperator
 {
 public:
