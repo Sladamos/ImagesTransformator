@@ -2,13 +2,14 @@
 #include <string>
 #include <fstream>
 #include "Image.h"
+template <class T, typename P>
 class HeadersOperator
 {
 public:
-	void loadHeaders(Image* image);
-	virtual bool areHeadersValidate(Image* image) = 0;
+	void loadHeaders(T* image);
+	virtual bool areHeadersValidate(T* image) = 0;
 private:
-	virtual ImageHeaderPtr createHeaderPtr() = 0;
-	virtual ImageHeaderPtr loadImageHeader(std::ifstream& imageFile) = 0;
+	virtual P createHeaderPtr() = 0;
+	virtual P loadImageHeader(std::ifstream& imageFile) = 0;
 };
 

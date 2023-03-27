@@ -1,9 +1,8 @@
 #include "Bmp24HeadersOperator.h"
 using namespace std;
 
-bool Bmp24HeadersOperator::areHeadersValidate(Image* image)
+bool Bmp24HeadersOperator::areHeadersValidate(Bmp24* bitmap)
 {
-	Bmp24* bitmap = reinterpret_cast<Bmp24*>(image);
 	Bmp24Header bitmapHeader = dynamic_cast<const Bmp24Header&>(bitmap->getImageHeader());
 	return bitmapHeader.fileSize > 0 && bitmapHeader.fileType == 0x4D42 && bitmapHeader.planes == 1 && bitmapHeader.offsetData <= sizeof(bitmapHeader);
 }
@@ -24,7 +23,7 @@ void Bmp24HeadersOperator::loadDIBHeader(std::ifstream& bitmapFile, BitmapHeader
 	bitmapFile.read(reinterpret_cast<char*>(&bmp24Header.colorsImportant), sizeof(bmp24Header.colorsImportant));
 }
 
-BitmapHeaderPtr Bmp24HeadersOperator::createBitmapPtr()
+BitmapHeaderPtr Bmp24HeadersOperator::createHeaderPtr()
 {
 	return Bmp24HeaderPtr(new Bmp24Header());
 }
