@@ -1,8 +1,7 @@
 #include "Bmp24Loader.h"
 
-void Bmp24Loader::prepareAndLoadContent(std::ifstream& bitmapFile, Image* image)
+void Bmp24Loader::prepareAndLoadContent(std::ifstream& bitmapFile, Bmp24* bitmap)
 {
-	Bmp24* bitmap = reinterpret_cast<Bmp24*>(image);
 	const Bmp24Header& bitmapHeader = dynamic_cast<const Bmp24Header&>(bitmap->getImageHeader());
 	Bmp24Content& bitmapContent = dynamic_cast<Bmp24Content&>(bitmap->getImageContent());
 	int bitmapWidth = bitmapContent.getWidth(), bitmapHeight = bitmapContent.getHeight();
