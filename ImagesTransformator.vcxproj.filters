@@ -4,10 +4,7 @@
     <ClCompile Include="DampelTransformator.cpp" />
     <ClCompile Include="FormatSelector.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Mask.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="ModeSelector.cpp" />
-    <ClCompile Include="Pixel.cpp" />
     <ClCompile Include="SobelTransformator.cpp" />
     <ClCompile Include="Transformator.cpp" />
     <ClCompile Include="Image.cpp">
@@ -76,15 +73,24 @@
     <ClCompile Include="ImagesCreator.cpp">
       <Filter>Creators</Filter>
     </ClCompile>
-    <ClCompile Include="Bmp24Creator.cpp" />
+    <ClCompile Include="Bmp24Creator.cpp">
+      <Filter>Creators</Filter>
+    </ClCompile>
+    <ClCompile Include="Pixel.cpp">
+      <Filter>SimpleElements</Filter>
+    </ClCompile>
+    <ClCompile Include="Mask.cpp">
+      <Filter>SimpleElements</Filter>
+    </ClCompile>
+    <ClCompile Include="ModeSelector.cpp">
+      <Filter>Selectors</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleModeSelector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DampelTransformator.h" />
     <ClInclude Include="FormatSelector.h" />
-    <ClInclude Include="Mask.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="ModeSelector.h" />
-    <ClInclude Include="Pixel.h" />
     <ClInclude Include="SobelTransformator.h" />
     <ClInclude Include="Transformator.h" />
     <ClInclude Include="Image.h">
@@ -153,7 +159,19 @@
     <ClInclude Include="ImagesCreator.h">
       <Filter>Creators</Filter>
     </ClInclude>
-    <ClInclude Include="Bmp24Creator.h" />
+    <ClInclude Include="Bmp24Creator.h">
+      <Filter>Creators</Filter>
+    </ClInclude>
+    <ClInclude Include="Pixel.h">
+      <Filter>SimpleElements</Filter>
+    </ClInclude>
+    <ClInclude Include="Mask.h">
+      <Filter>SimpleElements</Filter>
+    </ClInclude>
+    <ClInclude Include="ModeSelector.h">
+      <Filter>Selectors</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleModeSelector.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">
@@ -186,11 +204,22 @@
     <Filter Include="Creators">
       <UniqueIdentifier>{4cfb5233-b6ca-4f1c-9f76-69a67c22705b}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="Masks.xml" />
+    <Filter Include="Transformators">
+      <UniqueIdentifier>{b715932b-4e23-4941-bccf-0b2245a28f21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SimpleElements">
+      <UniqueIdentifier>{ef62daa8-1a1d-4f69-a308-1a1be93fb96d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Selectors">
+      <UniqueIdentifier>{d694debb-747c-46f1-bb32-537e8028e7c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Xsd Include="MasksSchema.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Masks.xml">
+      <Filter>SimpleElements</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

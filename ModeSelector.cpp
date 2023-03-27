@@ -3,36 +3,26 @@
 #include "ModeSelector.h"
 using namespace std;
 
-string ModeSelector::selectNewMode(const string& currentMode, const vector<string>& modes)
+ModeSelector::ModeSelector(const vector<string>& modes)
 {
-	printSelector(modes);
-	return updateMode(currentMode, modes);
+	this->modes = modes;
 }
 
-void ModeSelector::printSelector(const vector<string>& transformators)
+string ModeSelector::selectNewMode(const string& currentMode)
 {
-	cout << "Choose correct mode\n";
-	for (auto name : transformators)
-		cout << name << "\n";
-	cout << "Undo\n\n";
+	printModes();
+	return updateMode(currentMode);
 }
 
-string ModeSelector::updateMode(const string& currentMode, const vector<string>& transformators)
+string ModeSelector::updateMode(const string& currentMode)
 {
-	string readedMode = readModeFromInput(transformators);
+	string readedMode = readMode();
 	if (readedMode == "Undo")
 		readedMode = currentMode;
 	return readedMode;
 }
 
-string ModeSelector::readModeFromInput(const vector<string>& transformators)
+bool ModeSelector::isInModes(const string& mode)
 {
-	string newMode;
-	do
-	{
-		cin >> newMode;
-	}
-	while (newMode != "Undo" && find(transformators.begin(), transformators.end(), newMode) == transformators.end());
-	
-	return newMode;
+	return find(modes.begin(), modes.end(), mode) == modes.end();
 }

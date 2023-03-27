@@ -4,9 +4,13 @@
 class FormatSelector
 {
 public:
-	static std::string selectNewFormat(const std::vector<std::string>& imagesFormats);
+	FormatSelector(const std::vector<std::string>& imagesFormats);
+	std::string selectNewFormat();
+protected:
+	std::vector<std::string>& imagesFormats;
 private:
-	static void printSelector(const std::vector<std::string>& transformators);
-	static std::string readFormatFromInput(const std::vector<std::string>& imagesFormats);
+	virtual void printFormats() = 0;
+	virtual std::string readFormat() = 0;
+
 };
 

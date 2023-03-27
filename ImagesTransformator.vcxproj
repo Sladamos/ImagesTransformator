@@ -148,6 +148,7 @@
     <ClCompile Include="Bmp24HeadersOperator.cpp" />
     <ClCompile Include="Bmp24Loader.cpp" />
     <ClCompile Include="Bmp24Saver.cpp" />
+    <ClCompile Include="ConsoleModeSelector.cpp" />
     <ClCompile Include="DampelMasksOperator.cpp" />
     <ClCompile Include="DampelTransformator.cpp" />
     <ClCompile Include="FormatSelector.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="Bmp24HeadersOperator.h" />
     <ClInclude Include="Bmp24Loader.h" />
     <ClInclude Include="Bmp24Saver.h" />
+    <ClInclude Include="ConsoleModeSelector.h" />
     <ClInclude Include="DampelMasksOperator.h" />
     <ClInclude Include="DampelTransformator.h" />
     <ClInclude Include="FormatSelector.h" />
