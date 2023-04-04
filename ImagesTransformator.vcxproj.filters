@@ -1,11 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="DampelTransformator.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="SobelTransformator.cpp" />
-    <ClCompile Include="Transformator.cpp" />
     <ClCompile Include="Image.cpp">
       <Filter>Images</Filter>
     </ClCompile>
@@ -93,12 +89,16 @@
     <ClCompile Include="FormatSelector.cpp">
       <Filter>Selectors</Filter>
     </ClCompile>
+    <ClCompile Include="Transformator.cpp">
+      <Filter>Transformators</Filter>
+    </ClCompile>
+    <ClCompile Include="Bmp24Transformator.cpp">
+      <Filter>Transformators</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DampelTransformator.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="SobelTransformator.h" />
-    <ClInclude Include="Transformator.h" />
     <ClInclude Include="Image.h">
       <Filter>Images</Filter>
     </ClInclude>
@@ -185,6 +185,12 @@
     </ClInclude>
     <ClInclude Include="FormatSelector.h">
       <Filter>Selectors</Filter>
+    </ClInclude>
+    <ClInclude Include="Transformator.h">
+      <Filter>Transformators</Filter>
+    </ClInclude>
+    <ClInclude Include="Bmp24Transformator.h">
+      <Filter>Transformators</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

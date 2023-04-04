@@ -148,10 +148,10 @@
     <ClCompile Include="Bmp24HeadersOperator.cpp" />
     <ClCompile Include="Bmp24Loader.cpp" />
     <ClCompile Include="Bmp24Saver.cpp" />
+    <ClCompile Include="Bmp24Transformator.cpp" />
     <ClCompile Include="ConsoleFormatSelector.cpp" />
     <ClCompile Include="ConsoleModeSelector.cpp" />
     <ClCompile Include="DampelMasksOperator.cpp" />
-    <ClCompile Include="DampelTransformator.cpp" />
     <ClCompile Include="FormatSelector.cpp" />
     <ClCompile Include="HeadersOperator.cpp" />
     <ClCompile Include="Image.cpp" />
@@ -170,7 +170,6 @@
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Pixel.cpp" />
     <ClCompile Include="SobelMasksOperator.cpp" />
-    <ClCompile Include="SobelTransformator.cpp" />
     <ClCompile Include="Splitter.cpp" />
     <ClCompile Include="Transformator.cpp" />
   </ItemGroup>
@@ -184,10 +183,10 @@
     <ClInclude Include="Bmp24HeadersOperator.h" />
     <ClInclude Include="Bmp24Loader.h" />
     <ClInclude Include="Bmp24Saver.h" />
+    <ClInclude Include="Bmp24Transformator.h" />
     <ClInclude Include="ConsoleFormatSelector.h" />
     <ClInclude Include="ConsoleModeSelector.h" />
     <ClInclude Include="DampelMasksOperator.h" />
-    <ClInclude Include="DampelTransformator.h" />
     <ClInclude Include="FormatSelector.h" />
     <ClInclude Include="HeadersOperator.h" />
     <ClInclude Include="Image.h" />
@@ -205,7 +204,6 @@
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Pixel.h" />
     <ClInclude Include="SobelMasksOperator.h" />
-    <ClInclude Include="SobelTransformator.h" />
     <ClInclude Include="Splitter.h" />
     <ClInclude Include="Transformator.h" />
   </ItemGroup>

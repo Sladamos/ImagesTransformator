@@ -1,19 +1,14 @@
 #pragma once
 #include <string>
+#include <memory>
 #include "Bmp24.h"
 #include "MasksOperator.h"
+template<class T>
 class Transformator
 {
 public:
-	Transformator(MasksOperator* masksOperator, Image*& sourceImage);
-	virtual ~Transformator();
-	Image* transformateImage(const std::string& outputName, const std::string& imageFormat);
+	Transformator(const std::vector<Mask>& masks);
+	virtual std::shared_ptr<T> transformateImage(std::shared_ptr<T> source) = 0;
 protected:
-	const MasksOperator* masksOperator;
-	Image*& sourceImage;
 	const std::vector<Mask> masks;
-private:
-	Bmp24* transformateBmp24(const std::string& outputName);
-	virtual Pixel transformatePixel(const Pixel& sourcePixel);
 };
-
