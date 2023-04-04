@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="DampelTransformator.cpp" />
-    <ClCompile Include="FormatSelector.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="SobelTransformator.cpp" />
@@ -88,11 +87,15 @@
     <ClCompile Include="ConsoleModeSelector.cpp">
       <Filter>Selectors</Filter>
     </ClCompile>
-    <ClCompile Include="ConsoleFormatSelector.cpp" />
+    <ClCompile Include="ConsoleFormatSelector.cpp">
+      <Filter>Selectors</Filter>
+    </ClCompile>
+    <ClCompile Include="FormatSelector.cpp">
+      <Filter>Selectors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DampelTransformator.h" />
-    <ClInclude Include="FormatSelector.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="SobelTransformator.h" />
     <ClInclude Include="Transformator.h" />
@@ -177,7 +180,12 @@
     <ClInclude Include="ConsoleModeSelector.h">
       <Filter>Selectors</Filter>
     </ClInclude>
-    <ClInclude Include="ConsoleFormatSelector.h" />
+    <ClInclude Include="ConsoleFormatSelector.h">
+      <Filter>Selectors</Filter>
+    </ClInclude>
+    <ClInclude Include="FormatSelector.h">
+      <Filter>Selectors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">

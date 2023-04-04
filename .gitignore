@@ -12,3 +12,4 @@
 !*.xsd
 !*.vcxproj
 !*.vcxproj.filters
+!*.vcxproj.user
