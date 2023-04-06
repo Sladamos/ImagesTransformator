@@ -3,23 +3,24 @@ using namespace std;
 
 std::string ConsoleMenu::handleInput()
 {
-	return "";
+	clearConsole();
+	std::string output;
+	cin >> output;
+	return output;
 }
 
 void ConsoleMenu::printOptions()
 {
-	clearConsole();
-	//forEach possible option
-	//display
-	cout << endl
-		//<< "1." << " Source name: " << source->getName() << "\n"
-		<< "2." << " Load source" << "\n"
-		//<< "3." << " Output name: " << outputName << "\n"
-		//<< "4." << " Current format: " << imageFormat << "\n"
-		//<< "5." << " Current mode: " << currentMode << "\n"
-		<< "6." << " Transform image" << "\n"
-		<< "9. Exit\n\n";
-	//mapa numer opcji | nazwa opcji
+	stringstream ss;
+	ss << endl;
+	int numberOfOptions = options.size();
+
+	for (int i = 0; i < numberOfOptions; i++)
+	{
+		ss << i + i << ". " << options[i]->getName();
+	}
+
+	cout << ss.str();
 }
 
 void ConsoleMenu::clearConsole()

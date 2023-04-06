@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <sstream>
 #include "Menu.h"
 class ConsoleMenu : public Menu
 {
