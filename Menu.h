@@ -1,8 +1,8 @@
 #pragma once
-#include <map>
 #include <vector>
 #include <memory>
 #include <string>
+#include "Option.h"
 class Menu
 {
 public:
@@ -10,10 +10,9 @@ public:
 	void selectAndExecuteOption();
 	virtual void printOptions() = 0;
 protected:
-	std::shared_ptr<std::map<int, std::string>> options;
-	virtual void handleInput() = 0;
+	std::vector<std::shared_ptr<Option>> options;
+	virtual std::string handleInput() = 0;
 private:
-	void selectMatchingOption();
-	void executeOption();
+	std::shared_ptr<Option> selectMatchingOption(const std::string& handledInput);
 };
 

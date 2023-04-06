@@ -1,11 +1,11 @@
 #include "ConsoleMenu.h"
 using namespace std;
 
-void ConsoleMenu::handleOption()
+void ConsoleMenu::handleInput()
 {
 }
 
-void ConsoleMenu::print()
+void ConsoleMenu::printOptions()
 {
 	clearConsole();
 	//forEach possible option

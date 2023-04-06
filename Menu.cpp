@@ -12,3 +12,21 @@ Menu::Menu()
 	options->insert()*/
 	//TODO: option class
 }
+
+void Menu::selectAndExecuteOption()
+{
+	string input = handleInput();
+	shared_ptr<Option> selectedOption = selectMatchingOption(input);
+	selectedOption->execute();
+}
+
+shared_ptr<Option> Menu::selectMatchingOption(const string& handledInput)
+{
+	for (auto option : options)
+	{
+		if (handledInput == option->getName())
+			return option;
+	}
+	//TODO input may be an index
+	return options[options.size() - 1];
+}

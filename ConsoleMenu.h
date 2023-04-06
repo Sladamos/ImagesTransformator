@@ -4,8 +4,8 @@
 class ConsoleMenu : public Menu
 {
 public:
-	virtual void handleOption() override;
-	virtual void print() override;
+	virtual void handleInput() override;
+	virtual void printOptions() override;
 private:
 	void clearConsole();
 };

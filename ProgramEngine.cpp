@@ -10,7 +10,7 @@ void ProgramEngine::startProgram()
 	isProgramLaunched = true;
 	while (isProgramLaunched)
 	{
-		menu->print();
-		menu->handleOption();
+		menu->printOptions();
+		menu->selectAndExecuteOption();
 	}
 }
