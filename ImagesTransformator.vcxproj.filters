@@ -56,7 +56,7 @@
     <ClCompile Include="Parser.cpp">
       <Filter>Parsers</Filter>
     </ClCompile>
-    <ClCompile Include="Splitter.cpp">
+    <ClCompile Include="StringsOperator.cpp">
       <Filter>Parsers</Filter>
     </ClCompile>
     <ClCompile Include="RapidXMLMasksParser.cpp">
@@ -101,6 +101,12 @@
     </ClCompile>
     <ClCompile Include="ConsoleMenu.cpp">
       <Filter>Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Option.cpp">
+      <Filter>Options</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -159,7 +165,7 @@
     <ClInclude Include="Parser.h">
       <Filter>Parsers</Filter>
     </ClInclude>
-    <ClInclude Include="Splitter.h">
+    <ClInclude Include="StringsOperator.h">
       <Filter>Parsers</Filter>
     </ClInclude>
     <ClInclude Include="RapidXMLMasksParser.h">
@@ -207,6 +213,9 @@
     <ClInclude Include="Menu.h">
       <Filter>Menus</Filter>
     </ClInclude>
+    <ClInclude Include="Option.h">
+      <Filter>Options</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">
@@ -253,6 +262,9 @@
     </Filter>
     <Filter Include="Menus">
       <UniqueIdentifier>{25396c8a-69a7-442b-a691-4b183e6fa67d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Options">
+      <UniqueIdentifier>{83568457-463f-443e-a587-67d50cec477b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

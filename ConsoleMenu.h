@@ -4,7 +4,7 @@
 class ConsoleMenu : public Menu
 {
 public:
-	virtual void handleInput() override;
+	virtual std::string handleInput() override;
 	virtual void printOptions() override;
 private:
 	void clearConsole();

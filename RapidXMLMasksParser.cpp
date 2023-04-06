@@ -1,5 +1,5 @@
 #include "RapidXMLMasksParser.h"
-#include "Splitter.h"
+#include "StringsOperator.h"
 using namespace std;
 using namespace rapidxml;
 const std::string RapidXMLMasksParser::FILE_PATH = "Masks.xml";
@@ -68,7 +68,7 @@ Mask RapidXMLMasksParser::readMaskFromNode(xml_node<>* maskNode)
 vector<int> RapidXMLMasksParser::parseValuesFrom(const string& rowValue)
 {
 	vector<int> finalValues;
-	Splitter splitter;
+	StringsOperator splitter;
 	vector<string> values = splitter.split(rowValue, DELIMITER);
 	for (string value : values)
 	{

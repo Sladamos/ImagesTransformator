@@ -1,8 +1,9 @@
 #include "ConsoleMenu.h"
 using namespace std;
 
-void ConsoleMenu::handleInput()
+std::string ConsoleMenu::handleInput()
 {
+	return "";
 }
 
 void ConsoleMenu::printOptions()

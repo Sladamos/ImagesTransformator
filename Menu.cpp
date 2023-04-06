@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include "StringsOperator.h"
 
 using namespace std;
 
@@ -22,6 +23,8 @@ void Menu::selectAndExecuteOption()
 
 shared_ptr<Option> Menu::selectMatchingOption(const string& handledInput)
 {
+	StringsOperator strOp;
+
 	for (auto option : options)
 	{
 		if (handledInput == option->getName())
