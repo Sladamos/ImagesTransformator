@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include "Menu.h"
+#include "Menuz.h"
 #include "Bmp24Loader.h"
 #include "Parser.h"
 #include "ModeSelector.h"
@@ -8,20 +8,20 @@
 #include "ImagesCreator.h"
 using namespace std;
 
-Menu::Menu()
+Menuz::Menuz()
 {
 	Parser::initialize(source);
 	updateFormat();
 }
 
-void Menu::updateFormat()
+void Menuz::updateFormat()
 {
 	ImagesCreator::updateImage(source, imageFormat);
 	currentMode = "Sobel";
 	updateMode();
 }
 
-void Menu::updateMode()
+void Menuz::updateMode()
 {
 	imagesTransformator = Parser::getTransformator(currentMode);
 	headersOperator = Parser::getHeadersOperator(imageFormat);
@@ -29,28 +29,16 @@ void Menu::updateMode()
 	contentLoader = Parser::getImagesLoader(imageFormat);
 }
 
-void Menu::startProgram()
+void Menuz::startProgram()
 {
 	while (programLaunched)
 	{
-		printMenu();
+		printMenuz();
 		handleOption();
 	}
 }
 
-void Menu::printMenu()
-{
-	cout << endl
-		<< "1." <<  " Source name: " << source->getName() << "\n"
-		<< "2." <<  " Load source" << "\n"
-		<< "3." << " Output name: " << outputName << "\n"
-		<< "4." << " Current format: " << imageFormat << "\n"
-		<< "5." << " Current mode: " << currentMode << "\n"
-		<< "6." << " Transform image" << "\n"
-		<< "9. Exit\n\n";
-}
-
-void Menu::handleOption()
+void Menuz::handleOption()
 {
 	cin >> option;
 	clearConsole();
@@ -80,12 +68,12 @@ void Menu::handleOption()
 	}
 }
 
-void Menu::clearConsole()
+void Menuz::clearConsole()
 {
 	system("cls");
 }
 
-void Menu::loadSourceOption()
+void Menuz::loadSourceOption()
 {
 	source->clear();
 	headersOperator->loadHeaders(source);
@@ -93,13 +81,13 @@ void Menu::loadSourceOption()
 	cout << source->toString();
 }
 
-void Menu::loadContentIfPossible()
+void Menuz::loadContentIfPossible()
 {
 	if (headersOperator->areHeadersValidate(source))
 		contentLoader->loadImageContent(source);
 }
 
-string Menu::readNameFromInput()
+string Menuz::readNameFromInput()
 {
 	string name;
 	cout << "New name: "; 
@@ -109,7 +97,7 @@ string Menu::readNameFromInput()
 	return name;
 }
 
-string Menu::getImageExtension()
+string Menuz::getImageExtension()
 {
 	string imageExtension;
 	if (imageFormat == "Bmp24")
@@ -117,7 +105,7 @@ string Menu::getImageExtension()
 	return imageExtension;
 }
 
-void Menu::changeFormatOption()
+void Menuz::changeFormatOption()
 {
 	string userInput = FormatSelector::selectNewFormat(Parser::getImagesFormats());
 	if (userInput != "Undo")
@@ -128,14 +116,14 @@ void Menu::changeFormatOption()
 	clearConsole();
 }
 
-void Menu::changeModeOption()
+void Menuz::changeModeOption()
 {
 	currentMode = ModeSelector::selectNewMode(currentMode, Parser::getTransformatorsWhichSupport(imageFormat));
 	updateMode();
 	clearConsole();
 }
 
-void Menu::transformateImageOption()
+void Menuz::transformateImageOption()
 {
 	bool transformationCorrect = false;
 	if (headersOperator->areHeadersValidate(source) && imagesTransformator != nullptr)
@@ -148,7 +136,7 @@ void Menu::transformateImageOption()
 	printTransformationResult(transformationCorrect);
 }
 
-void Menu::printTransformationResult(bool transformationCorrect)
+void Menuz::printTransformationResult(bool transformationCorrect)
 {
 	if(transformationCorrect)
 		cout << "Transformation done!\n";
@@ -156,7 +144,7 @@ void Menu::printTransformationResult(bool transformationCorrect)
 		cout << "Transformation failed!\n";
 }
 
-Menu::~Menu()
+Menuz::~Menuz()
 {
 	Parser::clear();
 	delete source;

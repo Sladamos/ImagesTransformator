@@ -1,7 +1,8 @@
 #include "ProgramEngine.h"
 
-ProgramEngine::ProgramEngine()
+ProgramEngine::ProgramEngine(std::shared_ptr<Menu> menu)
 {
+	this->menu = menu;
 }
 
 void ProgramEngine::startProgram()
