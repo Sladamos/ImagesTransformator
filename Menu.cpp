@@ -25,11 +25,19 @@ shared_ptr<Option> Menu::selectMatchingOption(const string& handledInput)
 {
 	StringsOperator strOp;
 
-	for (auto option : options)
+	if (strOp.isNumber(handledInput))
 	{
-		if (handledInput == option->getName())
-			return option;
+		int index = stoi(handledInput);
+		return options[index];
 	}
-	//TODO input may be an index
+	else
+	{
+		for (auto option : options)
+		{
+			if (handledInput == option->getName())
+				return option;
+		}
+	}
+
 	return options[options.size() - 1];
 }
