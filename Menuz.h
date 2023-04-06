@@ -3,7 +3,7 @@
 #include "HeadersOperator.h"
 #include "ImagesLoader.h"
 #include "Transformator.h"
-class Menu
+class Menuz
 {
 public:
 	Menu();
