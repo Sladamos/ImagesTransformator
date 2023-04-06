@@ -150,6 +150,7 @@
     <ClCompile Include="Bmp24Saver.cpp" />
     <ClCompile Include="Bmp24Transformator.cpp" />
     <ClCompile Include="ConsoleFormatSelector.cpp" />
+    <ClCompile Include="ConsoleMenu.cpp" />
     <ClCompile Include="ConsoleModeSelector.cpp" />
     <ClCompile Include="DampelMasksOperator.cpp" />
     <ClCompile Include="FormatSelector.cpp" />
@@ -164,8 +165,9 @@
     <ClCompile Include="Mask.cpp" />
     <ClCompile Include="MasksOperator.cpp" />
     <ClCompile Include="MasksParser.cpp" />
+    <ClCompile Include="ProgramEngine.cpp" />
     <ClCompile Include="RapidXMLMasksParser.cpp" />
-    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Menuz.cpp" />
     <ClCompile Include="ModeSelector.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Pixel.cpp" />
@@ -185,6 +187,7 @@
     <ClInclude Include="Bmp24Saver.h" />
     <ClInclude Include="Bmp24Transformator.h" />
     <ClInclude Include="ConsoleFormatSelector.h" />
+    <ClInclude Include="ConsoleMenu.h" />
     <ClInclude Include="ConsoleModeSelector.h" />
     <ClInclude Include="DampelMasksOperator.h" />
     <ClInclude Include="FormatSelector.h" />
@@ -198,8 +201,10 @@
     <ClInclude Include="Mask.h" />
     <ClInclude Include="MasksOperator.h" />
     <ClInclude Include="MasksParser.h" />
-    <ClInclude Include="RapidXMLMasksParser.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="ProgramEngine.h" />
+    <ClInclude Include="RapidXMLMasksParser.h" />
+    <ClInclude Include="Menuz.h" />
     <ClInclude Include="ModeSelector.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Pixel.h" />

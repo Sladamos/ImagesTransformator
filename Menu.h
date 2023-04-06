@@ -1,8 +1,19 @@
 #pragma once
+#include <map>
+#include <vector>
+#include <memory>
+#include <string>
 class Menu
 {
 public:
-	virtual void handleOption() = 0;
-	virtual void print() = 0;
+	Menu();
+	void selectAndExecuteOption();
+	virtual void printOptions() = 0;
+protected:
+	std::shared_ptr<std::map<int, std::string>> options;
+	virtual void handleInput() = 0;
+private:
+	void selectMatchingOption();
+	void executeOption();
 };
 

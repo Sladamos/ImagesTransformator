@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Menuz.cpp" />
     <ClCompile Include="Image.cpp">
       <Filter>Images</Filter>
     </ClCompile>
@@ -96,9 +96,15 @@
       <Filter>Transformators</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ProgramEngine.cpp">
+      <Filter>Engines</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleMenu.cpp">
+      <Filter>Menus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Menu.h" />
+    <ClInclude Include="Menuz.h" />
     <ClInclude Include="Image.h">
       <Filter>Images</Filter>
     </ClInclude>
@@ -192,6 +198,15 @@
     <ClInclude Include="Bmp24Transformator.h">
       <Filter>Transformators</Filter>
     </ClInclude>
+    <ClInclude Include="ProgramEngine.h">
+      <Filter>Engines</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleMenu.h">
+      <Filter>Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Menus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">
@@ -232,6 +247,12 @@
     </Filter>
     <Filter Include="Selectors">
       <UniqueIdentifier>{d694debb-747c-46f1-bb32-537e8028e7c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engines">
+      <UniqueIdentifier>{babebeee-1ae4-4737-9dca-bc08b794aad1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menus">
+      <UniqueIdentifier>{25396c8a-69a7-442b-a691-4b183e6fa67d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
