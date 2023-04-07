@@ -157,12 +157,9 @@
     <ClCompile Include="ExitOption.cpp" />
     <ClCompile Include="FormatSelector.cpp" />
     <ClCompile Include="HeadersOperator.cpp" />
-    <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageContent.cpp" />
     <ClCompile Include="ImageHeader.cpp" />
     <ClCompile Include="ImagesCreator.cpp" />
-    <ClCompile Include="ImagesLoader.cpp" />
-    <ClCompile Include="ImagesSaver.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mask.cpp" />
     <ClCompile Include="MasksOperator.cpp" />
@@ -177,7 +174,6 @@
     <ClCompile Include="Pixel.cpp" />
     <ClCompile Include="SobelMasksOperator.cpp" />
     <ClCompile Include="StringsOperator.cpp" />
-    <ClCompile Include="Transformator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BitmapHeader.h" />

@@ -7,15 +7,48 @@ template<class H, class C>
 class Image
 {
 public:
-	Image(Image* source, const std::string& imageName);
-	Image();
-	virtual ~Image() = default;
-	std::string getName() const;
-	const H& getImageHeader() const;
-	C& getImageContent() const;
-	void setName(const std::string& name);
-	void setImageHeader(std::shared_ptr<H> imageHeader);
-	virtual std::string toString();
+	Image(Image* source, const std::string& imageName) : name(imageName)
+	{
+		imageHeader = source->imageHeader;
+		imageContent = source->imageContent;
+	}
+
+	Image() : name("EMPTY IMAGE")
+	{
+		imageHeader = nullptr;
+		imageContent = nullptr;
+
+	}
+
+	std::string getName() const
+	{
+		return name;
+	}
+
+	const H& getImageHeader() const
+	{
+		return *imageHeader;
+	}
+
+	C& getImageContent() const
+	{
+		return *imageContent;
+	}
+
+	void setName(const std::string& name)
+	{
+		this->name = name;
+	}
+
+	void setImageHeader(std::shared_ptr<H> imageHeader)
+	{
+		this->imageHeader = imageHeader;
+	}
+
+	virtual std::string toString()
+	{
+		return imageHeader->toString();
+	}
 private:
 	std::shared_ptr<H> imageHeader;
 	std::shared_ptr<C> imageContent;

@@ -7,4 +7,5 @@ std::string ExitOption::getDescription()
 
 void ExitOption::execute()
 {
+    exitProgram.invoke();
 }

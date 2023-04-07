@@ -1,14 +1,24 @@
 #pragma once
+#include <string>
 #include <fstream>
 #include "Image.h"
 template<class I, class H, class C>
 class ImagesSaver
 {
 public:
-	void saveImage(I* image);
+	void saveImage(I* image)
+	{
+		std::ofstream imageFile(DIRECTORY_PATH + image->getName(), std::ios::binary | std::ios::out | std::ios::trunc);
+		if (imageFile.is_open())
+		{
+			writeImageHeader(imageFile, image->getImageHeader());
+			writeImageContent(imageFile, image->getImageContent());
+			imageFile.close();
+		} 
+	}
 private:
 	virtual void writeImageHeader(std::ofstream& imageFile, const H& imageHeader) = 0;
 	virtual void writeImageContent(std::ofstream& imageFile, const C& imageContent) = 0;
-	const static std::string DIRECTORY_PATH;
+	const std::string DIRECTORY_PATH = "./newGfx/";
 };
 

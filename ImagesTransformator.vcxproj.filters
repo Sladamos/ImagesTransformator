@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Menuz.cpp" />
-    <ClCompile Include="Image.cpp">
-      <Filter>Images</Filter>
-    </ClCompile>
     <ClCompile Include="Bmp24.cpp">
       <Filter>Images</Filter>
     </ClCompile>
@@ -29,13 +26,7 @@
     <ClCompile Include="Bmp24Loader.cpp">
       <Filter>Loaders</Filter>
     </ClCompile>
-    <ClCompile Include="ImagesLoader.cpp">
-      <Filter>Loaders</Filter>
-    </ClCompile>
     <ClCompile Include="Bmp24Saver.cpp">
-      <Filter>Savers</Filter>
-    </ClCompile>
-    <ClCompile Include="ImagesSaver.cpp">
       <Filter>Savers</Filter>
     </ClCompile>
     <ClCompile Include="ImageContent.cpp">
@@ -88,9 +79,6 @@
     </ClCompile>
     <ClCompile Include="FormatSelector.cpp">
       <Filter>Selectors</Filter>
-    </ClCompile>
-    <ClCompile Include="Transformator.cpp">
-      <Filter>Transformators</Filter>
     </ClCompile>
     <ClCompile Include="Bmp24Transformator.cpp">
       <Filter>Transformators</Filter>
