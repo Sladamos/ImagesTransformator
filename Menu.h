@@ -1,4 +1,5 @@
 #pragma once
+#include <map>
 #include <vector>
 #include <memory>
 #include <string>
@@ -10,9 +11,11 @@ public:
 	void selectAndExecuteOption();
 	virtual void printOptions() = 0;
 protected:
-	std::vector<std::shared_ptr<Option>> options;
+	std::vector<std::shared_ptr<Option>> indexedOptions;
+	std::map<std::string,std::shared_ptr<Option>> namedOptions;
 	virtual std::string handleInput() = 0;
 private:
 	std::shared_ptr<Option> selectMatchingOption(const std::string& handledInput);
+	std::shared_ptr<Option> selectNamedOption(const std::string& handledInput);
 };
 

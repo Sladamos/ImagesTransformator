@@ -1,17 +1,12 @@
 #include "Menu.h"
-#include "StringsOperator.h"
 
 using namespace std;
 
 Menu::Menu()
-{/*
-	options = std::shared_ptr<std::map<int, std::string>>(new map<int, string>());
-	vector<pair<int, string>> optionsVec = {
-	pair<int, string>(1, "Source name")};
-
-	for(auto p)
-	options->insert()*/
-	//TODO: option class
+{
+	//namedOptions.insert("Exit")
+	for (auto it = namedOptions.begin(); it != namedOptions.end(); it++)
+		indexedOptions.push_back(it->second);
 }
 
 void Menu::selectAndExecuteOption()
@@ -23,21 +18,25 @@ void Menu::selectAndExecuteOption()
 
 shared_ptr<Option> Menu::selectMatchingOption(const string& handledInput)
 {
-	StringsOperator strOp;
-	//TODO trycatch
-	if (strOp.isNumber(handledInput))
+	try
 	{
 		int index = stoi(handledInput) - 1;
-		return options[index];
+		return indexedOptions[index];
 	}
-	else
+	catch (exception& err)
 	{
-		for (auto option : options)
-		{
-			if (handledInput == option->getName())
-				return option;
-		}
+		return selectNamedOption(handledInput);
 	}
 
-	return options[options.size() - 1];
+}
+
+std::shared_ptr<Option> Menu::selectNamedOption(const std::string& handledInput)
+{
+	for (auto option : namedOptions)
+	{
+		if (handledInput == option.first)
+			return option.second;
+	}
+
+	return namedOptions["Exit"];
 }
