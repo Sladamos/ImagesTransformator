@@ -24,10 +24,10 @@ void Menu::selectAndExecuteOption()
 shared_ptr<Option> Menu::selectMatchingOption(const string& handledInput)
 {
 	StringsOperator strOp;
-
+	//TODO trycatch
 	if (strOp.isNumber(handledInput))
 	{
-		int index = stoi(handledInput);
+		int index = stoi(handledInput) - 1;
 		return options[index];
 	}
 	else
