@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "Image.h"
 #include "Pixel.h"
 #include "Bmp24Header.h"

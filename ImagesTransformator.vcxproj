@@ -153,6 +153,8 @@
     <ClCompile Include="ConsoleMenu.cpp" />
     <ClCompile Include="ConsoleModeSelector.cpp" />
     <ClCompile Include="DampelMasksOperator.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="ExitOption.cpp" />
     <ClCompile Include="FormatSelector.cpp" />
     <ClCompile Include="HeadersOperator.cpp" />
     <ClCompile Include="Image.cpp" />
@@ -192,6 +194,8 @@
     <ClInclude Include="ConsoleMenu.h" />
     <ClInclude Include="ConsoleModeSelector.h" />
     <ClInclude Include="DampelMasksOperator.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="ExitOption.h" />
     <ClInclude Include="FormatSelector.h" />
     <ClInclude Include="HeadersOperator.h" />
     <ClInclude Include="Image.h" />

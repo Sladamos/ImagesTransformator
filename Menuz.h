@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include "ImagesSaver.h"
 #include "HeadersOperator.h"
 #include "ImagesLoader.h"
@@ -34,3 +34,4 @@ private:
 	ImagesLoader* contentLoader;
 };
 
+*/

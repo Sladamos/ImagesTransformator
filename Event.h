@@ -5,11 +5,10 @@
 class Event
 {
 public:
-	void addListener(std::function<void()> listener);
-	void invoke();
-
-	void operator +=(std::function<void()> listener);
+	void addListener(std::function<void()> listener) const;
+	void invoke() const;
+	void operator +=(std::function<void()> listener) const;
 private:
-	std::vector<std::function<void()>> listeners;
+	mutable std::vector<std::function<void()>> listeners;
 };
 

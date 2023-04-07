@@ -1,4 +1,4 @@
-#include <iostream>
+/*#include <iostream>
 #include <iomanip>
 #include "Menuz.h"
 #include "Bmp24Loader.h"
@@ -148,4 +148,4 @@ Menuz::~Menuz()
 {
 	Parser::clear();
 	delete source;
-}
+}*/

@@ -1,4 +1,4 @@
-#include <algorithm>
+/*#include <algorithm>
 #include "Parser.h"
 #include "SobelTransformator.h"
 #include "DampelTransformator.h"
@@ -136,4 +136,4 @@ void Parser::clearLoaders()
 	for (auto saver : imagesLoaders)
 		delete saver.second;
 	imagesSavers.clear();
-}
+} */

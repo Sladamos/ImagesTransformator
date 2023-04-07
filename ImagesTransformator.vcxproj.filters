@@ -108,6 +108,12 @@
     <ClCompile Include="Option.cpp">
       <Filter>Options</Filter>
     </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="ExitOption.cpp">
+      <Filter>Options</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menuz.h" />
@@ -216,6 +222,12 @@
     <ClInclude Include="Option.h">
       <Filter>Options</Filter>
     </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="ExitOption.h">
+      <Filter>Options</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">
@@ -265,6 +277,9 @@
     </Filter>
     <Filter Include="Options">
       <UniqueIdentifier>{83568457-463f-443e-a587-67d50cec477b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{a4e2cbbd-5034-47a7-93e8-b5c8429e789b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
