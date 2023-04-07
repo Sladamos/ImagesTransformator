@@ -3,9 +3,9 @@ using namespace std;
 
 std::string ConsoleMenu::handleInput()
 {
-	clearConsole();
 	std::string output;
 	cin >> output;
+	clearConsole();
 	return output;
 }
 
@@ -17,9 +17,9 @@ void ConsoleMenu::printOptions()
 
 	for (int i = 0; i < numberOfOptions; i++)
 	{
-		ss << i + i << ". " << indexedOptions[i]->getDescription();
+		ss << i + 1 << ". " << indexedOptions[i]->toString();
 	}
-
+	ss << endl;
 	cout << ss.str();
 }
 

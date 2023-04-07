@@ -5,10 +5,11 @@ using namespace std;
 
 Menu::Menu()
 {
-	shared_ptr<ExitOption> exitOption = shared_ptr<ExitOption>(new ExitOption());
+	std::string optionName = "Exit";
+	shared_ptr<ExitOption> exitOption = shared_ptr<ExitOption>(new ExitOption(optionName));
 	auto exit = [this]() {exitProgram.invoke(); };
 	exitOption->exitProgram += exit;
-	pair<string, shared_ptr<Option>> namedOption = pair<string, shared_ptr<Option>>("Exit", exitOption);
+	pair<string, shared_ptr<Option>> namedOption = pair<string, shared_ptr<Option>>(optionName, exitOption);
 	namedOptions.insert(namedOption);
 	for (auto it = namedOptions.begin(); it != namedOptions.end(); it++)
 		indexedOptions.push_back(it->second);
