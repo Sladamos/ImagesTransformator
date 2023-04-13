@@ -17,9 +17,8 @@ void ConsoleMenu::printOptions()
 
 	for (int i = 0; i < numberOfOptions; i++)
 	{
-		ss << i + 1 << ". " << indexedOptions[i]->toString();
+		ss << i + 1 << ". " << indexedOptions[i]->toString() << endl;
 	}
-	ss << endl;
 	cout << ss.str();
 }
 

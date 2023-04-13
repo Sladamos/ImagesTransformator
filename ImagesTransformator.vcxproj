@@ -200,6 +200,7 @@
     <ClInclude Include="ImagesCreator.h" />
     <ClInclude Include="ImagesLoader.h" />
     <ClInclude Include="ImagesSaver.h" />
+    <ClInclude Include="LoadSourceOption.h" />
     <ClInclude Include="Mask.h" />
     <ClInclude Include="MasksOperator.h" />
     <ClInclude Include="MasksParser.h" />

@@ -216,6 +216,9 @@
     <ClInclude Include="ExitOption.h">
       <Filter>Options</Filter>
     </ClInclude>
+    <ClInclude Include="LoadSourceOption.h">
+      <Filter>Options</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">

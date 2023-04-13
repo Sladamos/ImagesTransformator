@@ -75,6 +75,8 @@ void Menuz::clearConsole()
 
 void Menuz::loadSourceOption()
 {
+generyczny typ manager
+create new resource
 	source->clear();
 	headersOperator->loadHeaders(source);
 	loadContentIfPossible();

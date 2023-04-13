@@ -1,5 +1,9 @@
 #include "Menu.h"
 #include "ExitOption.h"
+#include "LoadSourceOption.h"
+#include "Bmp24Creator.h"
+#include "Bmp24Loader.h"
+#include "Bmp24HeadersOperator.h"
 
 using namespace std;
 
@@ -9,8 +13,18 @@ Menu::Menu()
 	shared_ptr<ExitOption> exitOption = shared_ptr<ExitOption>(new ExitOption(optionName));
 	auto exit = [this]() {exitProgram.invoke(); };
 	exitOption->exitProgram += exit;
+	
 	pair<string, shared_ptr<Option>> namedOption = pair<string, shared_ptr<Option>>(optionName, exitOption);
 	namedOptions.insert(namedOption);
+	optionName = "LoadSource";
+	namedOption = pair<string, shared_ptr<Option>>(optionName, new LoadSourceOption<Bmp24Creator, Bmp24HeadersOperator, Bmp24Loader>(optionName));
+	namedOptions.insert(namedOption);
+
+	addNamedOptionsAsIndexed();
+}
+
+void Menu::addNamedOptionsAsIndexed()
+{
 	for (auto it = namedOptions.begin(); it != namedOptions.end(); it++)
 		indexedOptions.push_back(it->second);
 }

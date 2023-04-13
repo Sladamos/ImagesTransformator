@@ -19,6 +19,7 @@ protected:
 	std::vector<std::shared_ptr<Option>> indexedOptions;
 	std::map<std::string, std::shared_ptr<Option>> namedOptions;
 private:
+	void addNamedOptionsAsIndexed();
 	std::shared_ptr<Option> selectMatchingOption(const std::string& handledInput);
 	std::shared_ptr<Option> selectNamedOption(const std::string& handledInput);
 };
