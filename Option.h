@@ -9,6 +9,7 @@ class Option
 public:
 	Option(const std::string& name, std::shared_ptr<Communicator> communicator);
 	std::string toString();
+	std::string getName();
 	virtual void execute() = 0;
 protected:
 	virtual std::string getDescription() = 0;

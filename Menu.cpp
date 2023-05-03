@@ -9,29 +9,25 @@ using namespace std;
 Menu::Menu(std::shared_ptr<Communicator> communicator)
 {
 	this->communicator = communicator;
-	//todo initialize every option method
-	//map: string(format) -> vector options
-	//for same options for every format: for each add
-	std::string optionName = "Exit";
-	shared_ptr<ExitOption> exitOption = shared_ptr<ExitOption>(new ExitOption(optionName));
-	exitOption->exitProgram += [this]() {exitProgram.invoke(); };
+	addBmp24Options();
+	addExitOption();
+	onFormatChanged("Bmp24");
+}
 
-	
-	pair<string, shared_ptr<Option>> namedOption = pair<string, shared_ptr<Option>>(optionName, exitOption);
-	namedOptions.insert(namedOption);
-
-	optionName = "LoadSource";
-	namedOption = pair<string, shared_ptr<Option>>(optionName,
+void Menu::addBmp24Options()
+{
+	string format = "Bmp24";
+	string optionName = "LoadSource";
+	auto namedOptions = map<string, shared_ptr<Option>>();
+	auto namedOption = pair<string, shared_ptr<Option>>(optionName,
 		new LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>(optionName, communicator));
 	namedOptions.insert(namedOption);
-
-	addNamedOptionsAsIndexed();
+	options.insert({format, namedOptions});
 }
 
 void Menu::addNamedOptionsAsIndexed()
 {
-	//select options for format
-	//clear vector first
+	indexedOptions.clear();
 	for (auto it = namedOptions.begin(); it != namedOptions.end(); it++)
 		indexedOptions.push_back(it->second);
 }
@@ -48,13 +44,31 @@ shared_ptr<Option> Menu::selectMatchingOption(const string& handledInput)
 	try
 	{
 		int index = stoi(handledInput) - 1;
-		return indexedOptions[index];
+		if (index < indexedOptions.size())
+			return indexedOptions[index];
+		else
+			throw exception();
 	}
 	catch (exception& err)
 	{
 		return selectNamedOption(handledInput);
 	}
+}
 
+void Menu::addOptionForAllFormats(std::shared_ptr<Option> option)
+{
+	for (auto& kv : options) 
+	{
+		kv.second.insert({ option->getName(), option });
+	}
+}
+
+void Menu::addExitOption()
+{
+	string optionName = "Exit";
+	shared_ptr<ExitOption> exitOption = shared_ptr<ExitOption>(new ExitOption(optionName));
+	exitOption->exitProgram += [this]() {exitProgram.invoke();};
+	addOptionForAllFormats(exitOption);
 }
 
 std::shared_ptr<Option> Menu::selectNamedOption(const std::string& handledInput)
@@ -66,4 +80,11 @@ std::shared_ptr<Option> Menu::selectNamedOption(const std::string& handledInput)
 	}
 
 	return namedOptions["Exit"];
+}
+
+void Menu::onFormatChanged(std::string newFormat)
+{
+	currentFormat = newFormat;
+	namedOptions = options[newFormat];
+	addNamedOptionsAsIndexed();
 }

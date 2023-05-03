@@ -12,6 +12,11 @@ std::string Option::toString()
     return ss.str();
 }
 
+std::string Option::getName()
+{
+    return name;
+}
+
 void Option::displayText(const std::string& text)
 {
     communicator->displayText(text);
