@@ -31,6 +31,7 @@ public:
 		{
 			contentLoader->loadImageContent(image.get());
 			displayText(image->toString());
+			//TODO return image
 		}
 		else
 		{

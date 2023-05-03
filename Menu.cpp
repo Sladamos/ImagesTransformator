@@ -9,6 +9,7 @@ using namespace std;
 Menu::Menu(std::shared_ptr<Communicator> communicator)
 {
 	this->communicator = communicator;
+	//todo initialize every option method
 	std::string optionName = "Exit";
 	shared_ptr<ExitOption> exitOption = shared_ptr<ExitOption>(new ExitOption(optionName));
 	auto exit = [this]() {exitProgram.invoke(); };
