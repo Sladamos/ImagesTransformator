@@ -99,6 +99,9 @@
     <ClCompile Include="ConsoleDisplayer.cpp">
       <Filter>Displayers</Filter>
     </ClCompile>
+    <ClCompile Include="ChangeFormatOption.cpp">
+      <Filter>Options</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menuz.h" />
@@ -227,6 +230,9 @@
     </ClInclude>
     <ClInclude Include="OneArgEvent.h">
       <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeFormatOption.h">
+      <Filter>Options</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

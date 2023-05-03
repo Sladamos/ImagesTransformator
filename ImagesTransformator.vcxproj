@@ -147,6 +147,7 @@
     <ClCompile Include="Bmp24Loader.cpp" />
     <ClCompile Include="Bmp24Saver.cpp" />
     <ClCompile Include="Bmp24Transformator.cpp" />
+    <ClCompile Include="ChangeFormatOption.cpp" />
     <ClCompile Include="Communicator.cpp" />
     <ClCompile Include="ConsoleCommunicator.cpp" />
     <ClCompile Include="ConsoleDisplayer.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="Bmp24Loader.h" />
     <ClInclude Include="Bmp24Saver.h" />
     <ClInclude Include="Bmp24Transformator.h" />
+    <ClInclude Include="ChangeFormatOption.h" />
     <ClInclude Include="Communicator.h" />
     <ClInclude Include="ConsoleCommunicator.h" />
     <ClInclude Include="ConsoleDisplayer.h" />
