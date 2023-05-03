@@ -45,25 +45,25 @@ void Menuz::handleOption()
 	switch (option)
 	{
 	case 1:
-		source->setName(readNameFromInput());
+		source->setName(readNameFromInput()); done
 		break;
 	case 2:
-		loadSourceOption();
+		loadSourceOption(); done
 		break;
 	case 3:
-		outputName = readNameFromInput();
+			outputName = readNameFromInput(); easy
 		break;
 	case 4:
-		changeFormatOption();
+		changeFormatOption(); done
 		break;
 	case 5:
-		changeModeOption();
+			changeModeOption();	easy: changeFilter , onFilterChanged with Masks vector
 		break;
 	case 6:
-		transformateImageOption();
+			transformateImageOption(); hard
 		break;
 	case 9:
-		programLaunched = false;
+		programLaunched = false; done
 		break;
 	}
 }

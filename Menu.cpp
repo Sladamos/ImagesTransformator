@@ -33,8 +33,6 @@ void Menu::addBmp24Options(const std::string& format)
 	auto changeFormatOption = std::dynamic_pointer_cast<ChangeFormatOption>(options[formats[0]]["ChangeFormat"]);
 	
 	changeFormatOption->formatChanged += [loadSourceOption](auto format) {loadSourceOption->onFormatChanged(format); };
-	//add this on format changed
-	//remember that format need function with string arg!
 	namedOptions.insert(namedOption);
 }
 
