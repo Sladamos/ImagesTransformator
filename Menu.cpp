@@ -18,9 +18,15 @@ void Menu::addBmp24Options()
 {
 	string format = "Bmp24";
 	string optionName = "LoadSource";
+	auto loadSourceOption = shared_ptr<LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>>
+		(new LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>(optionName, communicator));
+
 	auto namedOptions = map<string, shared_ptr<Option>>();
-	auto namedOption = pair<string, shared_ptr<Option>>(optionName,
-		new LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>(optionName, communicator));
+	auto namedOption = pair<string, shared_ptr<Option>>(optionName, loadSourceOption);
+
+	//selectFormatOption->selectFormat += [loadSourceOption]() {loadSourceOption->onFormatChanged(); };
+	//add this on format changed
+	//remember that format need function with string arg!
 	namedOptions.insert(namedOption);
 	options.insert({format, namedOptions});
 }

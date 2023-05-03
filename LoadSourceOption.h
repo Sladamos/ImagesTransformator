@@ -55,7 +55,7 @@ public:
 		return image;
 	}
 	
-	void onFormatChanged()
+	void onFormatChanged(std::string newFormat)
 	{
 		image == nullptr;
 	}
