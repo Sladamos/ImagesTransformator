@@ -12,7 +12,7 @@ template <class T, class H, class L>
 class LoadSourceOption : public Option
 {
 public:
-	LoadSourceOption(const std::string& name) : Option(name)
+	LoadSourceOption(const std::string& name, std::shared_ptr<Communicator> communicator) : Option(name, communicator)
 	{
 		this->creator = std::shared_ptr<T>(new T());
 		this->headersOperator = std::shared_ptr<H>(new H());
@@ -21,8 +21,8 @@ public:
 
 	virtual void execute() override
 	{
-		std::string sourceName;
-		std::cin >> sourceName;
+		std::string sourceName = handleInput();
+
 		auto image = creator->createImage(sourceName);
 		headersOperator->loadHeaders(image);
 		
@@ -30,9 +30,12 @@ public:
 		{
 			contentLoader->loadImageContent(image.get());
 			//invoke sourceChange event
-			std::cout << image->toString();
+			displayText(image->toString());
 		}
-		//return image->toString();
+		else
+		{
+			displayError("Incorrect source name\n");
+		}
 		
 	}
 

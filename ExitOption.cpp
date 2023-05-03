@@ -1,6 +1,6 @@
 #include "ExitOption.h"
 
-ExitOption::ExitOption(const std::string& name) : Option(name)
+ExitOption::ExitOption(const std::string& name, std::shared_ptr<Communicator> communicator) : Option(name, communicator)
 {
 }
 
