@@ -147,6 +147,9 @@
     <ClCompile Include="Bmp24Loader.cpp" />
     <ClCompile Include="Bmp24Saver.cpp" />
     <ClCompile Include="Bmp24Transformator.cpp" />
+    <ClCompile Include="Communicator.cpp" />
+    <ClCompile Include="ConsoleCommunicator.cpp" />
+    <ClCompile Include="ConsoleDisplayer.cpp" />
     <ClCompile Include="ConsoleFormatSelector.cpp" />
     <ClCompile Include="ConsoleMenu.cpp" />
     <ClCompile Include="ConsoleModeSelector.cpp" />
@@ -181,10 +184,14 @@
     <ClInclude Include="Bmp24Loader.h" />
     <ClInclude Include="Bmp24Saver.h" />
     <ClInclude Include="Bmp24Transformator.h" />
+    <ClInclude Include="Communicator.h" />
+    <ClInclude Include="ConsoleCommunicator.h" />
+    <ClInclude Include="ConsoleDisplayer.h" />
     <ClInclude Include="ConsoleFormatSelector.h" />
     <ClInclude Include="ConsoleMenu.h" />
     <ClInclude Include="ConsoleModeSelector.h" />
     <ClInclude Include="DampelMasksOperator.h" />
+    <ClInclude Include="Displayer.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="ExitOption.h" />
     <ClInclude Include="FormatSelector.h" />

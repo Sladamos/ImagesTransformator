@@ -90,6 +90,15 @@
     <ClCompile Include="ExitOption.cpp">
       <Filter>Options</Filter>
     </ClCompile>
+    <ClCompile Include="Communicator.cpp">
+      <Filter>Communicator</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleCommunicator.cpp">
+      <Filter>Communicator</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleDisplayer.cpp">
+      <Filter>Displayers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menuz.h" />
@@ -204,6 +213,18 @@
     <ClInclude Include="LoadSourceOption.h">
       <Filter>Options</Filter>
     </ClInclude>
+    <ClInclude Include="Displayer.h">
+      <Filter>Displayers</Filter>
+    </ClInclude>
+    <ClInclude Include="Communicator.h">
+      <Filter>Communicator</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleCommunicator.h">
+      <Filter>Communicator</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleDisplayer.h">
+      <Filter>Displayers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">
@@ -256,6 +277,12 @@
     </Filter>
     <Filter Include="Events">
       <UniqueIdentifier>{a4e2cbbd-5034-47a7-93e8-b5c8429e789b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Displayers">
+      <UniqueIdentifier>{4fc67360-e776-4a52-9127-3ac021e0dee6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communicator">
+      <UniqueIdentifier>{b14aa61b-58fe-4eba-b8a8-19e3b9561f7e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
