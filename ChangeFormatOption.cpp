@@ -13,7 +13,8 @@ void ChangeFormatOption::execute()
     auto format = std::shared_ptr<std::string>(new std::string(handleInput()));
     if (*format != "Undo" && isFormatSupported(*format))
     {
-            formatChanged.invoke(format);
+        formatChanged.invoke(format);
+        onCurrentFormatChanged(format);
     }
 }
 
@@ -33,9 +34,14 @@ bool ChangeFormatOption::isFormatSupported(const std::string& format)
     
 }
 
+void ChangeFormatOption::onCurrentFormatChanged(std::shared_ptr<std::string> format)
+{
+    currentFormat = format;
+}
+
 std::string ChangeFormatOption::getDescription()
 {
-    return "Select input image format";
+    return "Select input image format, current format: " + *currentFormat;
 }
 
 
