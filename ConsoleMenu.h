@@ -2,10 +2,11 @@
 #include <iostream>
 #include <sstream>
 #include "Menu.h"
+#include "Communicator.h"
 class ConsoleMenu : public Menu
 {
 public:
-	virtual std::string handleInput() override;
+	ConsoleMenu();
 	virtual void printOptions() override;
 private:
 	void clearConsole();

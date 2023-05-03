@@ -17,6 +17,11 @@ void Option::displayText(const std::string& text)
     communicator->displayText(text);
 }
 
+void Option::displayError(const std::string& text)
+{
+    communicator->displayError(text);
+}
+
 std::string Option::handleInput()
 {
     return communicator->handleInput();

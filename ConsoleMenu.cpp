@@ -1,14 +1,11 @@
 #include "ConsoleMenu.h"
+#include "ConsoleCommunicator.h"
 using namespace std;
 
-std::string ConsoleMenu::handleInput()
+ConsoleMenu::ConsoleMenu() : Menu(shared_ptr<Communicator>(new ConsoleCommunicator()))
 {
-	std::string output;
-	cin >> output;
-	clearConsole();
-	return output;
-}
 
+}
 void ConsoleMenu::printOptions()
 {
 	stringstream ss;

@@ -21,6 +21,7 @@ public:
 
 	virtual void execute() override
 	{
+		displayText("Give the image name with extension.");
 		std::string sourceName = handleInput();
 
 		auto image = creator->createImage(sourceName);
@@ -29,12 +30,11 @@ public:
 		if (headersOperator->areHeadersValidate(image))
 		{
 			contentLoader->loadImageContent(image.get());
-			//invoke sourceChange event
 			displayText(image->toString());
 		}
 		else
 		{
-			displayError("Incorrect source name\n");
+			displayError("Incorrect source name.");
 		}
 		
 	}

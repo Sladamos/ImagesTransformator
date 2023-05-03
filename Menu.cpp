@@ -6,8 +6,9 @@
 
 using namespace std;
 
-Menu::Menu()
+Menu::Menu(std::shared_ptr<Communicator> communicator)
 {
+	this->communicator = communicator;
 	std::string optionName = "Exit";
 	shared_ptr<ExitOption> exitOption = shared_ptr<ExitOption>(new ExitOption(optionName));
 	auto exit = [this]() {exitProgram.invoke(); };
@@ -15,9 +16,10 @@ Menu::Menu()
 	
 	pair<string, shared_ptr<Option>> namedOption = pair<string, shared_ptr<Option>>(optionName, exitOption);
 	namedOptions.insert(namedOption);
+
 	optionName = "LoadSource";
 	namedOption = pair<string, shared_ptr<Option>>(optionName,
-		new LoadSourceOption<ImagesCreator<Bmp24>, Bmp24HeadersOperator, Bmp24Loader>(optionName));
+		new LoadSourceOption<ImagesCreator<Bmp24>, Bmp24HeadersOperator, Bmp24Loader>(optionName, communicator));
 	namedOptions.insert(namedOption);
 
 	addNamedOptionsAsIndexed();
@@ -31,7 +33,7 @@ void Menu::addNamedOptionsAsIndexed()
 
 void Menu::selectAndExecuteOption()
 {
-	string input = handleInput();
+	string input = communicator->handleInput();
 	shared_ptr<Option> selectedOption = selectMatchingOption(input);
 	selectedOption->execute();
 }

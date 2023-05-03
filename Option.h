@@ -10,10 +10,11 @@ public:
 	Option(const std::string& name, std::shared_ptr<Communicator> communicator);
 	std::string toString();
 	virtual void execute() = 0;
-	void displayText(const std::string& text);
-	std::string handleInput();
 protected:
 	virtual std::string getDescription() = 0;
+	void displayText(const std::string& text);
+	void displayError(const std::string& text);
+	std::string handleInput();
 private:
 	std::string name;
 	std::shared_ptr<Communicator> communicator;

@@ -8,13 +8,11 @@
 class Menu
 {
 public:
-	Menu();
+	Menu(std::shared_ptr<Communicator> communicator);
 	void selectAndExecuteOption();
 	virtual void printOptions() = 0;
 
 	const Event exitProgram;
-protected:
-	virtual std::string handleInput() = 0;
 
 	std::vector<std::shared_ptr<Option>> indexedOptions;
 	std::map<std::string, std::shared_ptr<Option>> namedOptions;
@@ -22,5 +20,6 @@ private:
 	void addNamedOptionsAsIndexed();
 	std::shared_ptr<Option> selectMatchingOption(const std::string& handledInput);
 	std::shared_ptr<Option> selectNamedOption(const std::string& handledInput);
+	std::shared_ptr<Communicator> communicator;
 };
 

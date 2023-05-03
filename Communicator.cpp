@@ -9,3 +9,8 @@ void Communicator::displayText(const std::string& text)
 {
 	displayer->displayText(text);
 }
+
+void Communicator::displayError(const std::string& text)
+{
+	displayer->displayError(text);
+}
