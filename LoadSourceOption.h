@@ -1,4 +1,5 @@
 #pragma once
+#include <stdexcept>
 #include "OneArgEvent.h"
 #include "Option.h"
 #include "Image.h"
@@ -14,9 +15,10 @@ class LoadSourceOption : public Option
 public:
 	LoadSourceOption(const std::string& name, std::shared_ptr<Communicator> communicator) : Option(name, communicator)
 	{
-		this->creator = std::shared_ptr<T>(new T());
+		this->creator = std::shared_ptr<ImagesCreator<T>>(new ImagesCreator<T>());
 		this->headersOperator = std::shared_ptr<H>(new H());
 		this->contentLoader = std::shared_ptr<L>(new L());
+		this->image = nullptr;
 	}
 
 	virtual void execute() override
@@ -31,7 +33,7 @@ public:
 		{
 			contentLoader->loadImageContent(image);
 			displayText(image->toString());
-			//TODO return image
+			this->image = image;
 		}
 		else
 		{
@@ -42,11 +44,25 @@ public:
 
 	virtual std::string getDescription() override
 	{
-		return "Load source";
+		return "Load source image";
+	}
+
+	std::shared_ptr<T> getImage()
+	{
+		if (image == nullptr)
+			throw std::domain_error("Firstly load source.");
+
+		return image;
+	}
+	
+	void onFormatChanged()
+	{
+		image == nullptr;
 	}
 private:
 	bool isLoaded;
-	std::shared_ptr<T> creator;
+	std::shared_ptr<T> image;
+	std::shared_ptr<ImagesCreator<T>> creator;
 	std::shared_ptr<H> headersOperator;
 	std::shared_ptr<L> contentLoader;
 };

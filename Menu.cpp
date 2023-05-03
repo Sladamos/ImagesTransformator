@@ -22,7 +22,7 @@ Menu::Menu(std::shared_ptr<Communicator> communicator)
 
 	optionName = "LoadSource";
 	namedOption = pair<string, shared_ptr<Option>>(optionName,
-		new LoadSourceOption<ImagesCreator<Bmp24>, Bmp24HeadersOperator, Bmp24Loader>(optionName, communicator));
+		new LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>(optionName, communicator));
 	namedOptions.insert(namedOption);
 
 	addNamedOptionsAsIndexed();
