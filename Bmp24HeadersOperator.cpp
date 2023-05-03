@@ -1,15 +1,15 @@
 #include "Bmp24HeadersOperator.h"
 using namespace std;
 
-bool Bmp24HeadersOperator::areHeadersValidate(Bmp24* bitmap)
+bool Bmp24HeadersOperator::areHeadersValidate(shared_ptr<Bmp24> bitmap)
 {
-	Bmp24Header bitmapHeader = bitmap->getImageHeader();
-	return bitmapHeader.fileSize > 0 && bitmapHeader.fileType == 0x4D42 && bitmapHeader.planes == 1 && bitmapHeader.offsetData <= sizeof(bitmapHeader);
+	auto bitmapHeader = bitmap->getImageHeader();
+	return bitmapHeader != nullptr && bitmapHeader->fileSize > 0 && bitmapHeader->fileType == 0x4D42 && bitmapHeader->planes == 1 && bitmapHeader->offsetData <= sizeof(*bitmapHeader);
 }
 
-void Bmp24HeadersOperator::loadDIBHeader(std::ifstream& bitmapFile, Bmp24HeaderPtr bitmapHeader)
+void Bmp24HeadersOperator::loadDIBHeader(std::ifstream& bitmapFile, std::shared_ptr<Bmp24Header> bitmapHeader)
 {
-	Bmp24Header bmp24Header = *bitmapHeader;
+	auto& bmp24Header = *bitmapHeader;
 	bitmapFile.read(reinterpret_cast<char*>(&bmp24Header.infoHeaderSize), sizeof(bmp24Header.infoHeaderSize));
 	bitmapFile.read(reinterpret_cast<char*>(&bmp24Header.bitmapWidth), sizeof(bmp24Header.bitmapWidth));
 	bitmapFile.read(reinterpret_cast<char*>(&bmp24Header.bitmapHeight), sizeof(bmp24Header.bitmapHeight));

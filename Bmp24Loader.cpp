@@ -2,14 +2,16 @@
 
 void Bmp24Loader::prepareAndLoadContent(std::ifstream& bitmapFile, Bmp24* bitmap)
 {
-	const Bmp24Header& bitmapHeader = dynamic_cast<const Bmp24Header&>(bitmap->getImageHeader());
-	Bmp24Content& bitmapContent = dynamic_cast<Bmp24Content&>(bitmap->getImageContent());
-	int bitmapWidth = bitmapContent.getWidth(), bitmapHeight = bitmapContent.getHeight();
+	auto bitmapHeader = bitmap->getImageHeader();
+	auto bitmapContent = bitmap->getImageContent();
+	bitmapContent->setWidth(bitmapHeader->bitmapWidth);
+	bitmapContent->setHeight(bitmapHeader->bitmapHeight);
+	int bitmapWidth = bitmapContent->getWidth(), bitmapHeight = bitmapContent->getHeight();
 
-	bitmapContent.createUninitializedPixels();
-	bitmapContent.setNumberOfZeroBytes(bitmapHeader.imageSize / bitmapHeight - bitmapHeader.bitsPerPixel / 8 * bitmapWidth);
-	bitmapFile.seekg(bitmapHeader.offsetData, bitmapFile.beg);
-	loadPixels(bitmapFile, bitmapContent);
+	bitmapContent->createUninitializedPixels();
+	bitmapContent->setNumberOfZeroBytes(bitmapHeader->imageSize / bitmapHeight - bitmapHeader->bitsPerPixel / 8 * bitmapWidth);
+	bitmapFile.seekg(bitmapHeader->offsetData, bitmapFile.beg);
+	loadPixels(bitmapFile, *bitmapContent);
 }
 
 void Bmp24Loader::loadPixels(std::ifstream& bitmapFile, Bmp24Content& bitmapContent)

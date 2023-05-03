@@ -13,9 +13,9 @@ std::shared_ptr<Bmp24> Bmp24Transformator::transformateImage(std::shared_ptr<Bmp
 std::shared_ptr<Bmp24> Bmp24Transformator::transformSource()
 {
 	std::shared_ptr<Bmp24> output = std::shared_ptr<Bmp24>(new Bmp24(*currentSource));
-	Bmp24Content content = output->getImageContent();
-	int width = content.getWidth(), height = content.getHeight();
-	Pixels pixels = content.getPixels();
+	auto content = output->getImageContent();
+	int width = content->getWidth(), height = content->getHeight();
+	Pixels pixels = content->getPixels();
 
 	for (int y = 0; y < height; y++)
 		for (int x = 0; x < width; x++)
@@ -58,9 +58,9 @@ int Bmp24Transformator::transformateColorByMask(const Pixel& sourcePixel, const 
 Pixel Bmp24Transformator::getNeighbourPixel(int row, int column)
 {
 	Pixel sourcePixel, blackPixel;
-	Bmp24Content content = currentSource->getImageContent();
-	if (row < 0 || column < 0 || column >= content.getWidth() || row >= content.getHeight())
+	auto content = currentSource->getImageContent();
+	if (row < 0 || column < 0 || column >= content->getWidth() || row >= content->getHeight())
 		return Pixel();
 	else
-		return content.getPixels()[row][column];
+		return content->getPixels()[row][column];
 }

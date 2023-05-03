@@ -7,17 +7,15 @@ template<class H, class C>
 class Image
 {
 public:
-	Image(Image* source, const std::string& imageName) : name(imageName)
+	Image(const std::string& imageName)
 	{
-		imageHeader = source->imageHeader;
-		imageContent = source->imageContent;
+		imageHeader = std::shared_ptr<H>(new H());
+		imageContent = std::shared_ptr<C>(new C());
+		name = imageName;
 	}
 
-	Image() : name("EMPTY IMAGE")
+	Image() : Image("EMPTY IMAGE")
 	{
-		imageHeader = nullptr;
-		imageContent = nullptr;
-
 	}
 
 	std::string getName() const
@@ -25,17 +23,17 @@ public:
 		return name;
 	}
 
-	const H& getImageHeader() const
+	std::shared_ptr<H> getImageHeader() const
 	{
-		return *imageHeader;
+		return imageHeader;
 	}
 
-	C& getImageContent() const
+	std::shared_ptr<C> getImageContent() const
 	{
-		return *imageContent;
+		return imageContent;
 	}
 
-	void setName(const std::string& name)
+	virtual void setName(const std::string& name)
 	{
 		this->name = name;
 	}

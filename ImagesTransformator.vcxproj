@@ -140,10 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BitmapHeader.cpp" />
-    <ClCompile Include="BitmapHeadersOperator.cpp" />
     <ClCompile Include="Bmp24.cpp" />
     <ClCompile Include="Bmp24Content.cpp" />
-    <ClCompile Include="Bmp24Creator.cpp" />
     <ClCompile Include="Bmp24Header.cpp" />
     <ClCompile Include="Bmp24HeadersOperator.cpp" />
     <ClCompile Include="Bmp24Loader.cpp" />
@@ -156,10 +154,8 @@
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="ExitOption.cpp" />
     <ClCompile Include="FormatSelector.cpp" />
-    <ClCompile Include="HeadersOperator.cpp" />
     <ClCompile Include="ImageContent.cpp" />
     <ClCompile Include="ImageHeader.cpp" />
-    <ClCompile Include="ImagesCreator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mask.cpp" />
     <ClCompile Include="MasksOperator.cpp" />
@@ -180,7 +176,6 @@
     <ClInclude Include="BitmapHeadersOperator.h" />
     <ClInclude Include="Bmp24.h" />
     <ClInclude Include="Bmp24Content.h" />
-    <ClInclude Include="Bmp24Creator.h" />
     <ClInclude Include="Bmp24Header.h" />
     <ClInclude Include="Bmp24HeadersOperator.h" />
     <ClInclude Include="Bmp24Loader.h" />

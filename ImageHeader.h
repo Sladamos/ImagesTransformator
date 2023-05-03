@@ -4,6 +4,8 @@
 class ImageHeader
 {
 public:
+	ImageHeader() = default;
+	ImageHeader(const ImageHeader&) = default;
 	virtual std::string toString() = 0;
 };
 

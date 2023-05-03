@@ -1,7 +1,6 @@
 #include "Menu.h"
 #include "ExitOption.h"
 #include "LoadSourceOption.h"
-#include "Bmp24Creator.h"
 #include "Bmp24Loader.h"
 #include "Bmp24HeadersOperator.h"
 
@@ -17,7 +16,8 @@ Menu::Menu()
 	pair<string, shared_ptr<Option>> namedOption = pair<string, shared_ptr<Option>>(optionName, exitOption);
 	namedOptions.insert(namedOption);
 	optionName = "LoadSource";
-	namedOption = pair<string, shared_ptr<Option>>(optionName, new LoadSourceOption<Bmp24Creator, Bmp24HeadersOperator, Bmp24Loader>(optionName));
+	namedOption = pair<string, shared_ptr<Option>>(optionName,
+		new LoadSourceOption<ImagesCreator<Bmp24>, Bmp24HeadersOperator, Bmp24Loader>(optionName));
 	namedOptions.insert(namedOption);
 
 	addNamedOptionsAsIndexed();

@@ -14,12 +14,6 @@
     <ClCompile Include="Bmp24HeadersOperator.cpp">
       <Filter>HeadersOperators</Filter>
     </ClCompile>
-    <ClCompile Include="HeadersOperator.cpp">
-      <Filter>HeadersOperators</Filter>
-    </ClCompile>
-    <ClCompile Include="BitmapHeadersOperator.cpp">
-      <Filter>HeadersOperators</Filter>
-    </ClCompile>
     <ClCompile Include="BitmapHeader.cpp">
       <Filter>Images\Headers</Filter>
     </ClCompile>
@@ -55,12 +49,6 @@
     </ClCompile>
     <ClCompile Include="MasksParser.cpp">
       <Filter>Parsers\MasksParser</Filter>
-    </ClCompile>
-    <ClCompile Include="ImagesCreator.cpp">
-      <Filter>Creators</Filter>
-    </ClCompile>
-    <ClCompile Include="Bmp24Creator.cpp">
-      <Filter>Creators</Filter>
     </ClCompile>
     <ClCompile Include="Pixel.cpp">
       <Filter>SimpleElements</Filter>
@@ -169,9 +157,6 @@
       <Filter>Parsers\MasksParser</Filter>
     </ClInclude>
     <ClInclude Include="ImagesCreator.h">
-      <Filter>Creators</Filter>
-    </ClInclude>
-    <ClInclude Include="Bmp24Creator.h">
       <Filter>Creators</Filter>
     </ClInclude>
     <ClInclude Include="Pixel.h">

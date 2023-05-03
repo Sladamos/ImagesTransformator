@@ -5,7 +5,7 @@ template<class T>
 class ImagesLoader
 {
 public:
-	void loadImageContent(T* image)
+	void loadImageContent(T* image)	
 	{
 		std::ifstream imageFile(DIRECTORY_PATH + image->getName(), std::ios_base::binary);
 		if (imageFile.is_open())
