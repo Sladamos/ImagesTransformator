@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include <string>
 #include <fstream>
 #include "Image.h"
@@ -6,7 +7,7 @@ template<class I, class H, class C>
 class ImagesSaver
 {
 public:
-	void saveImage(I* image)
+	void saveImage(std::shared_ptr<I> image)
 	{
 		std::ofstream imageFile(DIRECTORY_PATH + image->getName(), std::ios::binary | std::ios::out | std::ios::trunc);
 		if (imageFile.is_open())

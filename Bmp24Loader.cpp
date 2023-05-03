@@ -1,6 +1,6 @@
 #include "Bmp24Loader.h"
 
-void Bmp24Loader::prepareAndLoadContent(std::ifstream& bitmapFile, Bmp24* bitmap)
+void Bmp24Loader::prepareAndLoadContent(std::ifstream& bitmapFile, std::shared_ptr<Bmp24> bitmap)
 {
 	auto bitmapHeader = bitmap->getImageHeader();
 	auto bitmapContent = bitmap->getImageContent();

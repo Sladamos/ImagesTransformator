@@ -29,7 +29,7 @@ public:
 		
 		if (headersOperator->areHeadersValidate(image))
 		{
-			contentLoader->loadImageContent(image.get());
+			contentLoader->loadImageContent(image);
 			displayText(image->toString());
 			//TODO return image
 		}
