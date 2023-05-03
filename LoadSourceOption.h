@@ -55,7 +55,7 @@ public:
 		return image;
 	}
 	
-	void onFormatChanged(std::string newFormat)
+	void onFormatChanged(std::shared_ptr<std::string> newFormat)
 	{
 		image == nullptr;
 	}

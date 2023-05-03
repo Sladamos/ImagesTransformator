@@ -8,7 +8,7 @@ Option::Option(const std::string& name, std::shared_ptr<Communicator> communicat
 std::string Option::toString()
 {
     stringstream ss;
-    ss << "[" << name << setw(10) << "]" << ": " << getDescription();
+    ss << "[" << left << setw(20) << name  << "]" << ": " << getDescription();
     return ss.str();
 }
 

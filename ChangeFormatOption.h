@@ -9,7 +9,7 @@ public:
 	ChangeFormatOption(const std::string& name, std::shared_ptr<Communicator> communicator, const std::vector<std::string>& formats);
 	virtual void execute() override;
 	virtual std::string getDescription() override;
-	void onCurrentFormatChanged(std::shared_ptr<std::string> format);
+	void onFormatChanged(std::shared_ptr<std::string> format);
 
 	const OneArgEvent<std::string> formatChanged;
 private:

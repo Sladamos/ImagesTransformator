@@ -5,16 +5,22 @@ ChangeFormatOption::ChangeFormatOption(const std::string& name, std::shared_ptr<
     Option(name, communicator), formats(formats)
 {
     this->formats.push_back("Undo");
+    currentFormat = nullptr;
 }
 
 void ChangeFormatOption::execute()
 {
+    displayText("Select input image format from below formats.");
     displayText(getSupportedFormats());
     auto format = std::shared_ptr<std::string>(new std::string(handleInput()));
     if (*format != "Undo" && isFormatSupported(*format))
     {
         formatChanged.invoke(format);
-        onCurrentFormatChanged(format);
+    }
+    else if (currentFormat == nullptr)
+    {
+        format = std::shared_ptr<std::string>(new std::string(formats[0]));
+        formatChanged.invoke(format);
     }
 }
 
@@ -23,7 +29,7 @@ std::string ChangeFormatOption::getSupportedFormats()
     std::string text;
     for (auto format : formats)
     {
-        text += format;
+        text += format + "\n";
     }
     return text;
 }
@@ -34,9 +40,9 @@ bool ChangeFormatOption::isFormatSupported(const std::string& format)
     
 }
 
-void ChangeFormatOption::onCurrentFormatChanged(std::shared_ptr<std::string> format)
+void ChangeFormatOption::onFormatChanged(std::shared_ptr<std::string> newFormat)
 {
-    currentFormat = format;
+    currentFormat = newFormat;
 }
 
 std::string ChangeFormatOption::getDescription()

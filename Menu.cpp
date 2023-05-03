@@ -3,32 +3,39 @@
 #include "LoadSourceOption.h"
 #include "Bmp24Loader.h"
 #include "Bmp24HeadersOperator.h"
+#include "ChangeFormatOption.h"
 
 using namespace std;
 
-Menu::Menu(std::shared_ptr<Communicator> communicator)
+Menu::Menu(std::shared_ptr<Communicator> communicator) : communicator(communicator)
 {
-	this->communicator = communicator;
-	addBmp24Options();
+	formats = vector<string>{ "Bmp24", "JPG" };
+	for (auto format : formats)
+	{
+		options.insert({ format, map<string, shared_ptr<Option>>() });
+	}
 	addExitOption();
-	onFormatChanged("Bmp24");
+	addChangeFormatOption();
+	addBmp24Options(formats[0]);
+	auto changeFormatOption = options[formats[0]]["ChangeFormat"];
+	changeFormatOption->execute();
 }
 
-void Menu::addBmp24Options()
+void Menu::addBmp24Options(const std::string& format)
 {
-	string format = "Bmp24";
 	string optionName = "LoadSource";
 	auto loadSourceOption = shared_ptr<LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>>
 		(new LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>(optionName, communicator));
 
-	auto namedOptions = map<string, shared_ptr<Option>>();
+	auto& namedOptions = options[format];
 	auto namedOption = pair<string, shared_ptr<Option>>(optionName, loadSourceOption);
 
-	//selectFormatOption->selectFormat += [loadSourceOption]() {loadSourceOption->onFormatChanged(); };
+	auto changeFormatOption = std::dynamic_pointer_cast<ChangeFormatOption>(options[formats[0]]["ChangeFormat"]);
+	
+	changeFormatOption->formatChanged += [loadSourceOption](auto format) {loadSourceOption->onFormatChanged(format); };
 	//add this on format changed
 	//remember that format need function with string arg!
 	namedOptions.insert(namedOption);
-	options.insert({format, namedOptions});
 }
 
 void Menu::addNamedOptionsAsIndexed()
@@ -77,6 +84,15 @@ void Menu::addExitOption()
 	addOptionForAllFormats(exitOption);
 }
 
+void Menu::addChangeFormatOption()
+{
+	string optionName = "ChangeFormat";
+	shared_ptr<ChangeFormatOption> changeFormatOption = shared_ptr<ChangeFormatOption>(new ChangeFormatOption("ChangeFormat", communicator, formats));
+	addOptionForAllFormats(changeFormatOption);
+	changeFormatOption->formatChanged += [this](auto format) {this->onFormatChanged(format); };
+	changeFormatOption->formatChanged += [changeFormatOption](auto format) {changeFormatOption->onFormatChanged(format); };
+}
+
 std::shared_ptr<Option> Menu::selectNamedOption(const std::string& handledInput)
 {
 	for (auto option : namedOptions)
@@ -88,9 +104,9 @@ std::shared_ptr<Option> Menu::selectNamedOption(const std::string& handledInput)
 	return namedOptions["Exit"];
 }
 
-void Menu::onFormatChanged(std::string newFormat)
+void Menu::onFormatChanged(std::shared_ptr<std::string> newFormat)
 {
-	currentFormat = newFormat;
-	namedOptions = options[newFormat];
+	currentFormat = *newFormat;
+	namedOptions = options[*newFormat];
 	addNamedOptionsAsIndexed();
 }
