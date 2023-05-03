@@ -10,6 +10,8 @@ Menu::Menu(std::shared_ptr<Communicator> communicator)
 {
 	this->communicator = communicator;
 	//todo initialize every option method
+	//map: string(format) -> vector options
+	//for same options for every format: for each add
 	std::string optionName = "Exit";
 	shared_ptr<ExitOption> exitOption = shared_ptr<ExitOption>(new ExitOption(optionName));
 	exitOption->exitProgram += [this]() {exitProgram.invoke(); };
@@ -28,6 +30,8 @@ Menu::Menu(std::shared_ptr<Communicator> communicator)
 
 void Menu::addNamedOptionsAsIndexed()
 {
+	//select options for format
+	//clear vector first
 	for (auto it = namedOptions.begin(); it != namedOptions.end(); it++)
 		indexedOptions.push_back(it->second);
 }

@@ -13,7 +13,7 @@ public:
 	virtual void printOptions() = 0;
 
 	const Event exitProgram;
-
+protected:
 	std::vector<std::shared_ptr<Option>> indexedOptions;
 	std::map<std::string, std::shared_ptr<Option>> namedOptions;
 private:
