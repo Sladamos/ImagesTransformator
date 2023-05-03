@@ -12,8 +12,8 @@ Menu::Menu(std::shared_ptr<Communicator> communicator)
 	//todo initialize every option method
 	std::string optionName = "Exit";
 	shared_ptr<ExitOption> exitOption = shared_ptr<ExitOption>(new ExitOption(optionName));
-	auto exit = [this]() {exitProgram.invoke(); };
-	exitOption->exitProgram += exit;
+	exitOption->exitProgram += [this]() {exitProgram.invoke(); };
+
 	
 	pair<string, shared_ptr<Option>> namedOption = pair<string, shared_ptr<Option>>(optionName, exitOption);
 	namedOptions.insert(namedOption);

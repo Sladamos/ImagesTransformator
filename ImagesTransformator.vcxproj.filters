@@ -225,6 +225,9 @@
     <ClInclude Include="ConsoleDisplayer.h">
       <Filter>Displayers</Filter>
     </ClInclude>
+    <ClInclude Include="OneArgEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">

@@ -1,5 +1,5 @@
 #pragma once
-#include <iostream>
+#include "OneArgEvent.h"
 #include "Option.h"
 #include "Image.h"
 #include "HeadersOperator.h"

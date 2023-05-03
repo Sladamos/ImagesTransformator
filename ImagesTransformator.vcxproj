@@ -207,6 +207,7 @@
     <ClInclude Include="MasksOperator.h" />
     <ClInclude Include="MasksParser.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="OneArgEvent.h" />
     <ClInclude Include="Option.h" />
     <ClInclude Include="ProgramEngine.h" />
     <ClInclude Include="RapidXMLMasksParser.h" />
