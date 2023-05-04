@@ -38,7 +38,10 @@ void Menuz::startProgram()
 	}
 }
 			changeModeOption();	easy: changeFilter , onFilterChanged with Masks vector
-			:> options creator class with menu instance in constructor
+			:> options creator class with menu instance in method
+			createOptions(T )
+
+
 		break;
 	case 6:
 			transformateImageOption(); hard

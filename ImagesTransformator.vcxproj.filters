@@ -105,6 +105,7 @@
     <ClCompile Include="SelectOutputNameOption.cpp">
       <Filter>Options</Filter>
     </ClCompile>
+    <ClCompile Include="MenuOptionsCreator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menuz.h" />
@@ -240,6 +241,10 @@
     <ClInclude Include="SelectOutputNameOption.h">
       <Filter>Options</Filter>
     </ClInclude>
+    <ClInclude Include="OptionsCreator.h">
+      <Filter>Creators\OptionsCreators</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuOptionsCreator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">
@@ -298,6 +303,9 @@
     </Filter>
     <Filter Include="Communicator">
       <UniqueIdentifier>{b14aa61b-58fe-4eba-b8a8-19e3b9561f7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Creators\OptionsCreators">
+      <UniqueIdentifier>{cd208e3d-0bd8-41e7-9cc1-0ce649e757e2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
