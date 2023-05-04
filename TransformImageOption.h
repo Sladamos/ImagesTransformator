@@ -30,6 +30,7 @@ public:
 			auto destination = transformator->transformateImage(source);
 			destination->setName(*outputName);
 			destinationChanged.invoke(destination);
+			displayText("Transformated source properly.");
 		}
 		destinationChanged.invoke(nullptr);
 	}

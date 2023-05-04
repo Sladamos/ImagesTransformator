@@ -147,6 +147,7 @@
     <ClCompile Include="Bmp24Loader.cpp" />
     <ClCompile Include="Bmp24Saver.cpp" />
     <ClCompile Include="Bmp24Transformator.cpp" />
+    <ClCompile Include="ChangeFilterOption.cpp" />
     <ClCompile Include="ChangeFormatOption.cpp" />
     <ClCompile Include="Communicator.cpp" />
     <ClCompile Include="ConsoleCommunicator.cpp" />
@@ -173,7 +174,6 @@
     <ClCompile Include="ModeSelector.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Pixel.cpp" />
-    <ClCompile Include="SaveImageOption.cpp" />
     <ClCompile Include="SelectOutputNameOption.cpp" />
     <ClCompile Include="SobelMasksOperator.cpp" />
     <ClCompile Include="StringsOperator.cpp" />
@@ -188,6 +188,7 @@
     <ClInclude Include="Bmp24Loader.h" />
     <ClInclude Include="Bmp24Saver.h" />
     <ClInclude Include="Bmp24Transformator.h" />
+    <ClInclude Include="ChangeFilterOption.h" />
     <ClInclude Include="ChangeFormatOption.h" />
     <ClInclude Include="Communicator.h" />
     <ClInclude Include="ConsoleCommunicator.h" />

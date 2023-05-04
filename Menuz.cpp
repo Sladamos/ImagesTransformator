@@ -43,9 +43,6 @@ void Menuz::startProgram()
 
 
 		break;
-	case 6:
-			transformateImageOption(); hard
-		break;
 	}
 }
 
@@ -54,25 +51,4 @@ void Menuz::changeModeOption()
 	currentMode = ModeSelector::selectNewMode(currentMode, Parser::getTransformatorsWhichSupport(imageFormat));
 	updateMode();
 	clearConsole();
-}
-
-void Menuz::transformateImageOption()
-{
-	bool transformationCorrect = false;
-	if (headersOperator->areHeadersValidate(source) && imagesTransformator != nullptr)
-	{
-		Image* output = imagesTransformator->transformateImage(outputName, imageFormat);
-		imagesSaver->saveImage(output);
-		delete output;
-		transformationCorrect = true;
-	}
-	printTransformationResult(transformationCorrect);
-}
-
-void Menuz::printTransformationResult(bool transformationCorrect)
-{
-	if(transformationCorrect)
-		cout << "Transformation done!\n";
-	else
-		cout << "Transformation failed!\n";
-}\*/
+} */

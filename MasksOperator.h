@@ -7,13 +7,7 @@
 class MasksOperator
 {
 public:
-	int getNumberOfMasks();
-	Mask getMask(int maskNumber);
-	const std::vector<Mask>& getMasks();
-protected:
-	std::vector<Mask> masks;
-private:
-	void initializeMasks();
+	std::vector<Mask> getMasks();	
 	virtual std::string getName() = 0;
 };
 

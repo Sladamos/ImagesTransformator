@@ -108,7 +108,9 @@
     <ClCompile Include="MenuOptionsCreator.cpp">
       <Filter>Creators\OptionsCreators</Filter>
     </ClCompile>
-    <ClCompile Include="SaveImageOption.cpp" />
+    <ClCompile Include="ChangeFilterOption.cpp">
+      <Filter>Options</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menuz.h" />
@@ -250,8 +252,13 @@
     <ClInclude Include="MenuOptionsCreator.h">
       <Filter>Creators\OptionsCreators</Filter>
     </ClInclude>
-    <ClInclude Include="SaveImageOption.h" />
     <ClInclude Include="TransformImageOption.h">
+      <Filter>Options</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveImageOption.h">
+      <Filter>Options</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeFilterOption.h">
       <Filter>Options</Filter>
     </ClInclude>
   </ItemGroup>
