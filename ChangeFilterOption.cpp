@@ -1,6 +1,17 @@
 #include "ChangeFilterOption.h"
+#include "SobelMasksOperator.h"
+#include "DampelMasksOperator.h"
 
 using namespace std;
+
+ChangeFilterOption::ChangeFilterOption(const string& name, shared_ptr<Communicator> communicator) : 
+    Option(name, communicator)
+{
+    auto masksOperator = shared_ptr<MasksOperator>(new SobelMasksOperator());
+    filters.insert({ masksOperator->getName(), masksOperator });
+    masksOperator = shared_ptr<MasksOperator>(new DampelMasksOperator());
+    filters.insert({ masksOperator->getName(), masksOperator });
+}
 
 void ChangeFilterOption::execute()
 {
