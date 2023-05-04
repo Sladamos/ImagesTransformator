@@ -22,6 +22,7 @@ private:
 	void addNamedOptionsAsIndexed();
 	void addExitOption();
 	void addChangeFormatOption();
+	void addSelectOutputNameOption();
 	void addOptionForAllFormats(std::shared_ptr<Option> option);
 
 	std::string currentFormat;

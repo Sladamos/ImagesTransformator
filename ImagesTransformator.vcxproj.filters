@@ -102,6 +102,9 @@
     <ClCompile Include="ChangeFormatOption.cpp">
       <Filter>Options</Filter>
     </ClCompile>
+    <ClCompile Include="SelectOutputNameOption.cpp">
+      <Filter>Options</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menuz.h" />
@@ -232,6 +235,9 @@
       <Filter>Events</Filter>
     </ClInclude>
     <ClInclude Include="ChangeFormatOption.h">
+      <Filter>Options</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectOutputNameOption.h">
       <Filter>Options</Filter>
     </ClInclude>
   </ItemGroup>

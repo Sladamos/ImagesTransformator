@@ -4,6 +4,7 @@
 #include "Bmp24Loader.h"
 #include "Bmp24HeadersOperator.h"
 #include "ChangeFormatOption.h"
+#include "SelectOutputNameOption.h"
 
 using namespace std;
 
@@ -16,6 +17,7 @@ Menu::Menu(std::shared_ptr<Communicator> communicator) : communicator(communicat
 	}
 	addExitOption();
 	addChangeFormatOption();
+	addSelectOutputNameOption();
 	addBmp24Options(formats[0]);
 	auto changeFormatOption = options[formats[0]]["ChangeFormat"];
 	changeFormatOption->execute();
@@ -32,7 +34,7 @@ void Menu::addBmp24Options(const std::string& format)
 
 	auto changeFormatOption = std::dynamic_pointer_cast<ChangeFormatOption>(options[formats[0]]["ChangeFormat"]);
 	
-	changeFormatOption->formatChanged += [loadSourceOption](auto format) {loadSourceOption->onFormatChanged(format); };
+	changeFormatOption->formatChanged += [loadSourceOption](auto format) {loadSourceOption->onFormatChanged(); };
 	namedOptions.insert(namedOption);
 }
 
@@ -85,10 +87,26 @@ void Menu::addExitOption()
 void Menu::addChangeFormatOption()
 {
 	string optionName = "ChangeFormat";
-	shared_ptr<ChangeFormatOption> changeFormatOption = shared_ptr<ChangeFormatOption>(new ChangeFormatOption("ChangeFormat", communicator, formats));
+	shared_ptr<ChangeFormatOption> changeFormatOption = shared_ptr<ChangeFormatOption>(new ChangeFormatOption(optionName, communicator, formats));
 	addOptionForAllFormats(changeFormatOption);
 	changeFormatOption->formatChanged += [this](auto format) {this->onFormatChanged(format); };
 	changeFormatOption->formatChanged += [changeFormatOption](auto format) {changeFormatOption->onFormatChanged(format); };
+}
+
+void Menu::addSelectOutputNameOption()
+{
+	string optionName = "SelectOutputName";
+	auto selectOutputNameOption = shared_ptr<SelectOutputNameOption>(new SelectOutputNameOption(optionName, communicator));
+	addOptionForAllFormats(selectOutputNameOption);
+	auto changeFormatOption = std::dynamic_pointer_cast<ChangeFormatOption>(options[formats[0]]["ChangeFormat"]);
+	changeFormatOption->formatChanged += [selectOutputNameOption](auto format) {selectOutputNameOption->onFormatChanged(); };
+}
+
+void Menu::onFormatChanged(std::shared_ptr<std::string> newFormat)
+{
+	currentFormat = *newFormat;
+	namedOptions = options[*newFormat];
+	addNamedOptionsAsIndexed();
 }
 
 std::shared_ptr<Option> Menu::selectNamedOption(const std::string& handledInput)
@@ -100,11 +118,4 @@ std::shared_ptr<Option> Menu::selectNamedOption(const std::string& handledInput)
 	}
 
 	return namedOptions["Exit"];
-}
-
-void Menu::onFormatChanged(std::shared_ptr<std::string> newFormat)
-{
-	currentFormat = *newFormat;
-	namedOptions = options[*newFormat];
-	addNamedOptionsAsIndexed();
 }

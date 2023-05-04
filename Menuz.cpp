@@ -58,6 +58,7 @@ void Menuz::handleOption()
 		break;
 	case 5:
 			changeModeOption();	easy: changeFilter , onFilterChanged with Masks vector
+			:> options creator class with menu instance in constructor
 		break;
 	case 6:
 			transformateImageOption(); hard

@@ -55,10 +55,11 @@ public:
 		return image;
 	}
 	
-	void onFormatChanged(std::shared_ptr<std::string> newFormat)
+	void onFormatChanged(std::shared_ptr<std::string> newFormat = nullptr)
 	{
 		image == nullptr;
 	}
+
 private:
 	bool isLoaded;
 	std::shared_ptr<T> image;

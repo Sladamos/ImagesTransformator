@@ -172,6 +172,7 @@
     <ClCompile Include="ModeSelector.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Pixel.cpp" />
+    <ClCompile Include="SelectOutputNameOption.cpp" />
     <ClCompile Include="SobelMasksOperator.cpp" />
     <ClCompile Include="StringsOperator.cpp" />
   </ItemGroup>
@@ -217,6 +218,7 @@
     <ClInclude Include="ModeSelector.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Pixel.h" />
+    <ClInclude Include="SelectOutputNameOption.h" />
     <ClInclude Include="SobelMasksOperator.h" />
     <ClInclude Include="StringsOperator.h" />
     <ClInclude Include="Transformator.h" />
