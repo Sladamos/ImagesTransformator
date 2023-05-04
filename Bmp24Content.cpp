@@ -2,7 +2,7 @@
 
 int Bmp24Content::getNumberOfZeroBytes() const
 {
-    return 0;
+	return numberOfZeroBytes;
 }
 
 Pixels Bmp24Content::getPixels() const
