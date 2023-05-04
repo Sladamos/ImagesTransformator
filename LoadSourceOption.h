@@ -19,6 +19,7 @@ public:
 		this->headersOperator = std::shared_ptr<H>(new H());
 		this->contentLoader = std::shared_ptr<L>(new L());
 		this->image = nullptr;
+		sourceChanged += [this](auto image) { this->onSourceChanged(image); };
 	}
 
 	virtual void execute() override
@@ -33,7 +34,7 @@ public:
 		{
 			contentLoader->loadImageContent(image);
 			displayText(image->toString());
-			this->image = image;
+			sourceChanged.invoke(image);
 		}
 		else
 		{
@@ -44,23 +45,23 @@ public:
 
 	virtual std::string getDescription() override
 	{
-		return "Load source image";
-	}
-
-	std::shared_ptr<T> getImage()
-	{
-		//TODO add event sourceLoad and remove this method
 		if (image == nullptr)
-			throw std::domain_error("Firstly load source.");
-
-		return image;
+			return "Load source image";
+		else
+			return "Loaded source image: " + image->getName();
 	}
-	
+
 	void onFormatChanged(std::shared_ptr<std::string> newFormat = nullptr)
 	{
-		image == nullptr;
+		sourceChanged.invoke(nullptr);
 	}
 
+	void onSourceChanged(std::shared_ptr<T> source)
+	{
+		image = source;
+	}
+
+	const OneArgEvent<T> sourceChanged;
 private:
 	bool isLoaded;
 	std::shared_ptr<T> image;

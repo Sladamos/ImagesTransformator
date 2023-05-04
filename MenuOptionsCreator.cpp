@@ -38,13 +38,14 @@ const std::vector<std::string>& MenuOptionsCreator::getFormats()
 
 void MenuOptionsCreator::addBmp24Options(const std::string& format)
 {
+	auto& namedOptions = options[format];
+	auto changeFormatOption = std::dynamic_pointer_cast<ChangeFormatOption>(options[format]["ChangeFormat"]);
+	auto selectOutputNameOption = std::dynamic_pointer_cast<SelectOutputNameOption>(options[format]["SelectOutputName"]);
+
 	string optionName = "LoadSource";
 	auto loadSourceOption = shared_ptr<LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>>
 		(new LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>(optionName, communicator));
-	auto& namedOptions = options[format];
 	auto namedOption = pair<string, shared_ptr<Option>>(optionName, loadSourceOption);
-	auto changeFormatOption = std::dynamic_pointer_cast<ChangeFormatOption>(options[format]["ChangeFormat"]);
-	auto selectOutputNameOption = std::dynamic_pointer_cast<SelectOutputNameOption>(options[format]["SelectOutputName"]);
 	changeFormatOption->formatChanged += [loadSourceOption](auto format) {loadSourceOption->onFormatChanged(); };
 	changeFormatOption->formatChanged += [selectOutputNameOption](auto format) {selectOutputNameOption->onFormatChanged(); };
 	namedOptions.insert(namedOption);
@@ -62,6 +63,7 @@ void MenuOptionsCreator::addBmp24Options(const std::string& format)
 	changeFormatOption->formatChanged += [transformImageOption](auto format) {transformImageOption->onFormatChanged(); };
 	selectOutputNameOption->outputNameChanged += [transformImageOption](auto name) {transformImageOption->onOutputNameChanged(name); };
 	transformImageOption->destinationChanged += [saveImageOption](auto destination) {saveImageOption->onDestinationChanged(destination); };
+	loadSourceOption->sourceChanged += [transformImageOption](auto source) { transformImageOption->onSourceChanged(source); };
 	//on filter updated remember to save event listener
 	namedOptions.insert(namedOption);
 }

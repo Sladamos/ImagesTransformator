@@ -13,6 +13,24 @@ public:
 
 	virtual void execute() override
 	{
+		if (outputName == nullptr)
+		{
+			displayText("Specify output name.");
+		}
+		else if (source == nullptr)
+		{
+			displayText("Load source first.");
+		}
+		else if (transformator == nullptr)
+		{
+			displayText("Select filter first.");
+		}
+		else
+		{
+			auto destination = transformator->transformateImage(source);
+			destination->setName(*outputName);
+			destinationChanged.invoke(destination);
+		}
 		destinationChanged.invoke(nullptr);
 	}
 

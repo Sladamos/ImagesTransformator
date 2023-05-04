@@ -11,7 +11,8 @@ void SelectOutputNameOption::execute()
 {
     displayText("Give the image name with extension proper to selected format.");
     std::string imageName = handleInput();
-    outputName = std::shared_ptr<std::string>(new std::string(imageName));
+    auto outputName = std::shared_ptr<std::string>(new std::string(imageName));
+    outputNameChanged.invoke(outputName);
 }
 
 std::string SelectOutputNameOption::getDescription()
