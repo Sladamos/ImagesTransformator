@@ -10,7 +10,7 @@ ConsoleCommunicator::ConsoleCommunicator() : Communicator(std::shared_ptr<Displa
 std::string ConsoleCommunicator::handleInput()
 {
 	std::string text;
-	std::cin >> text;
+	std::getline(std::cin, text);
 	clearConsole();
 	return text;
 }
