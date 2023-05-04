@@ -24,10 +24,11 @@ public:
 
 	virtual void execute() override
 	{
-		displayText("Give the image name with extension.");
+		displayText("Give the image name.");
 		std::string sourceName = handleInput();
 
-		auto image = creator->createImage(sourceName);
+		auto image = creator->createImage();
+		image->setName(sourceName);
 		headersOperator->loadHeaders(image);
 		
 		if (headersOperator->areHeadersValidate(image))
