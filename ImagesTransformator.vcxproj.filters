@@ -251,6 +251,9 @@
       <Filter>Creators\OptionsCreators</Filter>
     </ClInclude>
     <ClInclude Include="SaveImageOption.h" />
+    <ClInclude Include="TransformImageOption.h">
+      <Filter>Options</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">

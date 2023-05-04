@@ -227,6 +227,7 @@
     <ClInclude Include="SobelMasksOperator.h" />
     <ClInclude Include="StringsOperator.h" />
     <ClInclude Include="Transformator.h" />
+    <ClInclude Include="TransformImageOption.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Masks.xml" />
