@@ -3,7 +3,10 @@
 #include "SelectOutputNameOption.h"
 #include "ExitOption.h"
 #include "LoadSourceOption.h"
+#include "SaveImageOption.h"
 #include "Bmp24Loader.h"
+#include "Bmp24Saver.h"
+#include "Bmp24.h"
 #include "Bmp24HeadersOperator.h"
 using namespace std;
 
@@ -36,13 +39,23 @@ void MenuOptionsCreator::addBmp24Options(const std::string& format)
 	string optionName = "LoadSource";
 	auto loadSourceOption = shared_ptr<LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>>
 		(new LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>(optionName, communicator));
-
 	auto& namedOptions = options[format];
 	auto namedOption = pair<string, shared_ptr<Option>>(optionName, loadSourceOption);
-
 	auto changeFormatOption = std::dynamic_pointer_cast<ChangeFormatOption>(options[formats[0]]["ChangeFormat"]);
-
 	changeFormatOption->formatChanged += [loadSourceOption](auto format) {loadSourceOption->onFormatChanged(); };
+	namedOptions.insert(namedOption);
+
+	optionName = "SaveImage";
+	auto saveImageOption = shared_ptr<SaveImageOption<Bmp24, Bmp24Saver>>
+		(new SaveImageOption<Bmp24, Bmp24Saver>(optionName, communicator));
+	namedOption = pair<string, shared_ptr<Option>>(optionName, saveImageOption);
+	//connect onImageChanged to transformator.imageChanged
+
+	//add TransformImage -> with event destinationChange, 
+	//on format changed -> imageChanged(nullptr)
+	//on source changed -> source = nullptr;
+	//on destination changed
+	//on filter updated remember to save event listener
 	namedOptions.insert(namedOption);
 }
 

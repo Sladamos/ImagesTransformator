@@ -49,6 +49,7 @@ public:
 
 	std::shared_ptr<T> getImage()
 	{
+		//TODO add event sourceLoad and remove this method
 		if (image == nullptr)
 			throw std::domain_error("Firstly load source.");
 
