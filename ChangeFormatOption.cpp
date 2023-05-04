@@ -11,7 +11,7 @@ ChangeFormatOption::ChangeFormatOption(const std::string& name, std::shared_ptr<
 
 void ChangeFormatOption::execute()
 {
-    displayText("Select input image format from below formats.");
+    displayText("Select images format from below formats.");
     displayText(getSupportedFormats());
     auto format = std::shared_ptr<std::string>(new std::string(handleInput()));
     if (*format != "Undo" && isFormatSupported(*format))
@@ -49,7 +49,7 @@ void ChangeFormatOption::onFormatChanged(std::shared_ptr<std::string> newFormat)
 
 std::string ChangeFormatOption::getDescription()
 {
-    return "Select input image format, current format: " + *currentFormat;
+    return "Select images format, current format: " + *currentFormat;
 }
 
 
