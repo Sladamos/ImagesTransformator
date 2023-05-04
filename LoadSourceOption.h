@@ -32,7 +32,7 @@ public:
 		}
 
 		auto image = creator->createImage();
-		image->setName(sourceName);
+		image->setName(*sourceName);
 		headersOperator->loadHeaders(image);
 		
 		if (headersOperator->areHeadersValidate(image))
@@ -69,6 +69,7 @@ public:
 	void onSourceNameChanged(std::shared_ptr<std::string> sourceName)
 	{
 		this->sourceName = sourceName;
+		sourceChanged.invoke(nullptr);
 	}
 
 	const OneArgEvent<T> sourceChanged;
