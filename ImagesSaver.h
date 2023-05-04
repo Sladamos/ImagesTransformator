@@ -18,8 +18,8 @@ public:
 		} 
 	}
 private:
-	virtual void writeImageHeader(std::ofstream& imageFile, const H& imageHeader) = 0;
-	virtual void writeImageContent(std::ofstream& imageFile, const C& imageContent) = 0;
+	virtual void writeImageHeader(std::ofstream& imageFile, std::shared_ptr<H> imageHeader) = 0;
+	virtual void writeImageContent(std::ofstream& imageFile, std::shared_ptr<C> imageContent) = 0;
 	const std::string DIRECTORY_PATH = "./newGfx/";
 };
 
