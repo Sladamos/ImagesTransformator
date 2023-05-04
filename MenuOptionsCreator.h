@@ -12,6 +12,7 @@ private:
 	void addExitOption(Menu* menu);
 	void addChangeFormatOption(Menu* menu);
 	void addSelectOutputNameOption();
+	void addChangeFilterOption();
 	void addOptionForAllFormats(std::shared_ptr<Option> option);
 
 	std::shared_ptr<Communicator> communicator;

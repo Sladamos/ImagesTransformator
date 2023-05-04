@@ -1,6 +1,7 @@
 #include "MenuOptionsCreator.h"
 #include "ChangeFormatOption.h"
 #include "SelectOutputNameOption.h"
+#include "ChangeFilterOption.h"
 #include "TransformImageOption.h"
 #include "ExitOption.h"
 #include "LoadSourceOption.h"
@@ -25,6 +26,7 @@ map<string, map<string, shared_ptr<Option>>> MenuOptionsCreator::createOptions(M
 		options.insert({ format, map<string, shared_ptr<Option>>() });
 	}
 	addExitOption(menu);
+	addChangeFilterOption();
 	addChangeFormatOption(menu);
 	addSelectOutputNameOption();
 	addBmp24Options(formats[0]);
@@ -40,6 +42,7 @@ void MenuOptionsCreator::addBmp24Options(const std::string& format)
 {
 	auto& namedOptions = options[format];
 	auto changeFormatOption = std::dynamic_pointer_cast<ChangeFormatOption>(options[format]["ChangeFormat"]);
+	auto changeFilterOption = std::dynamic_pointer_cast<ChangeFilterOption>(options[format]["ChangeFilter"]);
 	auto selectOutputNameOption = std::dynamic_pointer_cast<SelectOutputNameOption>(options[format]["SelectOutputName"]);
 
 	string optionName = "LoadSource";
@@ -64,7 +67,7 @@ void MenuOptionsCreator::addBmp24Options(const std::string& format)
 	selectOutputNameOption->outputNameChanged += [transformImageOption](auto name) {transformImageOption->onOutputNameChanged(name); };
 	transformImageOption->destinationChanged += [saveImageOption](auto destination) {saveImageOption->onDestinationChanged(destination); };
 	loadSourceOption->sourceChanged += [transformImageOption](auto source) { transformImageOption->onSourceChanged(source); };
-	//on filter updated remember to save event listener
+	changeFilterOption->filterChanged += [transformImageOption](auto filter) { transformImageOption->onFilterChanged(filter); };
 	namedOptions.insert(namedOption);
 }
 
@@ -100,4 +103,11 @@ void MenuOptionsCreator::addSelectOutputNameOption()
 	addOptionForAllFormats(selectOutputNameOption);
 	auto changeFormatOption = std::dynamic_pointer_cast<ChangeFormatOption>(options[formats[0]]["ChangeFormat"]);
 	changeFormatOption->formatChanged += [selectOutputNameOption](auto format) {selectOutputNameOption->onFormatChanged(); };
+}
+
+void MenuOptionsCreator::addChangeFilterOption()
+{
+	string optionName = "ChangeFilter";
+	shared_ptr<ChangeFilterOption> changeFilterOption = shared_ptr<ChangeFilterOption>(new ChangeFilterOption(optionName, communicator));
+	addOptionForAllFormats(changeFilterOption);
 }

@@ -5,6 +5,7 @@
 #include "MasksOperator.h"
 class ChangeFilterOption : public Option
 {
+public:
 	ChangeFilterOption(const std::string& name, std::shared_ptr<Communicator> communicator);
 	virtual void execute() override;
 	virtual std::string getDescription() override;
