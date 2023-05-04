@@ -19,13 +19,17 @@ public:
 		this->headersOperator = std::shared_ptr<H>(new H());
 		this->contentLoader = std::shared_ptr<L>(new L());
 		this->image = nullptr;
+		this->sourceName = nullptr;
 		sourceChanged += [this](auto image) { this->onSourceChanged(image); };
 	}
 
 	virtual void execute() override
 	{
-		displayText("Give the image name.");
-		std::string sourceName = handleInput();
+		if (sourceName == nullptr)
+		{
+			displayError("Specify input name before load.");
+			return;
+		}
 
 		auto image = creator->createImage();
 		image->setName(sourceName);
@@ -62,9 +66,15 @@ public:
 		image = source;
 	}
 
+	void onSourceNameChanged(std::shared_ptr<std::string> sourceName)
+	{
+		this->sourceName = sourceName;
+	}
+
 	const OneArgEvent<T> sourceChanged;
 private:
 	bool isLoaded;
+	std::shared_ptr<std::string> sourceName;
 	std::shared_ptr<T> image;
 	std::shared_ptr<ImagesCreator<T>> creator;
 	std::shared_ptr<H> headersOperator;

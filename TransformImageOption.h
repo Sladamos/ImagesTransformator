@@ -15,15 +15,15 @@ public:
 	{
 		if (outputName == nullptr)
 		{
-			displayText("Specify output name.");
+			displayError("Specify output name.");
 		}
 		else if (source == nullptr)
 		{
-			displayText("Load source before transformate it.");
+			displayError("Load source before transformate it.");
 		}
 		else if (transformator == nullptr)
 		{
-			displayText("Select filter first.");
+			displayError("Select filter before transformation.");
 		}
 		else
 		{

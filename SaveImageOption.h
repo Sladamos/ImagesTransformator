@@ -19,7 +19,7 @@ public:
 		}
 		else
 		{
-			displayText("Transform image before saving.");
+			displayError("Transform image before saving.");
 		}
 	}
 

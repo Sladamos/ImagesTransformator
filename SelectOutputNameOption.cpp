@@ -9,7 +9,7 @@ SelectOutputNameOption::SelectOutputNameOption(const std::string& name, std::sha
 
 void SelectOutputNameOption::execute()
 {
-    displayText("Give the image name.");
+    displayText("Give output image name.");
     std::string imageName = handleInput();
     auto outputName = std::shared_ptr<std::string>(new std::string(imageName));
     outputNameChanged.invoke(outputName);
