@@ -15,10 +15,11 @@ public:
 		if (destination != nullptr)
 		{
 			imagesSaver->saveImage(destination);
+			displayText("Image saved properly.");
 		}
 		else
 		{
-			displayText("Transform image first.");
+			displayText("Transform image before saving.");
 		}
 	}
 

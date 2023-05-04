@@ -1,5 +1,9 @@
 #include "Bmp24Transformator.h"
 
+Bmp24Transformator::Bmp24Transformator(const std::vector<Mask>& masks) : Transformator(masks)
+{
+}
+
 std::shared_ptr<Bmp24> Bmp24Transformator::transformateImage(std::shared_ptr<Bmp24> source)
 {
 	std::shared_ptr<Bmp24> output = nullptr;

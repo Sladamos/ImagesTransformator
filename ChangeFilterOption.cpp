@@ -20,9 +20,11 @@ void ChangeFilterOption::execute()
     auto filter = shared_ptr<string>(new string(handleInput()));
     if (*filter != "Undo" && isFilterSupported(*filter))
     {
+        currentFilter = filter;
         auto masksOperator = filters[*filter];
         auto masks = masksOperator->getMasks();
         filterChanged.invoke(shared_ptr<vector<Mask>>(new vector<Mask>(masks)));
+        displayText("Filter loaded properly");
     }
 }
 

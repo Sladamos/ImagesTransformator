@@ -32,7 +32,6 @@ public:
 			destinationChanged.invoke(destination);
 			displayText("Transformated source properly.");
 		}
-		destinationChanged.invoke(nullptr);
 	}
 
 	virtual std::string getDescription() override

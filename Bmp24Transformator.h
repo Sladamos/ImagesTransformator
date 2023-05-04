@@ -3,6 +3,7 @@
 class Bmp24Transformator : public Transformator<Bmp24>
 {
 public:
+	Bmp24Transformator(const std::vector<Mask>& masks);
 	virtual std::shared_ptr<Bmp24> transformateImage(std::shared_ptr<Bmp24> source) override;
 protected:
 	virtual Pixel transformatePixel(const Pixel& sourcePixel);
