@@ -8,7 +8,7 @@ Menu::Menu(std::shared_ptr<Communicator> communicator) : communicator(communicat
 	auto optionsCreator = MenuOptionsCreator(communicator);
 	options = optionsCreator.createOptions(this);
 	auto formats = optionsCreator.getFormats();
-	auto changeFormatOption = options[formats[0]]["ChangeFormat"];
+	auto changeFormatOption = options[formats[0]]["Format"];
 	changeFormatOption->execute();
 }
 
