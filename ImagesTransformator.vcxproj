@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{e47e1e92-af1c-4597-b224-ebb1ee252dfe}</ProjectGuid>
+    <ProjectGuid>{14E0F914-C449-4963-8A84-B91187E6815A}</ProjectGuid>
     <RootNamespace>ImagesTransformator</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
