@@ -23,7 +23,10 @@ void Menu::selectAndExecuteOption()
 {
 	string input = communicator->handleInput();
 	shared_ptr<Option> selectedOption = selectMatchingOption(input);
-	selectedOption->execute();
+	if (selectedOption != nullptr)
+	{
+		selectedOption->execute();
+	}
 }
 
 shared_ptr<Option> Menu::selectMatchingOption(const string& handledInput)
@@ -56,5 +59,5 @@ std::shared_ptr<Option> Menu::selectNamedOption(const std::string& handledInput)
 			return option.second;
 	}
 
-	return namedOptions["Exit"];
+	return nullptr;
 }

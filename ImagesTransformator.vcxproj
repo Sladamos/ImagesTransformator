@@ -170,7 +170,6 @@
     <ClCompile Include="Option.cpp" />
     <ClCompile Include="ProgramEngine.cpp" />
     <ClCompile Include="RapidXMLMasksParser.cpp" />
-    <ClCompile Include="Menuz.cpp" />
     <ClCompile Include="ModeSelector.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Pixel.cpp" />
@@ -219,7 +218,6 @@
     <ClInclude Include="OptionsCreator.h" />
     <ClInclude Include="ProgramEngine.h" />
     <ClInclude Include="RapidXMLMasksParser.h" />
-    <ClInclude Include="Menuz.h" />
     <ClInclude Include="ModeSelector.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Pixel.h" />
