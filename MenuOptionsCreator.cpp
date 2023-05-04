@@ -53,7 +53,7 @@ void MenuOptionsCreator::addBmp24Options(const std::string& format)
 
 	//add TransformImage -> with event destinationChange, 
 	//on format changed -> imageChanged(nullptr)
-	//on source changed -> source = nullptr;
+	//on source changed -> source = new source;
 	//on destination changed
 	//on filter updated remember to save event listener
 	namedOptions.insert(namedOption);
@@ -82,7 +82,6 @@ void MenuOptionsCreator::addChangeFormatOption(Menu* menu)
 	shared_ptr<ChangeFormatOption> changeFormatOption = shared_ptr<ChangeFormatOption>(new ChangeFormatOption(optionName, communicator, formats));
 	addOptionForAllFormats(changeFormatOption);
 	changeFormatOption->formatChanged += [menu](auto format) {menu->onFormatChanged(format); };
-	changeFormatOption->formatChanged += [changeFormatOption](auto format) {changeFormatOption->onFormatChanged(format); };
 }
 
 void MenuOptionsCreator::addSelectOutputNameOption()

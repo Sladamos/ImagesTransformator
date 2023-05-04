@@ -4,6 +4,7 @@ SelectOutputNameOption::SelectOutputNameOption(const std::string& name, std::sha
     Option(name, communicator)
 {
     outputName = nullptr;
+    outputNameChanged += [this](auto name) {this->onOutputNameChanged(name); };
 }
 
 void SelectOutputNameOption::execute()
@@ -27,5 +28,10 @@ std::string SelectOutputNameOption::getDescription()
 
 void SelectOutputNameOption::onFormatChanged(std::shared_ptr<std::string> newFormat)
 {
-    outputName = nullptr;
+    outputNameChanged.invoke(nullptr);
+}
+
+void SelectOutputNameOption::onOutputNameChanged(std::shared_ptr<std::string> newOutputName)
+{
+    outputName = newOutputName;
 }

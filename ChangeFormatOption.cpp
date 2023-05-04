@@ -6,6 +6,7 @@ ChangeFormatOption::ChangeFormatOption(const std::string& name, std::shared_ptr<
 {
     this->formats.push_back("Undo");
     currentFormat = nullptr;
+    formatChanged += [this](auto format) {this->onFormatChanged(format); };
 }
 
 void ChangeFormatOption::execute()
