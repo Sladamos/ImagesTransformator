@@ -7,3 +7,9 @@
 !.gitkeep
 !*.cpp
 !*.h
+!*.hpp
+!*.xml
+!*.xsd
+!*.vcxproj
+!*.vcxproj.filters
+!*.vcxproj.user

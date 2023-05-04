@@ -1,19 +1,8 @@
 #include "MasksOperator.h"
 
-int MasksOperator::getNumberOfMasks()
+std::vector<Mask> MasksOperator::getMasks()
 {
-	return masks.size();
-}
-
-const std::vector<Mask>& MasksOperator::getMasks()
-{
+	std::shared_ptr<MasksParser> parser = std::shared_ptr<RapidXMLMasksParser>(new RapidXMLMasksParser());
+	std::vector<Mask> masks = parser->loadMasks(getName());
 	return masks;
-}
-
-Mask MasksOperator::getMask(int maskNumber)
-{
-	Mask mask;
-	if (maskNumber < masks.size())
-		mask = masks[maskNumber];
-	return mask;
 }

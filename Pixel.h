@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <vector>
+#include <memory>
 class Pixel
 {
 public:
@@ -15,4 +16,7 @@ public:
 	uint8_t R{ 0 }, G{ 0 }, B{ 0 };
 	int x, y;
 };
+
+typedef std::shared_ptr<Pixel[]> PixelsRow;
+typedef std::shared_ptr<std::shared_ptr<Pixel[]>[]> Pixels;
 

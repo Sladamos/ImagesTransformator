@@ -1,8 +1,11 @@
 //Author: Slawomir Adamowicz
-#include "Menu.h"
+#include "ConsoleMenu.h"
+#include "ProgramEngine.h"
 
 int main()
 {
-	Menu().startProgram();
+	std::shared_ptr<Menu> menu = std::shared_ptr<Menu>(new ConsoleMenu());
+	ProgramEngine engine(menu);
+	engine.startProgram();
 	return 0;
 }

@@ -5,7 +5,7 @@
 #include "HeadersOperator.h"
 #include "Transformator.h"
 #include "ImagesSaver.h"
-#include "ImagesLoader.h"
+#include "ImagesLoader.h"/*
 class Parser
 {
 public:
@@ -33,3 +33,4 @@ private:
 	static std::map<std::string, ImagesLoader*> imagesLoaders;
 };
 
+*/

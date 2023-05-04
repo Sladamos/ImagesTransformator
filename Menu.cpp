@@ -1,163 +1,63 @@
-#include <iostream>
-#include <iomanip>
 #include "Menu.h"
-#include "Bmp24Loader.h"
-#include "Parser.h"
-#include "ModeSelector.h"
-#include "FormatSelector.h"
-#include "ImagesCreator.h"
+#include "MenuOptionsCreator.h"
+
 using namespace std;
 
-Menu::Menu()
+Menu::Menu(std::shared_ptr<Communicator> communicator) : communicator(communicator)
 {
-	Parser::initialize(source);
-	updateFormat();
+	auto optionsCreator = MenuOptionsCreator(communicator);
+	options = optionsCreator.createOptions(this);
+	auto formats = optionsCreator.getFormats();
+	auto changeFormatOption = options[formats[0]]["Format"];
+	changeFormatOption->execute();
 }
 
-void Menu::updateFormat()
+void Menu::addNamedOptionsAsIndexed()
 {
-	ImagesCreator::updateImage(source, imageFormat);
-	currentMode = "Sobel";
-	updateMode();
+	indexedOptions.clear();
+	for (auto it = namedOptions.begin(); it != namedOptions.end(); it++)
+		indexedOptions.push_back(it->second);
 }
 
-void Menu::updateMode()
+void Menu::selectAndExecuteOption()
 {
-	imagesTransformator = Parser::getTransformator(currentMode);
-	headersOperator = Parser::getHeadersOperator(imageFormat);
-	imagesSaver = Parser::getImagesSaver(imageFormat);
-	contentLoader = Parser::getImagesLoader(imageFormat);
-}
-
-void Menu::startProgram()
-{
-	while (programLaunched)
+	string input = communicator->handleInput();
+	shared_ptr<Option> selectedOption = selectMatchingOption(input);
+	if (selectedOption != nullptr)
 	{
-		printMenu();
-		handleOption();
+		selectedOption->execute();
 	}
 }
 
-void Menu::printMenu()
+shared_ptr<Option> Menu::selectMatchingOption(const string& handledInput)
 {
-	cout << endl
-		<< "1." <<  " Source name: " << source->getName() << "\n"
-		<< "2." <<  " Load source" << "\n"
-		<< "3." << " Output name: " << outputName << "\n"
-		<< "4." << " Current format: " << imageFormat << "\n"
-		<< "5." << " Current mode: " << currentMode << "\n"
-		<< "6." << " Transform image" << "\n"
-		<< "9. Exit\n\n";
-}
-
-void Menu::handleOption()
-{
-	cin >> option;
-	clearConsole();
-	switch (option)
+	try
 	{
-	case 1:
-		source->setName(readNameFromInput());
-		break;
-	case 2:
-		loadSourceOption();
-		break;
-	case 3:
-		outputName = readNameFromInput();
-		break;
-	case 4:
-		changeFormatOption();
-		break;
-	case 5:
-		changeModeOption();
-		break;
-	case 6:
-		transformateImageOption();
-		break;
-	case 9:
-		programLaunched = false;
-		break;
+		int index = stoi(handledInput) - 1;
+		if (index < indexedOptions.size())
+			return indexedOptions[index];
+		else
+			throw exception();
+	}
+	catch (exception& err)
+	{
+		return selectNamedOption(handledInput);
 	}
 }
 
-void Menu::clearConsole()
+void Menu::onFormatChanged(std::shared_ptr<std::string> newFormat)
 {
-	system("cls");
+	namedOptions = options[*newFormat];
+	addNamedOptionsAsIndexed();
 }
 
-void Menu::loadSourceOption()
+std::shared_ptr<Option> Menu::selectNamedOption(const std::string& handledInput)
 {
-	source->clear();
-	headersOperator->loadHeaders(source);
-	loadContentIfPossible();
-	cout << source->toString();
-}
-
-void Menu::loadContentIfPossible()
-{
-	if (headersOperator->areHeadersValidate(source))
-		contentLoader->loadImageContent(source);
-}
-
-string Menu::readNameFromInput()
-{
-	string name;
-	cout << "New name: "; 
-	cin.ignore();
-	getline(cin, name);
-	name += getImageExtension();
-	return name;
-}
-
-string Menu::getImageExtension()
-{
-	string imageExtension;
-	if (imageFormat == "Bmp24")
-		imageExtension = ".bmp";
-	return imageExtension;
-}
-
-void Menu::changeFormatOption()
-{
-	string userInput = FormatSelector::selectNewFormat(Parser::getImagesFormats());
-	if (userInput != "Undo")
+	for (auto option : namedOptions)
 	{
-		imageFormat = userInput;
-		updateFormat();
+		if (handledInput == option.first)
+			return option.second;
 	}
-	clearConsole();
-}
 
-void Menu::changeModeOption()
-{
-	currentMode = ModeSelector::selectNewMode(currentMode, Parser::getTransformatorsWhichSupport(imageFormat));
-	updateMode();
-	clearConsole();
-}
-
-void Menu::transformateImageOption()
-{
-	bool transformationCorrect = false;
-	if (headersOperator->areHeadersValidate(source) && imagesTransformator != nullptr)
-	{
-		Image* output = imagesTransformator->transformateImage(outputName, imageFormat);
-		imagesSaver->saveImage(output);
-		delete output;
-		transformationCorrect = true;
-	}
-	printTransformationResult(transformationCorrect);
-}
-
-void Menu::printTransformationResult(bool transformationCorrect)
-{
-	if(transformationCorrect)
-		cout << "Transformation done!\n";
-	else
-		cout << "Transformation failed!\n";
-}
-
-Menu::~Menu()
-{
-	Parser::clear();
-	delete source;
+	return nullptr;
 }

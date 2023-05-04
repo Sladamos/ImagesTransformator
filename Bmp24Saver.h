@@ -1,13 +1,11 @@
 #pragma once
 #include "ImagesSaver.h"
 #include "Bmp24.h"
-class Bmp24Saver : public ImagesSaver
+class Bmp24Saver : public ImagesSaver<Bmp24, Bmp24Header, Bmp24Content>
 {
 private:
-	void save(std::ofstream& bitmapFile, Image* image) override;
-	void writeFileHeader(std::ofstream& bitmapFile, const Bmp24FileHeader& fileHeader);
-	void writeInfoHeader(std::ofstream& bitmapFile, const Bmp24InfoHeader& infoHeader);
-	void writePixels(std::ofstream& bitmapFile, Bmp24* bitmap);
+	void writeImageHeader(std::ofstream& imageFile, std::shared_ptr<Bmp24Header> imageHeader) override;
+	void writeImageContent(std::ofstream& imageFile, std::shared_ptr<Bmp24Content> imageContent) override;
 	void writePixel(std::ofstream& bitmapFile, const Pixel& pixel);
 };
 

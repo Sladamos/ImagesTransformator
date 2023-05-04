@@ -1,12 +1,13 @@
 #pragma once
 #include <cstdint>
 #include <string>
-class Bmp24InfoHeader
+#include "BitmapHeader.h"
+class Bmp24Header : public BitmapHeader
 {
-public:
-	std::string toString();
+public:    
+	virtual std::string toString() override;
 
-	uint32_t headerSize;
+	uint32_t infoHeaderSize;
 	int32_t bitmapWidth;
 	int32_t bitmapHeight;
 	uint16_t planes;
@@ -19,3 +20,4 @@ public:
 	uint32_t colorsImportant;
 };
 
+typedef std::shared_ptr<Bmp24Header> Bmp24HeaderPtr;

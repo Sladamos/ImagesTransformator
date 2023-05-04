@@ -1,36 +1,28 @@
 #pragma once
-#include "ImagesSaver.h"
-#include "HeadersOperator.h"
-#include "ImagesLoader.h"
-#include "Transformator.h"
+#include <map>
+#include <vector>
+#include <memory>
+#include <string>
+#include "Option.h"
+#include "Event.h"
 class Menu
 {
 public:
-	Menu();
-	~Menu();
-	void startProgram();
-private:
-	void printMenu();
-	void printTransformationResult(bool transformationCorrect);
-	void updateMode();
-	void updateFormat();
-	void handleOption();
-	void clearConsole();
-	void loadContentIfPossible();
-	void loadSourceOption();
-	void changeFormatOption();
-	void changeModeOption();
-	void transformateImageOption();
-	std::string readNameFromInput();
-	std::string getImageExtension();
+	Menu(std::shared_ptr<Communicator> communicator);
+	void selectAndExecuteOption();
+	void onFormatChanged(std::shared_ptr<std::string> newFormat);
+	virtual void printOptions() = 0;
 
-	int option;
-	bool programLaunched{true};
-	Image* source{nullptr};
-	std::string outputName{ "defaultOutput.bmp" }, currentMode{ "Sobel" }, imageFormat{ "Bmp24" };
-	HeadersOperator* headersOperator;
-	Transformator* imagesTransformator;
-	ImagesSaver* imagesSaver;
-	ImagesLoader* contentLoader;
+	const Event exitProgram;
+protected:
+	std::vector<std::shared_ptr<Option>> indexedOptions;
+	std::map<std::string, std::shared_ptr<Option>> namedOptions;
+private:
+	void addNamedOptionsAsIndexed();
+
+	std::shared_ptr<Option> selectMatchingOption(const std::string& handledInput);
+	std::shared_ptr<Option> selectNamedOption(const std::string& handledInput);
+	std::shared_ptr<Communicator> communicator;
+	std::map<std::string, std::map<std::string, std::shared_ptr<Option>>> options;
 };
 

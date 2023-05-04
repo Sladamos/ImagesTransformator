@@ -1,11 +1,18 @@
 #include <sstream>
-#include "Bmp24InfoHeader.h"
+#include "Bmp24Header.h"
 
-std::string Bmp24InfoHeader::toString()
+std::string Bmp24Header::toString()
 {
     std::stringstream output;
     output
-        << "Header size: " << headerSize << "\n"
+        << "BMP24 FILE HEADER:\n"
+        << "File type: " << fileType << "\n"
+        << "File size: " << fileSize << "\n"
+        << "First reserved field: " << reservedField1 << "\n"
+        << "Second reserved field: " << reservedField2 << "\n"
+        << "Offset data: " << offsetData << "\n"
+        << "BMP24 INFO HEADER:\n"
+        << "Header size: " << infoHeaderSize << "\n"
         << "Bitmap width: " << bitmapWidth << "\n"
         << "Bitmap height: " << bitmapHeight << "\n"
         << "Planes: " << planes << "\n"

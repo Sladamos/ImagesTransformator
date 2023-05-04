@@ -1,10 +1,12 @@
 #pragma once
-#include "HeadersOperator.h"
-class Bmp24HeadersOperator : public HeadersOperator
+#include "BitmapHeadersOperator.h"
+#include "Bmp24.h"
+class Bmp24HeadersOperator : public BitmapHeadersOperator<Bmp24, Bmp24Header>
 {
 public:
-	bool areHeadersValidate(Image* image) override;
+	bool areHeadersValidate(std::shared_ptr<Bmp24> bitmap) override;
 private:
-	void load(std::ifstream& bitmapFile, Image* bitmap) override;
+	virtual void loadDIBHeader(std::ifstream& bitmapFile, std::shared_ptr<Bmp24Header> bitmapHeader) override;
+	virtual Bmp24HeaderPtr createHeaderPtr() override;
 };
 
