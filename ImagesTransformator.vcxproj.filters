@@ -37,9 +37,6 @@
     <ClCompile Include="MasksOperator.cpp">
       <Filter>MasksOperator</Filter>
     </ClCompile>
-    <ClCompile Include="Parser.cpp">
-      <Filter>Parsers</Filter>
-    </ClCompile>
     <ClCompile Include="StringsOperator.cpp">
       <Filter>Parsers</Filter>
     </ClCompile>
@@ -163,9 +160,6 @@
     </ClInclude>
     <ClInclude Include="MasksOperator.h">
       <Filter>MasksOperator</Filter>
-    </ClInclude>
-    <ClInclude Include="Parser.h">
-      <Filter>Parsers</Filter>
     </ClInclude>
     <ClInclude Include="StringsOperator.h">
       <Filter>Parsers</Filter>
