@@ -5,6 +5,8 @@
 class Bmp24Content : public ImageContent
 {
 public:
+	Bmp24Content() = default;
+	Bmp24Content(const Bmp24Content& content);
 	int getNumberOfZeroBytes() const;
 	Pixels getPixels() const;
 	void setNumberOfZeroBytes(int numberOfZeroBytes);

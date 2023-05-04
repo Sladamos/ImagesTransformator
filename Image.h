@@ -7,6 +7,12 @@ template<class H, class C>
 class Image
 {
 public:
+	Image(const Image& image)
+	{
+		imageHeader = std::shared_ptr<H>(new H(*(image.getImageHeader())));
+		imageContent = std::shared_ptr<C>(new C(*(image.getImageContent())));
+	}
+
 	Image(const std::string& imageName)
 	{
 		imageHeader = std::shared_ptr<H>(new H());

@@ -7,6 +7,7 @@
 class Bmp24 : public Image<Bmp24Header, Bmp24Content>
 {
 public:
+	Bmp24(const Bmp24& source);
 	Bmp24();
 	virtual void setName(const std::string& name) override;
 	Bmp24(const std::string& bitmapName);
