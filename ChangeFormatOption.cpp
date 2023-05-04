@@ -32,6 +32,7 @@ std::string ChangeFormatOption::getSupportedFormats()
     {
         text += format + "\n";
     }
+    text.pop_back();
     return text;
 }
 

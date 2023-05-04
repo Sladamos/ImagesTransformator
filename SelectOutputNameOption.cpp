@@ -19,11 +19,11 @@ std::string SelectOutputNameOption::getDescription()
 {
     if (outputName != nullptr)
     {
-        return "Select output image name. Current name: " + *outputName;
+        return "Select output image name, current name: " + *outputName;
     }
     else
     {
-        return "Select output image name. Current name: undefined";
+        return "Select output image name, current name: undefined";
     }
 }
 

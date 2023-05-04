@@ -19,7 +19,7 @@ public:
 		}
 		else if (source == nullptr)
 		{
-			displayText("Load source first.");
+			displayText("Load source before transformate it.");
 		}
 		else if (transformator == nullptr)
 		{
@@ -36,7 +36,7 @@ public:
 
 	virtual std::string getDescription() override
 	{
-		return "Transform image when source is loaded and output name is selected.";
+		return "Transform source image";
 	}
 
 	void onOutputNameChanged(std::shared_ptr<std::string> outputName)
