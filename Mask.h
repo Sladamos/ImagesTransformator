@@ -4,11 +4,12 @@ class Mask
 {
 public:
 	Mask() = default;
-	Mask(int maskSize, std::vector<int> maskValues);
-	int getSize() const;
+	Mask(std::pair<int, int> maskSize, std::vector<int> maskValues);
+	int getNumberOfRows() const;
+	int getNumberOfCols() const;
 	int operator[](int index) const;
 private:
-	int size;
+	std::pair<int, int> size;
 	std::vector<int> maskValues;
 };
 

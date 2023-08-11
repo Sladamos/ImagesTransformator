@@ -49,13 +49,14 @@ uint8_t Bmp24Transformator::transformatePixelColor(const Pixel& sourcePixel, Pix
 
 int Bmp24Transformator::transformateColorByMask(const Pixel& sourcePixel, const Mask& mask, Pixel::Color color)
 {
-	int colorValue = 0, maskSize = mask.getSize(), y = sourcePixel.y, x = sourcePixel.x;
-
-	for (int i = y - maskSize / 2, z = 0; i <= y + maskSize / 2; i++, z++)
-		for (int j = x - maskSize / 2, f = 0; j <= x + maskSize / 2; j++, f++)
+	int colorValue = 0, y = sourcePixel.y, x = sourcePixel.x;
+	int maskHeight = mask.getNumberOfRows(), maskWidth = mask.getNumberOfCols();
+	const int maskLeftSide = maskWidth / 2, maskUpSide = maskHeight / 2, maskRightSide = ceil((double)maskWidth / 2), maskDownSide = ceil((double)maskHeight / 2);
+	for (int i = y - maskUpSide, z = 0; i < y + maskDownSide; i++, z++)
+		for (int j = x - maskLeftSide, f = 0; j < x + maskRightSide; j++, f++)
 		{
 			Pixel neighbourPixel = getNeighbourPixel(i, j);
-			colorValue += neighbourPixel.getColorValue(color) * mask[z * maskSize + f];
+			colorValue += neighbourPixel.getColorValue(color) * mask[z * maskWidth + f];
 		}
 	return colorValue;
 }

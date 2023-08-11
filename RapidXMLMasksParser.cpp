@@ -53,16 +53,18 @@ std::vector<Mask> RapidXMLMasksParser::readMasksFromNode(xml_node<>* masksNode)
 Mask RapidXMLMasksParser::readMaskFromNode(xml_node<>* maskNode)
 {
 	vector<int> maskValues;
-	int size = 0;
+	int numberOfRows = 0;
 	for (xml_node<>* rowNode = maskNode->first_node("Row");
 		rowNode; rowNode = rowNode->next_sibling())
 	{
-		size++;
+		numberOfRows++;
 		string rowValue = rowNode->value();
 		vector<int> parsedValues = parseValuesFrom(rowValue);
 		maskValues.insert(maskValues.end(), parsedValues.begin(), parsedValues.end());
 	}
-	return Mask(size, maskValues);
+	int numberOfCols = maskValues.size() / numberOfRows;
+	pair<int, int> maskSize {numberOfCols, numberOfRows};
+	return Mask(maskSize, maskValues);
 }
 
 vector<int> RapidXMLMasksParser::parseValuesFrom(const string& rowValue)
