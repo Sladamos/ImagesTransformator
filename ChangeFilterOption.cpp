@@ -18,7 +18,7 @@ void ChangeFilterOption::execute()
 {
     displayText("Select transformator filter from below filters.");
     displayLines(getSupportedFilters());
-    auto filter = shared_ptr<string>(new string(handleInput()));
+    auto filter = getSelectedFilter();
     if (*filter != "Undo" && isFilterSupported(*filter))
     {
         currentFilter = filter;
@@ -27,6 +27,24 @@ void ChangeFilterOption::execute()
         filterChanged.invoke(shared_ptr<vector<Mask>>(new vector<Mask>(masks)));
         displayText("Filter loaded properly");
     }
+}
+
+shared_ptr<string> ChangeFilterOption::getSelectedFilter()
+{
+    auto filter = shared_ptr<string>(new string(handleInput()));
+    auto filters = getSupportedFilters();
+    try
+    {
+        int index = stoi(*filter) - 1;
+        if (index < filters.size() && index >= 0)
+        {
+            *filter = filters[index];
+        }
+    }
+    catch (exception& err)
+    {
+    }
+    return filter;
 }
 
 string ChangeFilterOption::getDescription()

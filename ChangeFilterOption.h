@@ -13,6 +13,7 @@ public:
 
 	const OneArgEvent<std::vector<Mask>> filterChanged;
 private:
+	std::shared_ptr<std::string> getSelectedFilter();
 	std::vector<std::string> getSupportedFilters();
 	bool isFilterSupported(const std::string& filter);
 

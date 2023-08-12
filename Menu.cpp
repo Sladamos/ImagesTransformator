@@ -35,7 +35,7 @@ shared_ptr<Option> Menu::selectMatchingOption(const string& handledInput)
 	try
 	{
 		int index = stoi(handledInput) - 1;
-		if (index < indexedOptions.size() && index > 0)
+		if (index < indexedOptions.size() && index >= 0)
 		{
 			return indexedOptions[index];
 		}
