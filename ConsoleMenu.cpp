@@ -1,11 +1,13 @@
 #include "ConsoleMenu.h"
 #include "ConsoleCommunicator.h"
+
 using namespace std;
 
 ConsoleMenu::ConsoleMenu() : Menu(shared_ptr<Communicator>(new ConsoleCommunicator()))
 {
 
 }
+
 void ConsoleMenu::printOptions()
 {
 	stringstream ss;

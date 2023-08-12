@@ -10,5 +10,6 @@ public:
     bool isNumber(const std::string& str);
     std::string toLowerCase(const std::string& str);
     std::string toUpperCase(const std::string& str);
+    std::string decorateString(const std::string& str);
 };
 

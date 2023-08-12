@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include <map>
 #include "Option.h"
 #include "OneArgEvent.h"
@@ -12,7 +13,7 @@ public:
 
 	const OneArgEvent<std::vector<Mask>> filterChanged;
 private:
-	std::string getSupportedFilters();
+	std::vector<std::string> getSupportedFilters();
 	bool isFilterSupported(const std::string& filter);
 
 	std::shared_ptr<std::string> currentFilter;

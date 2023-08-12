@@ -13,7 +13,6 @@ public:
 
 	const OneArgEvent<std::string> formatChanged;
 private:
-	std::string getSupportedFormats();
 	bool isFormatSupported(const std::string& format);
 
 	std::vector<std::string> formats;

@@ -1,4 +1,5 @@
 #include <sstream>
+#include <iomanip>
 #include "StringsOperator.h"
 using namespace std;
 
@@ -33,4 +34,11 @@ std::string StringsOperator::toUpperCase(const std::string& str)
     std::transform(newStr.begin(), newStr.end(), newStr.begin(),
         [](unsigned char c) { return std::toupper(c); });
     return newStr;
+}
+
+std::string StringsOperator::decorateString(const std::string& str)
+{
+    stringstream ss;
+    ss << "[" << left << setw(9) << str << "]";
+    return ss.str();
 }
