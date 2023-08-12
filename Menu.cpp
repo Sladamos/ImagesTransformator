@@ -1,9 +1,10 @@
 #include "Menu.h"
 #include "MenuOptionsCreator.h"
+#include "StringsOperator.h"
 
 using namespace std;
 
-Menu::Menu(std::shared_ptr<Communicator> communicator) : communicator(communicator)
+Menu::Menu(shared_ptr<Communicator> communicator) : communicator(communicator)
 {
 	auto optionsCreator = MenuOptionsCreator(communicator);
 	options = optionsCreator.createOptions(this);
@@ -41,21 +42,25 @@ shared_ptr<Option> Menu::selectMatchingOption(const string& handledInput)
 	}
 	catch (exception& err)
 	{
+		
 		return selectNamedOption(handledInput);
 	}
 }
 
-void Menu::onFormatChanged(std::shared_ptr<std::string> newFormat)
+void Menu::onFormatChanged(shared_ptr<string> newFormat)
 {
 	namedOptions = options[*newFormat];
 	addNamedOptionsAsIndexed();
 }
 
-std::shared_ptr<Option> Menu::selectNamedOption(const std::string& handledInput)
+shared_ptr<Option> Menu::selectNamedOption(const string& handledInput)
 {
+	StringsOperator stringsOperator;
+	string handledName = stringsOperator.toLowerCase(handledInput);
 	for (auto option : namedOptions)
 	{
-		if (handledInput == option.first)
+		string optionName = stringsOperator.toLowerCase(option.first);
+		if (handledName == optionName)
 			return option.second;
 	}
 

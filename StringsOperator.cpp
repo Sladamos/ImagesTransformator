@@ -18,3 +18,19 @@ bool StringsOperator::isNumber(const std::string& str)
 {
     return !str.empty() && all_of(str.begin(), str.end(), isdigit);
 }
+
+std::string StringsOperator::toLowerCase(const std::string& str)
+{
+    std::string newStr{str};
+    std::transform(newStr.begin(), newStr.end(), newStr.begin(),
+        [](unsigned char c) { return std::tolower(c); });
+    return newStr;
+}
+
+std::string StringsOperator::toUpperCase(const std::string& str)
+{
+    std::string newStr{str};
+    std::transform(newStr.begin(), newStr.end(), newStr.begin(),
+        [](unsigned char c) { return std::toupper(c); });
+    return newStr;
+}
