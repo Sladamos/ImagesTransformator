@@ -35,16 +35,15 @@ shared_ptr<Option> Menu::selectMatchingOption(const string& handledInput)
 	try
 	{
 		int index = stoi(handledInput) - 1;
-		if (index < indexedOptions.size())
+		if (index < indexedOptions.size() && index > 0)
+		{
 			return indexedOptions[index];
-		else
-			throw exception();
+		}
 	}
 	catch (exception& err)
 	{
-		
-		return selectNamedOption(handledInput);
 	}
+	return selectNamedOption(handledInput);
 }
 
 void Menu::onFormatChanged(shared_ptr<string> newFormat)

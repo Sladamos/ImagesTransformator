@@ -107,7 +107,9 @@
     <ClCompile Include="ChangeFilterOption.cpp">
       <Filter>Options</Filter>
     </ClCompile>
-    <ClCompile Include="SelectSourceNameOption.cpp" />
+    <ClCompile Include="SelectSourceNameOption.cpp">
+      <Filter>Options</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Image.h">
@@ -254,7 +256,9 @@
     <ClInclude Include="ChangeFilterOption.h">
       <Filter>Options</Filter>
     </ClInclude>
-    <ClInclude Include="SelectSourceNameOption.h" />
+    <ClInclude Include="SelectSourceNameOption.h">
+      <Filter>Options</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">

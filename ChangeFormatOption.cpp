@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <sstream>
+#include <string>
 #include "ChangeFormatOption.h"
 
 ChangeFormatOption::ChangeFormatOption(const std::string& name, std::shared_ptr<Communicator> communicator, const std::vector<std::string>& formats) :
@@ -14,7 +15,8 @@ void ChangeFormatOption::execute()
 {
     displayText("Select images format from below formats.");
     displayLines(formats);
-    auto format = std::shared_ptr<std::string>(new std::string(handleInput()));
+    auto format = getSelectedFormat();
+
     if (*format != "Undo" && isFormatSupported(*format))
     {
         formatChanged.invoke(format);
@@ -24,6 +26,23 @@ void ChangeFormatOption::execute()
         format = std::shared_ptr<std::string>(new std::string(formats[0]));
         formatChanged.invoke(format);
     }
+}
+
+std::shared_ptr<std::string> ChangeFormatOption::getSelectedFormat()
+{
+    auto format = std::shared_ptr<std::string>(new std::string(handleInput())); 
+    try
+    {
+        int index = std::stoi(*format) - 1;
+        if (index < formats.size() && index >= 0)
+        {
+            *format = formats[index];
+        }
+    }
+    catch (std::exception& err)
+    {
+    }
+    return format;
 }
 
 bool ChangeFormatOption::isFormatSupported(const std::string& format)
