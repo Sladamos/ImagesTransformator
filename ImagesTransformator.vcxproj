@@ -176,6 +176,7 @@
     <ClCompile Include="SelectSourceNameOption.cpp" />
     <ClCompile Include="SobelMasksOperator.cpp" />
     <ClCompile Include="StringsOperator.cpp" />
+    <ClCompile Include="ThreadPool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BitmapHeader.h" />
@@ -225,6 +226,7 @@
     <ClInclude Include="SelectSourceNameOption.h" />
     <ClInclude Include="SobelMasksOperator.h" />
     <ClInclude Include="StringsOperator.h" />
+    <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="Transformator.h" />
     <ClInclude Include="TransformImageOption.h" />
   </ItemGroup>

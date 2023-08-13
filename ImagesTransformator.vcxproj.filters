@@ -110,6 +110,7 @@
     <ClCompile Include="SelectSourceNameOption.cpp">
       <Filter>Options</Filter>
     </ClCompile>
+    <ClCompile Include="ThreadPool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Image.h">
@@ -259,6 +260,7 @@
     <ClInclude Include="SelectSourceNameOption.h">
       <Filter>Options</Filter>
     </ClInclude>
+    <ClInclude Include="ThreadPool.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">
