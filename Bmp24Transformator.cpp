@@ -9,7 +9,9 @@ std::shared_ptr<Bmp24> Bmp24Transformator::transformateImage(std::shared_ptr<Bmp
 	std::shared_ptr<Bmp24> output = nullptr;
 	currentSource = source;
 	if(source != nullptr)
+	{
 		output = transformSource();
+	}
 	currentSource = nullptr;
 	return output;
 }

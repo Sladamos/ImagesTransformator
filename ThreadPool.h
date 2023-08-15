@@ -4,6 +4,7 @@
 #include <functional>
 #include <thread>
 #include <mutex>
+#include <condition_variable>
 
 class ThreadPool
 {
@@ -13,10 +14,14 @@ public:
 	void queueTask(const std::function<void()>& task);
 	void safeExit();
 private:
+	void threadJob();
 	void join();
 
 	std::vector<std::thread> threads;
 	std::queue<std::function<void()>> tasks;
 	std::mutex tasksMutex;
+	std::condition_variable cv;
+	bool acceptTasks;
+	int numberOfThreads;
 };
 
