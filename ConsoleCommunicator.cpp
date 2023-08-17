@@ -17,5 +17,5 @@ std::string ConsoleCommunicator::handleInput()
 
 void ConsoleCommunicator::clearConsole()
 {
-	system("cls");
+	system("cls||clear");
 }
