@@ -11,6 +11,5 @@ protected:
 private:
 	virtual void printFormats() = 0;
 	virtual std::string readFormat() = 0;
-
 };
 

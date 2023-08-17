@@ -5,7 +5,6 @@ using namespace std;
 
 ConsoleMenu::ConsoleMenu() : Menu(shared_ptr<Communicator>(new ConsoleCommunicator()))
 {
-
 }
 
 void ConsoleMenu::printOptions()
@@ -23,5 +22,5 @@ void ConsoleMenu::printOptions()
 
 void ConsoleMenu::clearConsole()
 {
-	system("cls");
+	system("cls||clear");
 }
