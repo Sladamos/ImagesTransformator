@@ -16,6 +16,7 @@ public:
 		for (auto listener : listeners)
 			listener(arg);
 	}
+
 	void operator +=(std::function<void(std::shared_ptr<T>)> listener) const
 	{
 		addListener(listener);
