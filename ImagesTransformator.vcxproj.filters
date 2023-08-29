@@ -72,10 +72,10 @@
       <Filter>Engines</Filter>
     </ClCompile>
     <ClCompile Include="ConsoleMenu.cpp">
-      <Filter>Menus</Filter>
+      <Filter>Menu</Filter>
     </ClCompile>
     <ClCompile Include="Menu.cpp">
-      <Filter>Menus</Filter>
+      <Filter>Menu</Filter>
     </ClCompile>
     <ClCompile Include="Option.cpp">
       <Filter>Options</Filter>
@@ -204,10 +204,10 @@
       <Filter>Engines</Filter>
     </ClInclude>
     <ClInclude Include="ConsoleMenu.h">
-      <Filter>Menus</Filter>
+      <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">
-      <Filter>Menus</Filter>
+      <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="Option.h">
       <Filter>Options</Filter>
@@ -305,9 +305,6 @@
     <Filter Include="Engines">
       <UniqueIdentifier>{babebeee-1ae4-4737-9dca-bc08b794aad1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Menus">
-      <UniqueIdentifier>{25396c8a-69a7-442b-a691-4b183e6fa67d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Options">
       <UniqueIdentifier>{83568457-463f-443e-a587-67d50cec477b}</UniqueIdentifier>
     </Filter>
@@ -322,6 +319,9 @@
     </Filter>
     <Filter Include="Creators\OptionsCreators">
       <UniqueIdentifier>{cd208e3d-0bd8-41e7-9cc1-0ce649e757e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{25396c8a-69a7-442b-a691-4b183e6fa67d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
