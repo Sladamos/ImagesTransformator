@@ -3,7 +3,7 @@
 
 using namespace std;
 
-ConsoleMenu::ConsoleMenu() : Menu(shared_ptr<Communicator>(new ConsoleCommunicator()))
+ConsoleMenu::ConsoleMenu(const Config& appConfig) : Menu(shared_ptr<Communicator>(new ConsoleCommunicator()))
 {
 
 }
@@ -19,9 +19,4 @@ void ConsoleMenu::printOptions()
 		ss << i + 1 << ". " << indexedOptions[i]->toString() << endl;
 	}
 	cout << ss.str();
-}
-
-void ConsoleMenu::clearConsole()
-{
-	system("cls");
 }

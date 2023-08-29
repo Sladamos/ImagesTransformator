@@ -1,31 +1,20 @@
 //Author: Slawomir Adamowicz
 #include "ConsoleMenu.h"
 #include "ProgramEngine.h"
-#include "json.hpp"
-#include <fstream>
-
-using json = nlohmann::json;
-json readProgramConfig();
+#include "Config.h"
 
 int main()
 {
-	json config = readProgramConfig();
-	std::shared_ptr<Menu> menu = std::shared_ptr<Menu>(new ConsoleMenu());
-	ProgramEngine engine(menu);
-	engine.startProgram();
-	return 0;
-}
-
-json readProgramConfig()
-{
 	try
 	{
-		std::ifstream f("config.json");
-		json config = json::parse(f);
-		return config;
+		Config appConfig(std::string("config.json"));
+		std::shared_ptr<Menu> menu = std::shared_ptr<Menu>(new ConsoleMenu(appConfig));
+		ProgramEngine engine(menu);
+		engine.startProgram();
+		return 0;
 	}
 	catch (const std::exception&)
 	{
-		exit(400);
+		return 404;
 	}
 }

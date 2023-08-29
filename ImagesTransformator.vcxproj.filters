@@ -111,6 +111,9 @@
       <Filter>Options</Filter>
     </ClCompile>
     <ClCompile Include="ThreadPool.cpp" />
+    <ClCompile Include="Config.cpp">
+      <Filter>Config</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Image.h">
@@ -261,6 +264,9 @@
       <Filter>Options</Filter>
     </ClInclude>
     <ClInclude Include="ThreadPool.h" />
+    <ClInclude Include="Config.h">
+      <Filter>Config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">
@@ -323,6 +329,9 @@
     <Filter Include="Menu">
       <UniqueIdentifier>{25396c8a-69a7-442b-a691-4b183e6fa67d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{f625c633-92f4-4eaf-b873-056afd58e521}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Xsd Include="MasksSchema.xsd" />
@@ -331,5 +340,10 @@
     <Xml Include="Masks.xml">
       <Filter>SimpleElements</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="config.json">
+      <Filter>Config</Filter>
+    </None>
   </ItemGroup>
 </Project>
