@@ -67,7 +67,7 @@ void MenuOptionsCreator::addBmp24Options(const std::string& format)
 
 	optionName = "Save";
 	auto saveImageOption = shared_ptr<SaveImageOption<Bmp24, Bmp24Saver>>
-		(new SaveImageOption<Bmp24, Bmp24Saver>(optionName, communicator));
+		(new SaveImageOption<Bmp24, Bmp24Saver>(optionName, communicator, this->appConfig["destination_images_path"]));
 	namedOption = pair<string, shared_ptr<Option>>(optionName, saveImageOption);
 	transformImageOption->destinationChanged += [saveImageOption](auto destination) {saveImageOption->onDestinationChanged(destination); };
 	namedOptions.insert(namedOption);

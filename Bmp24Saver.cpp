@@ -1,6 +1,10 @@
 #include "Bmp24Saver.h"
 using namespace std;
 
+Bmp24Saver::Bmp24Saver(const std::string& directory_path) : ImagesSaver<Bmp24, Bmp24Header, Bmp24Content>(directory_path)
+{
+}
+
 void Bmp24Saver::writeImageHeader(ofstream& bitmapFile, std::shared_ptr<Bmp24Header> imageHeader)
 {
 	Bmp24Header& bitmapHeader = *imageHeader;

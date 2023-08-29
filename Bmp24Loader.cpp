@@ -1,5 +1,9 @@
 #include "Bmp24Loader.h"
 
+Bmp24Loader::Bmp24Loader(const std::string& directory_path) : ImagesLoader<Bmp24>(directory_path)
+{
+}
+
 void Bmp24Loader::prepareAndLoadContent(std::ifstream& bitmapFile, std::shared_ptr<Bmp24> bitmap)
 {
 	auto bitmapHeader = bitmap->getImageHeader();
@@ -12,10 +16,6 @@ void Bmp24Loader::prepareAndLoadContent(std::ifstream& bitmapFile, std::shared_p
 	bitmapContent->setNumberOfZeroBytes(bitmapHeader->imageSize / bitmapHeight - bitmapHeader->bitsPerPixel / 8 * bitmapWidth);
 	bitmapFile.seekg(bitmapHeader->offsetData, bitmapFile.beg);
 	loadPixels(bitmapFile, *bitmapContent);
-}
-
-Bmp24Loader::Bmp24Loader(const std::string& directory_path) : ImagesLoader<Bmp24>(directory_path)
-{
 }
 
 void Bmp24Loader::loadPixels(std::ifstream& bitmapFile, Bmp24Content& bitmapContent)
