@@ -7,11 +7,13 @@ template <class T, typename H>
 class HeadersOperator
 {
 public:
-	HeadersOperator() = default;
+	HeadersOperator(const std::string& directory_path) : directory_path(directory_path) 
+	{
+	}
 
 	void loadHeaders(std::shared_ptr<T> image)
 	{
-		std::ifstream imageFile(DIRECTORY_PATH + image->getName(), std::ios_base::binary);
+		std::ifstream imageFile(directory_path + image->getName(), std::ios_base::binary);
 		if (imageFile.is_open())
 		{
 			image->setImageHeader(loadImageHeader(imageFile));
@@ -23,6 +25,6 @@ public:
 private:
 	virtual std::shared_ptr<H> createHeaderPtr() = 0;
 	virtual std::shared_ptr<H> loadImageHeader(std::ifstream& imageFile) = 0;
-	const std::string DIRECTORY_PATH = "./gfx/";
+	const std::string directory_path;
 };
 

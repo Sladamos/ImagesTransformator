@@ -1,6 +1,10 @@
 #include "Bmp24HeadersOperator.h"
 using namespace std;
 
+Bmp24HeadersOperator::Bmp24HeadersOperator(const std::string& directory_path) : BitmapHeadersOperator(directory_path)
+{
+}
+
 bool Bmp24HeadersOperator::areHeadersValidate(shared_ptr<Bmp24> bitmap)
 {
 	auto bitmapHeader = bitmap->getImageHeader();

@@ -4,9 +4,9 @@
 
 using namespace std;
 
-Menu::Menu(shared_ptr<Communicator> communicator) : communicator(communicator)
+Menu::Menu(shared_ptr<Communicator> communicator, const Config& appConfig) : communicator(communicator)
 {
-	auto optionsCreator = MenuOptionsCreator(communicator);
+	auto optionsCreator = MenuOptionsCreator(communicator, appConfig);
 	options = optionsCreator.createOptions(this);
 	auto formats = optionsCreator.getFormats();
 	auto changeFormatOption = options[formats[0]]["Format"];

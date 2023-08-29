@@ -1,10 +1,11 @@
 #pragma once
 #include "Menu.h"
+#include "Config.h"
 #include "OptionsCreator.h"
 class MenuOptionsCreator : public OptionsCreator<Menu>
 {
 public:
-	MenuOptionsCreator(std::shared_ptr<Communicator> communicator);
+	MenuOptionsCreator(std::shared_ptr<Communicator> communicator, const Config& appConfig);
 	virtual std::map<std::string, std::map<std::string, std::shared_ptr<Option>>> createOptions(Menu* menu) override;
 	const std::vector<std::string>& getFormats();
 private:
@@ -19,5 +20,6 @@ private:
 	std::shared_ptr<Communicator> communicator;
 	std::map<std::string, std::map<std::string, std::shared_ptr<Option>>> options;
 	std::vector<std::string> formats;
+	Config appConfig;
 };
 

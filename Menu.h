@@ -5,10 +5,11 @@
 #include <string>
 #include "Option.h"
 #include "Event.h"
+#include "Config.h"
 class Menu
 {
 public:
-	Menu(std::shared_ptr<Communicator> communicator);
+	Menu(std::shared_ptr<Communicator> communicator, const Config& appConfig);
 	void selectAndExecuteOption();
 	void onFormatChanged(std::shared_ptr<std::string> newFormat);
 	virtual void printOptions() = 0;

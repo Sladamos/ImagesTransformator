@@ -14,6 +14,10 @@ void Bmp24Loader::prepareAndLoadContent(std::ifstream& bitmapFile, std::shared_p
 	loadPixels(bitmapFile, *bitmapContent);
 }
 
+Bmp24Loader::Bmp24Loader(const std::string& directory_path) : ImagesLoader<Bmp24>(directory_path)
+{
+}
+
 void Bmp24Loader::loadPixels(std::ifstream& bitmapFile, Bmp24Content& bitmapContent)
 {
 	Pixels pixels = bitmapContent.getPixels();

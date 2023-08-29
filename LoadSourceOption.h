@@ -13,11 +13,11 @@ template <class T, class H, class L>
 class LoadSourceOption : public Option
 {
 public:
-	LoadSourceOption(const std::string& name, std::shared_ptr<Communicator> communicator) : Option(name, communicator)
+	LoadSourceOption(const std::string& name, std::shared_ptr<Communicator> communicator, const std::string& source_images_path) : Option(name, communicator)
 	{
 		this->creator = std::shared_ptr<ImagesCreator<T>>(new ImagesCreator<T>());
-		this->headersOperator = std::shared_ptr<H>(new H());
-		this->contentLoader = std::shared_ptr<L>(new L());
+		this->headersOperator = std::shared_ptr<H>(new H(source_images_path));
+		this->contentLoader = std::shared_ptr<L>(new L(source_images_path));
 		this->image = nullptr;
 		this->sourceName = nullptr;
 		sourceChanged += [this](auto image) { this->onSourceChanged(image); };

@@ -14,9 +14,8 @@
 #include "Bmp24Transformator.h"
 using namespace std;
 
-MenuOptionsCreator::MenuOptionsCreator(std::shared_ptr<Communicator> communicator)
+MenuOptionsCreator::MenuOptionsCreator(std::shared_ptr<Communicator> communicator, const Config& appConfig) : appConfig(appConfig), communicator(communicator)
 {
-	this->communicator = communicator;
 }
 
 map<string, map<string, shared_ptr<Option>>> MenuOptionsCreator::createOptions(Menu* menu)
@@ -50,7 +49,7 @@ void MenuOptionsCreator::addBmp24Options(const std::string& format)
 
 	string optionName = "Load";
 	auto loadSourceOption = shared_ptr<LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>>
-		(new LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>(optionName, communicator));
+		(new LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>(optionName, communicator, this->appConfig["source_images_path"]));
 	auto namedOption = pair<string, shared_ptr<Option>>(optionName, loadSourceOption);
 	changeFormatOption->formatChanged += [loadSourceOption](auto format) {loadSourceOption->onFormatChanged(); };
 	selectSourceNameOption->sourceNameChanged += [loadSourceOption](auto name) {loadSourceOption->onSourceNameChanged(name); };
