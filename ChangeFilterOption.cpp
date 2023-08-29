@@ -5,12 +5,12 @@
 
 using namespace std;
 
-ChangeFilterOption::ChangeFilterOption(const string& name, shared_ptr<Communicator> communicator) : 
+ChangeFilterOption::ChangeFilterOption(const string& name, shared_ptr<Communicator> communicator, const std::string& masksPath) :
     Option(name, communicator)
 {
-    auto masksOperator = shared_ptr<MasksOperator>(new SobelMasksOperator());
+    auto masksOperator = shared_ptr<MasksOperator>(new SobelMasksOperator(masksPath));
     filters.insert({ masksOperator->getName(), masksOperator });
-    masksOperator = shared_ptr<MasksOperator>(new DampelMasksOperator());
+    masksOperator = shared_ptr<MasksOperator>(new DampelMasksOperator(masksPath));
     filters.insert({ masksOperator->getName(), masksOperator });
 }
 

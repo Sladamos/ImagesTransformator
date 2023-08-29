@@ -1,6 +1,7 @@
 #include "Bmp24Transformator.h"
 
-Bmp24Transformator::Bmp24Transformator(const std::vector<Mask>& masks) : Transformator(masks), maxSectorWidth(150), maxSectorHeight(150), threadPool(12)
+Bmp24Transformator::Bmp24Transformator(const std::vector<Mask>& masks, Config transformatorConfig) : Transformator(masks),
+maxSectorWidth(transformatorConfig["max_sector_width"]), maxSectorHeight(transformatorConfig["max_sector_height"]), threadPool(transformatorConfig["number_of_threads"])
 {
 }
 

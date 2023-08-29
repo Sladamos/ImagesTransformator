@@ -49,7 +49,7 @@ void MenuOptionsCreator::addBmp24Options(const std::string& format)
 
 	string optionName = "Load";
 	auto loadSourceOption = shared_ptr<LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>>
-		(new LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>(optionName, communicator, this->appConfig["source_images_path"]));
+		(new LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>(optionName, communicator, appConfig["source_images_path"]));
 	auto namedOption = pair<string, shared_ptr<Option>>(optionName, loadSourceOption);
 	changeFormatOption->formatChanged += [loadSourceOption](auto format) {loadSourceOption->onFormatChanged(); };
 	selectSourceNameOption->sourceNameChanged += [loadSourceOption](auto name) {loadSourceOption->onSourceNameChanged(name); };
@@ -57,7 +57,7 @@ void MenuOptionsCreator::addBmp24Options(const std::string& format)
 
 	optionName = "Transform";
 	auto transformImageOption = shared_ptr<TransformImageOption<Bmp24Transformator, Bmp24>>
-		(new TransformImageOption<Bmp24Transformator, Bmp24>(optionName, communicator));
+		(new TransformImageOption<Bmp24Transformator, Bmp24>(optionName, communicator, appConfig["transformators"]["bmp24_transformator"]));
 	namedOption = pair<string, shared_ptr<Option>>(optionName, transformImageOption);
 	changeFormatOption->formatChanged += [transformImageOption](auto format) {transformImageOption->onFormatChanged(); };
 	selectOutputNameOption->outputNameChanged += [transformImageOption](auto name) {transformImageOption->onOutputNameChanged(name); };
@@ -67,7 +67,7 @@ void MenuOptionsCreator::addBmp24Options(const std::string& format)
 
 	optionName = "Save";
 	auto saveImageOption = shared_ptr<SaveImageOption<Bmp24, Bmp24Saver>>
-		(new SaveImageOption<Bmp24, Bmp24Saver>(optionName, communicator, this->appConfig["destination_images_path"]));
+		(new SaveImageOption<Bmp24, Bmp24Saver>(optionName, communicator, appConfig["destination_images_path"]));
 	namedOption = pair<string, shared_ptr<Option>>(optionName, saveImageOption);
 	transformImageOption->destinationChanged += [saveImageOption](auto destination) {saveImageOption->onDestinationChanged(destination); };
 	namedOptions.insert(namedOption);
@@ -119,6 +119,6 @@ void MenuOptionsCreator::addSelectSourceNameOption()
 void MenuOptionsCreator::addChangeFilterOption()
 {
 	string optionName = "Filter";
-	shared_ptr<ChangeFilterOption> changeFilterOption = shared_ptr<ChangeFilterOption>(new ChangeFilterOption(optionName, communicator));
+	shared_ptr<ChangeFilterOption> changeFilterOption = shared_ptr<ChangeFilterOption>(new ChangeFilterOption(optionName, communicator, appConfig["masks_path"]));
 	addOptionForAllFormats(changeFilterOption);
 }

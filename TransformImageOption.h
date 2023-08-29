@@ -5,8 +5,8 @@ template <class T, class I>
 class TransformImageOption : public Option
 {
 public:
-	TransformImageOption(const std::string& optionName, std::shared_ptr<Communicator> communicator):
-		Option(optionName, communicator)
+	TransformImageOption(const std::string& optionName, std::shared_ptr<Communicator> communicator, Config transformatorConfig):
+		Option(optionName, communicator), transformatorConfig(transformatorConfig)
 	{
 		this->transformator = nullptr;
 	}
@@ -56,7 +56,7 @@ public:
 
 	void onFilterChanged(std::shared_ptr<std::vector<Mask>> masks)
 	{
-		transformator = std::shared_ptr<T>(new T(*masks));
+		transformator = std::shared_ptr<T>(new T(*masks, transformatorConfig));
 	}
 
 	const OneArgEvent<I> destinationChanged;
@@ -64,4 +64,5 @@ private:
 	std::shared_ptr<std::string> outputName;
 	std::shared_ptr<I> source;
 	std::shared_ptr<T> transformator;
+	Config transformatorConfig;
 };

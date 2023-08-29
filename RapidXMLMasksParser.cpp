@@ -2,12 +2,11 @@
 #include "StringsOperator.h"
 using namespace std;
 using namespace rapidxml;
-const std::string RapidXMLMasksParser::FILE_PATH = "Masks.xml";
 const char RapidXMLMasksParser::DELIMITER = ';';
 
-RapidXMLMasksParser::RapidXMLMasksParser() : MasksParser()
+RapidXMLMasksParser::RapidXMLMasksParser(const std::string& masksPath) : MasksParser()
 {
-	ifstream file(FILE_PATH);
+	ifstream file(masksPath);
 	doc = shared_ptr<xml_document<>>(new xml_document<>);
 	buffer = vector<char>((istreambuf_iterator<char>(file)), istreambuf_iterator<char>());
 	buffer.push_back('\0');

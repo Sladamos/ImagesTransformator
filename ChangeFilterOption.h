@@ -7,7 +7,7 @@
 class ChangeFilterOption : public Option
 {
 public:
-	ChangeFilterOption(const std::string& name, std::shared_ptr<Communicator> communicator);
+	ChangeFilterOption(const std::string& name, std::shared_ptr<Communicator> communicator, const std::string& masksPath);
 	virtual void execute() override;
 	virtual std::string getDescription() override;
 
