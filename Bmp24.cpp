@@ -6,7 +6,6 @@ Bmp24::Bmp24(const Bmp24& source) : Image(source)
 
 Bmp24::Bmp24() : Image()
 {
-
 }
 
 void Bmp24::setName(const std::string& name)

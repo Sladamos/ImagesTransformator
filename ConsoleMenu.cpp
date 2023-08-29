@@ -5,7 +5,6 @@ using namespace std;
 
 ConsoleMenu::ConsoleMenu(const Config& appConfig) : Menu(shared_ptr<Communicator>(new ConsoleCommunicator()))
 {
-
 }
 
 void ConsoleMenu::printOptions()

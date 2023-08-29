@@ -5,7 +5,6 @@ class ImageContent
 public:
 	int getWidth() const;
 	int getHeight() const;
-
 	void setWidth(int width);
 	void setHeight(int height);
 protected:
