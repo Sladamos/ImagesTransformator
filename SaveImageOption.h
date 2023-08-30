@@ -10,6 +10,11 @@ public:
 		destination = nullptr;
 	}
 
+	void connectNotifiers(std::shared_ptr<OneArgNotifier<I>> destinationChangedNotifier)
+	{
+		destinationChangedNotifier->notified += [this](auto destination) { this->onDestinationChanged(destination); };
+	}
+
 	virtual void execute() override
 	{
 		if (destination != nullptr)
@@ -27,12 +32,12 @@ public:
 	{
 		return "Save transformated image";
 	}
-
+private:
 	void onDestinationChanged(std::shared_ptr<I> destination)
 	{
 		this->destination = destination;
 	}
-private:
+
 	std::shared_ptr<S> imagesSaver;
 	std::shared_ptr<I> destination;
 };

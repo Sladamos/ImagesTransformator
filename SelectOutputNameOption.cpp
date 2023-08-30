@@ -4,12 +4,13 @@ SelectOutputNameOption::SelectOutputNameOption(const std::string& name, std::sha
     Option(name, communicator)
 {
     outputName = nullptr;
-    outputNameChanged += [this](auto name) {this->onOutputNameChanged(name); };
 }
 
-void SelectOutputNameOption::connectNotifiers(std::shared_ptr<OneArgNotifier<std::string>> formatChangedNotifier)
+void SelectOutputNameOption::connectNotifiers(std::shared_ptr<OneArgNotifier<std::string>> formatChangedNotifier, std::shared_ptr<OneArgNotifier<std::string>> outputNameChangedNotifier)
 {
     formatChangedNotifier->notified += [this](auto format) {this->onFormatChanged(); };
+    outputNameChangedNotifier->notified += [this](auto name) {this->onOutputNameChanged(name); };
+    this->outputNameChangedNotifier = outputNameChangedNotifier;
 }
 
 void SelectOutputNameOption::execute()
@@ -17,7 +18,7 @@ void SelectOutputNameOption::execute()
     displayText("Give output image name.");
     std::string imageName = handleInput();
     auto outputName = std::shared_ptr<std::string>(new std::string(imageName));
-    outputNameChanged.invoke(outputName);
+    outputNameChangedNotifier->notifyListeners(outputName);
 }
 
 std::string SelectOutputNameOption::getDescription()
@@ -34,7 +35,7 @@ std::string SelectOutputNameOption::getDescription()
 
 void SelectOutputNameOption::onFormatChanged(std::shared_ptr<std::string> newFormat)
 {
-    outputNameChanged.invoke(nullptr);
+    outputNameChangedNotifier->notifyListeners(nullptr);
 }
 
 void SelectOutputNameOption::onOutputNameChanged(std::shared_ptr<std::string> newOutputName)

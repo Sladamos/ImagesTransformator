@@ -12,9 +12,15 @@ public:
 		this->transformator = nullptr;
 	}
 
-	void connectNotifiers(std::shared_ptr<OneArgNotifier<std::vector<Mask>>> filterChangedNotifier)
+	void connectNotifiers(std::shared_ptr<OneArgNotifier<std::vector<Mask>>> filterChangedNotifier, std::shared_ptr<OneArgNotifier<std::string>> formatChangedNotifier,
+		std::shared_ptr<OneArgNotifier<std::string>> outputNameChangedNotifier, std::shared_ptr<OneArgNotifier<I>> sourceChangedNotifier,
+		std::shared_ptr<OneArgNotifier<I>> destinationChangedNotifier)
 	{
 		filterChangedNotifier->notified += [this](auto filter) { this->onFilterChanged(filter); };
+		formatChangedNotifier->notified += [this](auto format) { this->onFormatChanged(format); };
+		outputNameChangedNotifier->notified += [this](auto outputName) { this->onOutputNameChanged(outputName); };
+		sourceChangedNotifier->notified += [this](auto image) { this->onSourceChanged(image); };
+		this->destinationChangedNotifier = destinationChangedNotifier;
 	}
 
 	virtual void execute() override
@@ -35,7 +41,7 @@ public:
 		{
 			auto destination = transformator->transformateImage(source);
 			destination->setName(*outputName);
-			destinationChanged.invoke(destination);
+			destinationChangedNotifier->notifyListeners(destination);
 			displayText("Transformated source properly.");
 		}
 	}
@@ -44,7 +50,7 @@ public:
 	{
 		return "Transform source image";
 	}
-
+private:
 	void onOutputNameChanged(std::shared_ptr<std::string> outputName)
 	{
 		this->outputName = outputName;
@@ -57,7 +63,7 @@ public:
 
 	void onFormatChanged(std::shared_ptr<std::string> newFormat = nullptr)
 	{
-		destinationChanged.invoke(nullptr);
+		destinationChangedNotifier->notifyListeners(nullptr);
 	}
 
 	void onFilterChanged(std::shared_ptr<std::vector<Mask>> masks)
@@ -65,10 +71,9 @@ public:
 		transformator = std::shared_ptr<T>(new T(*masks, transformatorConfig));
 	}
 
-	const OneArgEvent<I> destinationChanged;
-private:
 	std::shared_ptr<std::string> outputName;
 	std::shared_ptr<I> source;
 	std::shared_ptr<T> transformator;
+	std::shared_ptr<OneArgNotifier<I>> destinationChangedNotifier;
 	Config transformatorConfig;
 };

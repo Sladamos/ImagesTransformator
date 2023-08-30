@@ -10,10 +10,10 @@ public:
 	void connectNotifiers(std::shared_ptr<OneArgNotifier<std::string>> formatChangedNotifier);
 	virtual void execute() override;
 	virtual std::string getDescription() override;
-	void onFormatChanged(std::shared_ptr<std::string> format);
 private:
 	std::shared_ptr<std::string> getSelectedFormat();
 	bool isFormatSupported(const std::string& format);
+	void onFormatChanged(std::shared_ptr<std::string> format);
 
 	std::vector<std::string> formats;
 	std::shared_ptr<std::string> currentFormat;

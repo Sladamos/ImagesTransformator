@@ -1,6 +1,5 @@
 #pragma once
 #include <stdexcept>
-#include "OneArgEvent.h"
 #include "Option.h"
 #include "Image.h"
 #include "HeadersOperator.h"
@@ -48,7 +47,7 @@ public:
 		{
 			contentLoader->loadImageContent(image);
 			displayText(image->toString());
-			sourceChangedNotifier.notifyListeners(image);
+			sourceChangedNotifier->notifyListeners(image);
 		}
 		else
 		{
@@ -60,14 +59,18 @@ public:
 	virtual std::string getDescription() override
 	{
 		if (image == nullptr)
+		{
 			return "Load source image";
+		}
 		else
+		{
 			return "Loaded source image: " + image->getName();
+		}
 	}
-
+private:
 	void onFormatChanged(std::shared_ptr<std::string> newFormat = nullptr)
 	{
-		sourceChangedNotifier.notifyListeners(nullptr);
+		sourceChangedNotifier->notifyListeners(nullptr);
 	}
 
 	void onSourceChanged(std::shared_ptr<T> source)
@@ -78,9 +81,9 @@ public:
 	void onSourceNameChanged(std::shared_ptr<std::string> sourceName)
 	{
 		this->sourceName = sourceName;
-		sourceChangedNotifier.notifyListeners(nullptr);
+		sourceChangedNotifier->notifyListeners(nullptr);
 	}
-private:
+
 	bool isLoaded;
 	std::shared_ptr<std::string> sourceName;
 	std::shared_ptr<T> image;

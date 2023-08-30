@@ -2,7 +2,6 @@
 #include <vector>
 #include <map>
 #include "Option.h"
-#include "OneArgEvent.h"
 #include "OneArgNotifier.h"
 #include "MasksOperator.h"
 class ChangeFilterOption : public Option

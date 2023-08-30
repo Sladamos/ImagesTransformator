@@ -30,7 +30,8 @@ private:
 	std::shared_ptr<OneArgNotifier<std::string>> formatChangedNotifier;
 	std::shared_ptr<OneArgNotifier<std::string>> outputNameChangedNotifier;
 	std::shared_ptr<OneArgNotifier<std::string>> sourceNameChangedNotifier;
-	std::shared_ptr<OneArgNotifier<Bmp24>> bmp24ChangedNotifier;
+	std::shared_ptr<OneArgNotifier<Bmp24>> bmp24SourceChangedNotifier;
+	std::shared_ptr<OneArgNotifier<Bmp24>> bmp24DestinationChangedNotifier;
 	Config appConfig;
 };
 
