@@ -1,10 +1,13 @@
 #pragma once
 #include <vector>
+#include <map>
+#include <string>
 #include "Mask.h"
 #include "Menu.h"
 #include "Config.h"
 #include "OptionsCreator.h"
-#include "OneArgNotifier.h";
+#include "OneArgNotifier.h"
+#include "Bmp24.h"
 class MenuOptionsCreator : public OptionsCreator<Menu>
 {
 public:
@@ -24,6 +27,10 @@ private:
 	std::map<std::string, std::map<std::string, std::shared_ptr<Option>>> options;
 	std::vector<std::string> formats;
 	std::shared_ptr<OneArgNotifier<std::vector<Mask>>> filterChangedNotifier;
+	std::shared_ptr<OneArgNotifier<std::string>> formatChangedNotifier;
+	std::shared_ptr<OneArgNotifier<std::string>> outputNameChangedNotifier;
+	std::shared_ptr<OneArgNotifier<std::string>> sourceNameChangedNotifier;
+	std::shared_ptr<OneArgNotifier<Bmp24>> bmp24ChangedNotifier;
 	Config appConfig;
 };
 

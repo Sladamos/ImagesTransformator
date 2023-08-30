@@ -7,6 +7,11 @@ SelectOutputNameOption::SelectOutputNameOption(const std::string& name, std::sha
     outputNameChanged += [this](auto name) {this->onOutputNameChanged(name); };
 }
 
+void SelectOutputNameOption::connectNotifiers(std::shared_ptr<OneArgNotifier<std::string>> formatChangedNotifier)
+{
+    formatChangedNotifier->notified += [this](auto format) {this->onFormatChanged(); };
+}
+
 void SelectOutputNameOption::execute()
 {
     displayText("Give output image name.");

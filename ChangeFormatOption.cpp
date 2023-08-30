@@ -8,7 +8,12 @@ ChangeFormatOption::ChangeFormatOption(const std::string& name, std::shared_ptr<
 {
     this->formats.push_back("Undo");
     currentFormat = nullptr;
-    formatChanged += [this](auto format) {this->onFormatChanged(format); };
+}
+
+void ChangeFormatOption::connectNotifiers(std::shared_ptr<OneArgNotifier<std::string>> formatChangedNotifier)
+{
+    this->formatChangedNotifier = formatChangedNotifier;
+    formatChangedNotifier->notified += [this](auto format) {this->onFormatChanged(format); };
 }
 
 void ChangeFormatOption::execute()
@@ -19,12 +24,12 @@ void ChangeFormatOption::execute()
 
     if (*format != "Undo" && isFormatSupported(*format))
     {
-        formatChanged.invoke(format);
+        formatChangedNotifier->notifyListeners(format);
     }
     else if (currentFormat == nullptr)
     {
         format = std::shared_ptr<std::string>(new std::string(formats[0]));
-        formatChanged.invoke(format);
+        formatChangedNotifier->notifyListeners(format);
     }
 }
 

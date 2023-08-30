@@ -18,6 +18,10 @@ using namespace std;
 MenuOptionsCreator::MenuOptionsCreator(std::shared_ptr<Communicator> communicator, const Config& appConfig) : appConfig(appConfig), communicator(communicator)
 {
 	filterChangedNotifier = shared_ptr<OneArgNotifier<vector<Mask>>>(new OneArgNotifier<vector<Mask>>());
+	formatChangedNotifier = shared_ptr<OneArgNotifier<string>>(new OneArgNotifier<string>());
+	outputNameChangedNotifier = shared_ptr<OneArgNotifier<string>>(new OneArgNotifier<string>());
+	sourceNameChangedNotifier = shared_ptr<OneArgNotifier<string>>(new OneArgNotifier<string>());
+	bmp24ChangedNotifier = shared_ptr<OneArgNotifier<Bmp24>>(new OneArgNotifier<Bmp24>());
 }
 
 map<string, map<string, shared_ptr<Option>>> MenuOptionsCreator::createOptions(Menu* menu)
@@ -53,8 +57,7 @@ void MenuOptionsCreator::addBmp24Options(const std::string& format)
 	auto loadSourceOption = shared_ptr<LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>>
 		(new LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>(optionName, communicator, appConfig["source_images_path"]));
 	auto namedOption = pair<string, shared_ptr<Option>>(optionName, loadSourceOption);
-	changeFormatOption->formatChanged += [loadSourceOption](auto format) {loadSourceOption->onFormatChanged(); };
-	selectSourceNameOption->sourceNameChanged += [loadSourceOption](auto name) {loadSourceOption->onSourceNameChanged(name); };
+	loadSourceOption->connectNotifiers(formatChangedNotifier, sourceNameChangedNotifier, bmp24ChangedNotifier);
 	namedOptions.insert(namedOption);
 
 	optionName = "Transform";
@@ -96,26 +99,26 @@ void MenuOptionsCreator::addChangeFormatOption(Menu* menu)
 {
 	string optionName = "Format";
 	shared_ptr<ChangeFormatOption> changeFormatOption = shared_ptr<ChangeFormatOption>(new ChangeFormatOption(optionName, communicator, formats));
+	changeFormatOption->connectNotifiers(formatChangedNotifier);
 	addOptionForAllFormats(changeFormatOption);
-	changeFormatOption->formatChanged += [menu](auto format) {menu->onFormatChanged(format); };
+	//TODO TODO TODO TODO
+	//changeFormatOption->formatChanged += [menu](auto format) {menu->onFormatChanged(format); };
 }
 
 void MenuOptionsCreator::addSelectOutputNameOption()
 {
 	string optionName = "Output";
 	auto selectOutputNameOption = shared_ptr<SelectOutputNameOption>(new SelectOutputNameOption(optionName, communicator));
+	selectOutputNameOption->connectNotifiers(formatChangedNotifier);
 	addOptionForAllFormats(selectOutputNameOption);
-	auto changeFormatOption = std::dynamic_pointer_cast<ChangeFormatOption>(options[formats[0]]["Format"]);
-	changeFormatOption->formatChanged += [selectOutputNameOption](auto format) {selectOutputNameOption->onFormatChanged(); };
 }
 
 void MenuOptionsCreator::addSelectSourceNameOption()
 {
 	string optionName = "Source";
 	auto selectSourceNameOption = shared_ptr<SelectSourceNameOption>(new SelectSourceNameOption(optionName, communicator));
+	selectSourceNameOption->connectNotifiers(formatChangedNotifier);
 	addOptionForAllFormats(selectSourceNameOption);
-	auto changeFormatOption = std::dynamic_pointer_cast<ChangeFormatOption>(options[formats[0]]["Format"]);
-	changeFormatOption->formatChanged += [selectSourceNameOption](auto format) {selectSourceNameOption->onFormatChanged(); };
 }
 
 void MenuOptionsCreator::addChangeFilterOption()

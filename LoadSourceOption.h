@@ -8,6 +8,7 @@
 #include "ImageContent.h"
 #include "ImagesCreator.h"
 #include "ImagesLoader.h"
+#include "OneArgNotifier.h"
 
 template <class T, class H, class L>
 class LoadSourceOption : public Option
@@ -20,7 +21,15 @@ public:
 		this->contentLoader = std::shared_ptr<L>(new L(source_images_path));
 		this->image = nullptr;
 		this->sourceName = nullptr;
-		sourceChanged += [this](auto image) { this->onSourceChanged(image); };
+	}
+
+	void connectNotifiers(std::shared_ptr<OneArgNotifier<std::string>> formatChangedNotifier, std::shared_ptr<OneArgNotifier<std::string>> sourceNameChangedNotifier,
+		std::shared_ptr<OneArgNotifier<T>> sourceChangedNotifier)
+	{
+		formatChangedNotifier->notified += [this](auto format) {this->onFormatChanged(); };
+		sourceNameChangedNotifier->notified += [this](auto sourceName) {this->onSourceNameChanged(sourceName); };
+		sourceChangedNotifier->notified += [this](auto image) {this->onSourceChanged(image); };
+		this->sourceChangedNotifier = sourceChangedNotifier;
 	}
 
 	virtual void execute() override
@@ -39,7 +48,7 @@ public:
 		{
 			contentLoader->loadImageContent(image);
 			displayText(image->toString());
-			sourceChanged.invoke(image);
+			sourceChangedNotifier.notifyListeners(image);
 		}
 		else
 		{
@@ -58,7 +67,7 @@ public:
 
 	void onFormatChanged(std::shared_ptr<std::string> newFormat = nullptr)
 	{
-		sourceChanged.invoke(nullptr);
+		sourceChangedNotifier.notifyListeners(nullptr);
 	}
 
 	void onSourceChanged(std::shared_ptr<T> source)
@@ -69,10 +78,8 @@ public:
 	void onSourceNameChanged(std::shared_ptr<std::string> sourceName)
 	{
 		this->sourceName = sourceName;
-		sourceChanged.invoke(nullptr);
+		sourceChangedNotifier.notifyListeners(nullptr);
 	}
-
-	const OneArgEvent<T> sourceChanged;
 private:
 	bool isLoaded;
 	std::shared_ptr<std::string> sourceName;
@@ -80,5 +87,6 @@ private:
 	std::shared_ptr<ImagesCreator<T>> creator;
 	std::shared_ptr<H> headersOperator;
 	std::shared_ptr<L> contentLoader;
+	std::shared_ptr<OneArgNotifier<T>> sourceChangedNotifier;
 };
 

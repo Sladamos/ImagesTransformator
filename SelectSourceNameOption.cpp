@@ -7,6 +7,11 @@ SelectSourceNameOption::SelectSourceNameOption(const std::string& name, std::sha
     sourceNameChanged += [this](auto name) {this->onSourceNameChanged(name); };
 }
 
+void SelectSourceNameOption::connectNotifiers(std::shared_ptr<OneArgNotifier<std::string>> formatChangedNotifier)
+{
+    formatChangedNotifier->notified += [this](auto format) {this->onFormatChanged(); };
+}
+
 void SelectSourceNameOption::execute()
 {
     displayText("Give source image name.");
