@@ -1,6 +1,7 @@
 #pragma once
 #include "Option.h"
 #include "Transformator.h"
+#include "OneArgNotifier.h"
 template <class T, class I>
 class TransformImageOption : public Option
 {
@@ -9,6 +10,11 @@ public:
 		Option(optionName, communicator), transformatorConfig(transformatorConfig)
 	{
 		this->transformator = nullptr;
+	}
+
+	void connectNotifiers(std::shared_ptr<OneArgNotifier<std::vector<Mask>>> filterChangedNotifier)
+	{
+		filterChangedNotifier->notified += [this](auto filter) { this->onFilterChanged(filter); };
 	}
 
 	virtual void execute() override

@@ -12,10 +12,12 @@
 #include "Bmp24.h"
 #include "Bmp24HeadersOperator.h"
 #include "Bmp24Transformator.h"
+
 using namespace std;
 
 MenuOptionsCreator::MenuOptionsCreator(std::shared_ptr<Communicator> communicator, const Config& appConfig) : appConfig(appConfig), communicator(communicator)
 {
+	filterChangedNotifier = shared_ptr<OneArgNotifier<vector<Mask>>>(new OneArgNotifier<vector<Mask>>());
 }
 
 map<string, map<string, shared_ptr<Option>>> MenuOptionsCreator::createOptions(Menu* menu)
@@ -62,7 +64,7 @@ void MenuOptionsCreator::addBmp24Options(const std::string& format)
 	changeFormatOption->formatChanged += [transformImageOption](auto format) {transformImageOption->onFormatChanged(); };
 	selectOutputNameOption->outputNameChanged += [transformImageOption](auto name) {transformImageOption->onOutputNameChanged(name); };
 	loadSourceOption->sourceChanged += [transformImageOption](auto source) { transformImageOption->onSourceChanged(source); };
-	changeFilterOption->filterChanged += [transformImageOption](auto filter) { transformImageOption->onFilterChanged(filter); };
+	transformImageOption->connectNotifiers(filterChangedNotifier);
 	namedOptions.insert(namedOption);
 
 	optionName = "Save";
@@ -120,5 +122,6 @@ void MenuOptionsCreator::addChangeFilterOption()
 {
 	string optionName = "Filter";
 	shared_ptr<ChangeFilterOption> changeFilterOption = shared_ptr<ChangeFilterOption>(new ChangeFilterOption(optionName, communicator, appConfig["masks_path"]));
+	changeFilterOption->connectNotifiers(filterChangedNotifier);
 	addOptionForAllFormats(changeFilterOption);
 }

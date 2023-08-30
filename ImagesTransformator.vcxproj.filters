@@ -267,6 +267,9 @@
     <ClInclude Include="Config.h">
       <Filter>Config</Filter>
     </ClInclude>
+    <ClInclude Include="OneArgNotifier.h">
+      <Filter>Events\Notifiers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">
@@ -331,6 +334,9 @@
     </Filter>
     <Filter Include="Config">
       <UniqueIdentifier>{f625c633-92f4-4eaf-b873-056afd58e521}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Notifiers">
+      <UniqueIdentifier>{5a6d2c55-2253-49f4-8119-7925a5b6cba0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

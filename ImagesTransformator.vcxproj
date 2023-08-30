@@ -217,6 +217,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuOptionsCreator.h" />
     <ClInclude Include="OneArgEvent.h" />
+    <ClInclude Include="OneArgNotifier.h" />
     <ClInclude Include="Option.h" />
     <ClInclude Include="OptionsCreator.h" />
     <ClInclude Include="ProgramEngine.h" />

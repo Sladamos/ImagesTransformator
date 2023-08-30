@@ -1,7 +1,10 @@
 #pragma once
+#include <vector>
+#include "Mask.h"
 #include "Menu.h"
 #include "Config.h"
 #include "OptionsCreator.h"
+#include "OneArgNotifier.h";
 class MenuOptionsCreator : public OptionsCreator<Menu>
 {
 public:
@@ -20,6 +23,7 @@ private:
 	std::shared_ptr<Communicator> communicator;
 	std::map<std::string, std::map<std::string, std::shared_ptr<Option>>> options;
 	std::vector<std::string> formats;
+	std::shared_ptr<OneArgNotifier<std::vector<Mask>>> filterChangedNotifier;
 	Config appConfig;
 };
 

@@ -14,6 +14,11 @@ ChangeFilterOption::ChangeFilterOption(const string& name, shared_ptr<Communicat
     filters.insert({ masksOperator->getName(), masksOperator });
 }
 
+void ChangeFilterOption::connectNotifiers(std::shared_ptr<OneArgNotifier<std::vector<Mask>>> filterChangedNotifier)
+{
+    this->filterChangedNotifier = filterChangedNotifier;
+}
+
 void ChangeFilterOption::execute()
 {
     displayText("Select transformator filter from below filters.");
@@ -24,7 +29,7 @@ void ChangeFilterOption::execute()
         currentFilter = filter;
         auto masksOperator = filters[*filter];
         auto masks = masksOperator->getMasks();
-        filterChanged.invoke(shared_ptr<vector<Mask>>(new vector<Mask>(masks)));
+        filterChangedNotifier->notifyListeners(shared_ptr<vector<Mask>>(new vector<Mask>(masks)));
         displayText("Filter loaded properly");
     }
 }
