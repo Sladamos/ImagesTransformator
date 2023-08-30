@@ -7,7 +7,7 @@
 class ConsoleMenu : public Menu
 {
 public:
-	ConsoleMenu(const Config& appConfig);
+	ConsoleMenu(const Config& appConfig, std::shared_ptr<Notifier> programExitedNotifier);
 	virtual void printOptions() override;
 };
 

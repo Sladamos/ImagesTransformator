@@ -3,7 +3,7 @@
 
 using namespace std;
 
-ConsoleMenu::ConsoleMenu(const Config& appConfig) : Menu(shared_ptr<Communicator>(new ConsoleCommunicator()), appConfig)
+ConsoleMenu::ConsoleMenu(const Config& appConfig, std::shared_ptr<Notifier> programExitedNotifier) : Menu(shared_ptr<Communicator>(new ConsoleCommunicator()), appConfig, programExitedNotifier)
 {
 }
 

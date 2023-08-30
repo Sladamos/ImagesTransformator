@@ -15,24 +15,26 @@
 
 using namespace std;
 
-MenuOptionsCreator::MenuOptionsCreator(std::shared_ptr<Communicator> communicator, const Config& appConfig) : appConfig(appConfig), communicator(communicator)
+MenuOptionsCreator::MenuOptionsCreator(std::shared_ptr<Communicator> communicator, const Config& appConfig, shared_ptr<Notifier> programExitedNotifier,
+	shared_ptr<OneArgNotifier<string>> formatChangedNotifier) : appConfig(appConfig), communicator(communicator)
 {
+	this->programExitedNotifier = programExitedNotifier;
+	this->formatChangedNotifier = formatChangedNotifier; //shared_ptr(new OneArgNotifier<string>());
 	filterChangedNotifier = shared_ptr<OneArgNotifier<vector<Mask>>>(new OneArgNotifier<vector<Mask>>());
-	formatChangedNotifier = shared_ptr<OneArgNotifier<string>>(new OneArgNotifier<string>());
 	outputNameChangedNotifier = shared_ptr<OneArgNotifier<string>>(new OneArgNotifier<string>());
 	sourceNameChangedNotifier = shared_ptr<OneArgNotifier<string>>(new OneArgNotifier<string>());
 }
 
-map<string, map<string, shared_ptr<Option>>> MenuOptionsCreator::createOptions(Menu* menu)
+map<string, map<string, shared_ptr<Option>>> MenuOptionsCreator::createOptions()
 {
 	formats = vector<string>{ "Bmp24", "JPG" };
 	for (auto format : formats)
 	{
 		options.insert({ format, map<string, shared_ptr<Option>>() });
 	}
-	addExitOption(menu);
+	addExitOption();
 	addChangeFilterOption();
-	addChangeFormatOption(menu);
+	addChangeFormatOption();
 	addSelectOutputNameOption();
 	addSelectSourceNameOption();
 	addBmp24Options(formats[0]);
@@ -72,7 +74,6 @@ void MenuOptionsCreator::addBmp24Options(const std::string& format)
 	namedOptions.insert(namedOption);
 }
 
-
 void MenuOptionsCreator::addOptionForAllFormats(std::shared_ptr<Option> option)
 {
 	for (auto& kv : options)
@@ -81,23 +82,20 @@ void MenuOptionsCreator::addOptionForAllFormats(std::shared_ptr<Option> option)
 	}
 }
 
-void MenuOptionsCreator::addExitOption(Menu* menu)
+void MenuOptionsCreator::addExitOption()
 {
 	string optionName = "Exit";
 	shared_ptr<ExitOption> exitOption = shared_ptr<ExitOption>(new ExitOption(optionName));
-	//TODO TODO TODO TODO
-	//exitOption->exitProgram += [menu]() {menu->exitProgram.invoke(); };
+	exitOption->connectNotifiers(programExitedNotifier);
 	addOptionForAllFormats(exitOption);
 }
 
-void MenuOptionsCreator::addChangeFormatOption(Menu* menu)
+void MenuOptionsCreator::addChangeFormatOption()
 {
 	string optionName = "Format";
 	shared_ptr<ChangeFormatOption> changeFormatOption = shared_ptr<ChangeFormatOption>(new ChangeFormatOption(optionName, communicator, formats));
 	changeFormatOption->connectNotifiers(formatChangedNotifier);
 	addOptionForAllFormats(changeFormatOption);
-	//TODO TODO TODO TODO
-	//changeFormatOption->formatChanged += [menu](auto format) {menu->onFormatChanged(format); };
 }
 
 void MenuOptionsCreator::addSelectOutputNameOption()

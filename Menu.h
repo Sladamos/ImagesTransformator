@@ -4,21 +4,19 @@
 #include <memory>
 #include <string>
 #include "Option.h"
-#include "Event.h"
 #include "Config.h"
+#include "Notifier.h"
 class Menu
 {
 public:
-	Menu(std::shared_ptr<Communicator> communicator, const Config& appConfig);
+	Menu(std::shared_ptr<Communicator> communicator, const Config& appConfig, std::shared_ptr<Notifier> programExitedNotifier);
 	void selectAndExecuteOption();
-	void onFormatChanged(std::shared_ptr<std::string> newFormat);
 	virtual void printOptions() = 0;
-
-	const Event exitProgram;
 protected:
 	std::vector<std::shared_ptr<Option>> indexedOptions;
 	std::map<std::string, std::shared_ptr<Option>> namedOptions;
 private:
+	void onFormatChanged(std::shared_ptr<std::string> newFormat);
 	void addNamedOptionsAsIndexed();
 
 	std::shared_ptr<Option> selectMatchingOption(const std::string& handledInput);

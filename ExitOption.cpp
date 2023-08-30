@@ -4,6 +4,11 @@ ExitOption::ExitOption(const std::string& name, std::shared_ptr<Communicator> co
 {
 }
 
+void ExitOption::connectNotifiers(std::shared_ptr<Notifier> programExitedNotifier)
+{
+    this->programExitedNotifier = programExitedNotifier;
+}
+
 std::string ExitOption::getDescription()
 {
     return "Exit program";
@@ -11,5 +16,5 @@ std::string ExitOption::getDescription()
 
 void ExitOption::execute()
 {
-    exitProgram.invoke();
+    programExitedNotifier->notifyListeners();
 }

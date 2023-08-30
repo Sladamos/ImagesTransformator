@@ -3,21 +3,23 @@
 #include <map>
 #include <string>
 #include "Mask.h"
-#include "Menu.h"
 #include "Config.h"
 #include "OptionsCreator.h"
 #include "OneArgNotifier.h"
 #include "Bmp24.h"
-class MenuOptionsCreator : public OptionsCreator<Menu>
+#include "Notifier.h"
+
+class MenuOptionsCreator : public OptionsCreator
 {
 public:
-	MenuOptionsCreator(std::shared_ptr<Communicator> communicator, const Config& appConfig);
-	virtual std::map<std::string, std::map<std::string, std::shared_ptr<Option>>> createOptions(Menu* menu) override;
+	MenuOptionsCreator(std::shared_ptr<Communicator> communicator, const Config& appConfig, std::shared_ptr<Notifier> programExitedNotifier,
+		std::shared_ptr<OneArgNotifier<std::string>> formatChangedNotifier);
+	virtual std::map<std::string, std::map<std::string, std::shared_ptr<Option>>> createOptions() override;
 	const std::vector<std::string>& getFormats();
 private:
 	void addBmp24Options(const std::string& format);
-	void addExitOption(Menu* menu);
-	void addChangeFormatOption(Menu* menu);
+	void addExitOption();
+	void addChangeFormatOption();
 	void addSelectOutputNameOption();
 	void addSelectSourceNameOption();
 	void addChangeFilterOption();
@@ -30,8 +32,7 @@ private:
 	std::shared_ptr<OneArgNotifier<std::string>> formatChangedNotifier;
 	std::shared_ptr<OneArgNotifier<std::string>> outputNameChangedNotifier;
 	std::shared_ptr<OneArgNotifier<std::string>> sourceNameChangedNotifier;
-	std::shared_ptr<OneArgNotifier<Bmp24>> bmp24SourceChangedNotifier;
-	std::shared_ptr<OneArgNotifier<Bmp24>> bmp24DestinationChangedNotifier;
+	std::shared_ptr<Notifier> programExitedNotifier;
 	Config appConfig;
 };
 

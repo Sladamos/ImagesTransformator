@@ -216,6 +216,7 @@
     <ClInclude Include="MasksParser.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuOptionsCreator.h" />
+    <ClInclude Include="Notifier.h" />
     <ClInclude Include="OneArgEvent.h" />
     <ClInclude Include="OneArgNotifier.h" />
     <ClInclude Include="Option.h" />

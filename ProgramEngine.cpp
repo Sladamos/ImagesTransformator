@@ -1,10 +1,10 @@
 #include "ProgramEngine.h"
 
-ProgramEngine::ProgramEngine(std::shared_ptr<Menu> menu)
+ProgramEngine::ProgramEngine(std::shared_ptr<Menu> menu, std::shared_ptr<Notifier> programExitedNotifier)
 {
 	this->menu = menu;
 	auto execute = [this]() { this->turnOffProgram(); };
-	menu->exitProgram += execute;
+	programExitedNotifier->notified += execute;
 }
 
 void ProgramEngine::startProgram()

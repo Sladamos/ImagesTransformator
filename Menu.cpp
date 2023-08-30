@@ -1,13 +1,16 @@
 #include "Menu.h"
 #include "MenuOptionsCreator.h"
 #include "StringsOperator.h"
+#include "OneArgNotifier.h"
 
 using namespace std;
 
-Menu::Menu(shared_ptr<Communicator> communicator, const Config& appConfig) : communicator(communicator)
+Menu::Menu(shared_ptr<Communicator> communicator, const Config& appConfig, std::shared_ptr<Notifier> programExitedNotifier) : communicator(communicator)
 {
-	auto optionsCreator = MenuOptionsCreator(communicator, appConfig);
-	options = optionsCreator.createOptions(this);
+	auto formatChangedNotifier = shared_ptr<OneArgNotifier<string>>(new OneArgNotifier<string>());
+	formatChangedNotifier->notified += [this](auto format) { this->onFormatChanged(format); };
+	auto optionsCreator = MenuOptionsCreator(communicator, appConfig, programExitedNotifier, formatChangedNotifier);
+	options = optionsCreator.createOptions();
 	auto formats = optionsCreator.getFormats();
 	auto changeFormatOption = options[formats[0]]["Format"];
 	changeFormatOption->execute();

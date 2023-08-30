@@ -270,6 +270,9 @@
     <ClInclude Include="OneArgNotifier.h">
       <Filter>Events\Notifiers</Filter>
     </ClInclude>
+    <ClInclude Include="Notifier.h">
+      <Filter>Events\Notifiers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">
