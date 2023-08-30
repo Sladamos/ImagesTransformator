@@ -3,15 +3,8 @@
 #include "SelectOutputNameOption.h"
 #include "SelectSourceNameOption.h"
 #include "ChangeFilterOption.h"
-#include "TransformImageOption.h"
 #include "ExitOption.h"
-#include "LoadSourceOption.h"
-#include "SaveImageOption.h"
-#include "Bmp24Loader.h"
-#include "Bmp24Saver.h"
-#include "Bmp24.h"
-#include "Bmp24HeadersOperator.h"
-#include "Bmp24Transformator.h"
+#include "Bmp24OptionsCreators.h"
 
 using namespace std;
 
@@ -19,7 +12,7 @@ MenuOptionsCreator::MenuOptionsCreator(std::shared_ptr<Communicator> communicato
 	shared_ptr<OneArgNotifier<string>> formatChangedNotifier) : appConfig(appConfig), communicator(communicator)
 {
 	this->programExitedNotifier = programExitedNotifier;
-	this->formatChangedNotifier = formatChangedNotifier; //shared_ptr(new OneArgNotifier<string>());
+	this->formatChangedNotifier = formatChangedNotifier;
 	filterChangedNotifier = shared_ptr<OneArgNotifier<vector<Mask>>>(new OneArgNotifier<vector<Mask>>());
 	outputNameChangedNotifier = shared_ptr<OneArgNotifier<string>>(new OneArgNotifier<string>());
 	sourceNameChangedNotifier = shared_ptr<OneArgNotifier<string>>(new OneArgNotifier<string>());
@@ -48,30 +41,10 @@ const std::vector<std::string>& MenuOptionsCreator::getFormats()
 
 void MenuOptionsCreator::addBmp24Options(const std::string& format)
 {
-	std::shared_ptr<OneArgNotifier<Bmp24>> bmp24SourceChangedNotifier = shared_ptr<OneArgNotifier<Bmp24>>(new OneArgNotifier<Bmp24>());
-	std::shared_ptr<OneArgNotifier<Bmp24>> bmp24DestinationChangedNotifier = shared_ptr<OneArgNotifier<Bmp24>>(new OneArgNotifier<Bmp24>());
 	auto& namedOptions = options[format];
-
-	string optionName = "Load";
-	auto loadSourceOption = shared_ptr<LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>>
-		(new LoadSourceOption<Bmp24, Bmp24HeadersOperator, Bmp24Loader>(optionName, communicator, appConfig["source_images_path"]));
-	auto namedOption = pair<string, shared_ptr<Option>>(optionName, loadSourceOption);
-	loadSourceOption->connectNotifiers(formatChangedNotifier, sourceNameChangedNotifier, bmp24SourceChangedNotifier);
-	namedOptions.insert(namedOption);
-
-	optionName = "Transform";
-	auto transformImageOption = shared_ptr<TransformImageOption<Bmp24Transformator, Bmp24>>
-		(new TransformImageOption<Bmp24Transformator, Bmp24>(optionName, communicator, appConfig["transformators"]["bmp24_transformator"]));
-	namedOption = pair<string, shared_ptr<Option>>(optionName, transformImageOption);
-	transformImageOption->connectNotifiers(filterChangedNotifier, formatChangedNotifier, outputNameChangedNotifier, bmp24SourceChangedNotifier, bmp24DestinationChangedNotifier);
-	namedOptions.insert(namedOption);
-
-	optionName = "Save";
-	auto saveImageOption = shared_ptr<SaveImageOption<Bmp24, Bmp24Saver>>
-		(new SaveImageOption<Bmp24, Bmp24Saver>(optionName, communicator, appConfig["destination_images_path"]));
-	namedOption = pair<string, shared_ptr<Option>>(optionName, saveImageOption);
-	saveImageOption->connectNotifiers(bmp24DestinationChangedNotifier);
-	namedOptions.insert(namedOption);
+	auto bmp24OptionsCreator = Bmp24OptionsCreators(appConfig, communicator, filterChangedNotifier, formatChangedNotifier, outputNameChangedNotifier, sourceNameChangedNotifier);
+	auto bmp24SpecifiedOptions = bmp24OptionsCreator.createBmp24SpecifiedMenuOptions();
+	namedOptions.insert(bmp24SpecifiedOptions.begin(), bmp24SpecifiedOptions.end());
 }
 
 void MenuOptionsCreator::addOptionForAllFormats(std::shared_ptr<Option> option)

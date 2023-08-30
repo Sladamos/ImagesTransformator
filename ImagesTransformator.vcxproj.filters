@@ -114,6 +114,7 @@
     <ClCompile Include="Config.cpp">
       <Filter>Config</Filter>
     </ClCompile>
+    <ClCompile Include="Bmp24OptionsCreators.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Image.h">
@@ -273,6 +274,7 @@
     <ClInclude Include="Notifier.h">
       <Filter>Events\Notifiers</Filter>
     </ClInclude>
+    <ClInclude Include="Bmp24OptionsCreators.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">

@@ -145,6 +145,7 @@
     <ClCompile Include="Bmp24Header.cpp" />
     <ClCompile Include="Bmp24HeadersOperator.cpp" />
     <ClCompile Include="Bmp24Loader.cpp" />
+    <ClCompile Include="Bmp24OptionsCreators.cpp" />
     <ClCompile Include="Bmp24Saver.cpp" />
     <ClCompile Include="Bmp24Transformator.cpp" />
     <ClCompile Include="ChangeFilterOption.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="Bmp24Header.h" />
     <ClInclude Include="Bmp24HeadersOperator.h" />
     <ClInclude Include="Bmp24Loader.h" />
+    <ClInclude Include="Bmp24OptionsCreators.h" />
     <ClInclude Include="Bmp24Saver.h" />
     <ClInclude Include="Bmp24Transformator.h" />
     <ClInclude Include="ChangeFilterOption.h" />

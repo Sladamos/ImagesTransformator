@@ -25,6 +25,7 @@ private:
 	void addChangeFilterOption();
 	void addOptionForAllFormats(std::shared_ptr<Option> option);
 
+	Config appConfig;
 	std::shared_ptr<Communicator> communicator;
 	std::map<std::string, std::map<std::string, std::shared_ptr<Option>>> options;
 	std::vector<std::string> formats;
@@ -33,6 +34,5 @@ private:
 	std::shared_ptr<OneArgNotifier<std::string>> outputNameChangedNotifier;
 	std::shared_ptr<OneArgNotifier<std::string>> sourceNameChangedNotifier;
 	std::shared_ptr<Notifier> programExitedNotifier;
-	Config appConfig;
 };
 
