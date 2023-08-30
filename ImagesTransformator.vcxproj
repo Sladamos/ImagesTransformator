@@ -145,7 +145,7 @@
     <ClCompile Include="Bmp24Header.cpp" />
     <ClCompile Include="Bmp24HeadersOperator.cpp" />
     <ClCompile Include="Bmp24Loader.cpp" />
-    <ClCompile Include="Bmp24OptionsCreators.cpp" />
+    <ClCompile Include="Bmp24OptionsCreator.cpp" />
     <ClCompile Include="Bmp24Saver.cpp" />
     <ClCompile Include="Bmp24Transformator.cpp" />
     <ClCompile Include="ChangeFilterOption.cpp" />
@@ -177,6 +177,7 @@
     <ClCompile Include="SelectOutputNameOption.cpp" />
     <ClCompile Include="SelectSourceNameOption.cpp" />
     <ClCompile Include="SobelMasksOperator.cpp" />
+    <ClCompile Include="StringsDecorator.cpp" />
     <ClCompile Include="StringsOperator.cpp" />
     <ClCompile Include="ThreadPool.cpp" />
   </ItemGroup>
@@ -188,7 +189,7 @@
     <ClInclude Include="Bmp24Header.h" />
     <ClInclude Include="Bmp24HeadersOperator.h" />
     <ClInclude Include="Bmp24Loader.h" />
-    <ClInclude Include="Bmp24OptionsCreators.h" />
+    <ClInclude Include="Bmp24OptionsCreator.h" />
     <ClInclude Include="Bmp24Saver.h" />
     <ClInclude Include="Bmp24Transformator.h" />
     <ClInclude Include="ChangeFilterOption.h" />
@@ -231,6 +232,7 @@
     <ClInclude Include="SelectOutputNameOption.h" />
     <ClInclude Include="SelectSourceNameOption.h" />
     <ClInclude Include="SobelMasksOperator.h" />
+    <ClInclude Include="StringsDecorator.h" />
     <ClInclude Include="StringsOperator.h" />
     <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="Transformator.h" />

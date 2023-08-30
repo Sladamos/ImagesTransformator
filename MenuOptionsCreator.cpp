@@ -4,7 +4,7 @@
 #include "SelectSourceNameOption.h"
 #include "ChangeFilterOption.h"
 #include "ExitOption.h"
-#include "Bmp24OptionsCreators.h"
+#include "Bmp24OptionsCreator.h"
 
 using namespace std;
 
@@ -42,7 +42,7 @@ const std::vector<std::string>& MenuOptionsCreator::getFormats()
 void MenuOptionsCreator::addBmp24Options(const std::string& format)
 {
 	auto& namedOptions = options[format];
-	auto bmp24OptionsCreator = Bmp24OptionsCreators(appConfig, communicator, filterChangedNotifier, formatChangedNotifier, outputNameChangedNotifier, sourceNameChangedNotifier);
+	auto bmp24OptionsCreator = Bmp24OptionsCreator(appConfig, communicator, filterChangedNotifier, formatChangedNotifier, outputNameChangedNotifier, sourceNameChangedNotifier);
 	auto bmp24SpecifiedOptions = bmp24OptionsCreator.createBmp24SpecifiedMenuOptions();
 	namedOptions.insert(bmp24SpecifiedOptions.begin(), bmp24SpecifiedOptions.end());
 }

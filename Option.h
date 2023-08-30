@@ -21,5 +21,6 @@ protected:
 private:
 	std::string name;
 	std::shared_ptr<Communicator> communicator;
+	const static int EXPECTED_OPTION_WIDTH;
 };
 

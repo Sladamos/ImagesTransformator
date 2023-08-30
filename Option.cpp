@@ -1,5 +1,6 @@
 #include "Option.h"
-#include "StringsOperator.h"
+#include "StringsDecorator.h"
+const int Option::EXPECTED_OPTION_WIDTH = 9;
 
 using namespace std;
 
@@ -9,10 +10,10 @@ Option::Option(const std::string& name, std::shared_ptr<Communicator> communicat
 
 std::string Option::toString()
 {
-    StringsOperator decorator;
+    StringsDecorator decorator;
     stringstream ss;
  
-    ss << decorator.decorateString(name) << ": " << getDescription();
+    ss << decorator.squareBracketDecorateString(name, EXPECTED_OPTION_WIDTH) << ": " << getDescription();
     return ss.str();
 }
 
@@ -29,11 +30,11 @@ void Option::displayText(const std::string& text)
 void Option::displayLines(const std::vector<std::string>& lines)
 {
     stringstream ss;
-    StringsOperator decorator;
+    StringsDecorator decorator;
     int index = 1;
     for (auto& line : lines)
     {
-        ss << index << ". " << decorator.decorateString(line) << "\n";
+        ss << index << ". " << decorator.squareBracketDecorateString(line, EXPECTED_OPTION_WIDTH) << "\n";
         index++;
     }
 

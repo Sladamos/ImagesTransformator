@@ -114,7 +114,12 @@
     <ClCompile Include="Config.cpp">
       <Filter>Config</Filter>
     </ClCompile>
-    <ClCompile Include="Bmp24OptionsCreators.cpp" />
+    <ClCompile Include="Bmp24OptionsCreator.cpp">
+      <Filter>Creators\OptionsCreators</Filter>
+    </ClCompile>
+    <ClCompile Include="StringsDecorator.cpp">
+      <Filter>Parsers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Image.h">
@@ -274,7 +279,12 @@
     <ClInclude Include="Notifier.h">
       <Filter>Events\Notifiers</Filter>
     </ClInclude>
-    <ClInclude Include="Bmp24OptionsCreators.h" />
+    <ClInclude Include="Bmp24OptionsCreator.h">
+      <Filter>Creators\OptionsCreators</Filter>
+    </ClInclude>
+    <ClInclude Include="StringsDecorator.h">
+      <Filter>Parsers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">
