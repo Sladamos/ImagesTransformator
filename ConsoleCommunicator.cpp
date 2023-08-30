@@ -4,7 +4,6 @@
 
 ConsoleCommunicator::ConsoleCommunicator() : Communicator(std::shared_ptr<Displayer>(new ConsoleDisplayer()))
 {
-
 }
 
 std::string ConsoleCommunicator::handleInput()
@@ -17,5 +16,5 @@ std::string ConsoleCommunicator::handleInput()
 
 void ConsoleCommunicator::clearConsole()
 {
-	system("cls");
+	system("cls||clear");
 }

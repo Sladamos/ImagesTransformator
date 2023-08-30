@@ -4,7 +4,7 @@
 class ProgramEngine
 {
 public:
-	ProgramEngine(std::shared_ptr<Menu> menu);
+	ProgramEngine(std::shared_ptr<Menu> menu, std::shared_ptr<Notifier> programExitedNotifier);
 	void startProgram();
 	void turnOffProgram();
 private:

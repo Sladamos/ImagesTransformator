@@ -1,12 +1,16 @@
 #include "Menu.h"
 #include "MenuOptionsCreator.h"
+#include "StringsOperator.h"
+#include "OneArgNotifier.h"
 
 using namespace std;
 
-Menu::Menu(std::shared_ptr<Communicator> communicator) : communicator(communicator)
+Menu::Menu(shared_ptr<Communicator> communicator, const Config& appConfig, std::shared_ptr<Notifier> programExitedNotifier) : communicator(communicator)
 {
-	auto optionsCreator = MenuOptionsCreator(communicator);
-	options = optionsCreator.createOptions(this);
+	auto formatChangedNotifier = shared_ptr<OneArgNotifier<string>>(new OneArgNotifier<string>());
+	formatChangedNotifier->notified += [this](auto format) { this->onFormatChanged(format); };
+	auto optionsCreator = MenuOptionsCreator(communicator, appConfig, programExitedNotifier, formatChangedNotifier);
+	options = optionsCreator.createOptions();
 	auto formats = optionsCreator.getFormats();
 	auto changeFormatOption = options[formats[0]]["Format"];
 	changeFormatOption->execute();
@@ -34,28 +38,31 @@ shared_ptr<Option> Menu::selectMatchingOption(const string& handledInput)
 	try
 	{
 		int index = stoi(handledInput) - 1;
-		if (index < indexedOptions.size())
+		if (index < indexedOptions.size() && index >= 0)
+		{
 			return indexedOptions[index];
-		else
-			throw exception();
+		}
 	}
 	catch (exception& err)
 	{
-		return selectNamedOption(handledInput);
 	}
+	return selectNamedOption(handledInput);
 }
 
-void Menu::onFormatChanged(std::shared_ptr<std::string> newFormat)
+void Menu::onFormatChanged(shared_ptr<string> newFormat)
 {
 	namedOptions = options[*newFormat];
 	addNamedOptionsAsIndexed();
 }
 
-std::shared_ptr<Option> Menu::selectNamedOption(const std::string& handledInput)
+shared_ptr<Option> Menu::selectNamedOption(const string& handledInput)
 {
+	StringsOperator stringsOperator;
+	string handledName = stringsOperator.toLowerCase(handledInput);
 	for (auto option : namedOptions)
 	{
-		if (handledInput == option.first)
+		string optionName = stringsOperator.toLowerCase(option.first);
+		if (handledName == optionName)
 			return option.second;
 	}
 

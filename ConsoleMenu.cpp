@@ -1,11 +1,12 @@
 #include "ConsoleMenu.h"
 #include "ConsoleCommunicator.h"
+
 using namespace std;
 
-ConsoleMenu::ConsoleMenu() : Menu(shared_ptr<Communicator>(new ConsoleCommunicator()))
+ConsoleMenu::ConsoleMenu(const Config& appConfig, std::shared_ptr<Notifier> programExitedNotifier) : Menu(shared_ptr<Communicator>(new ConsoleCommunicator()), appConfig, programExitedNotifier)
 {
-
 }
+
 void ConsoleMenu::printOptions()
 {
 	stringstream ss;
@@ -17,9 +18,4 @@ void ConsoleMenu::printOptions()
 		ss << i + 1 << ". " << indexedOptions[i]->toString() << endl;
 	}
 	cout << ss.str();
-}
-
-void ConsoleMenu::clearConsole()
-{
-	system("cls");
 }

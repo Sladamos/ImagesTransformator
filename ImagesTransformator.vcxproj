@@ -29,26 +29,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -145,11 +145,13 @@
     <ClCompile Include="Bmp24Header.cpp" />
     <ClCompile Include="Bmp24HeadersOperator.cpp" />
     <ClCompile Include="Bmp24Loader.cpp" />
+    <ClCompile Include="Bmp24OptionsCreator.cpp" />
     <ClCompile Include="Bmp24Saver.cpp" />
     <ClCompile Include="Bmp24Transformator.cpp" />
     <ClCompile Include="ChangeFilterOption.cpp" />
     <ClCompile Include="ChangeFormatOption.cpp" />
     <ClCompile Include="Communicator.cpp" />
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="ConsoleCommunicator.cpp" />
     <ClCompile Include="ConsoleDisplayer.cpp" />
     <ClCompile Include="ConsoleFormatSelector.cpp" />
@@ -175,7 +177,9 @@
     <ClCompile Include="SelectOutputNameOption.cpp" />
     <ClCompile Include="SelectSourceNameOption.cpp" />
     <ClCompile Include="SobelMasksOperator.cpp" />
+    <ClCompile Include="StringsDecorator.cpp" />
     <ClCompile Include="StringsOperator.cpp" />
+    <ClCompile Include="ThreadPool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BitmapHeader.h" />
@@ -185,11 +189,13 @@
     <ClInclude Include="Bmp24Header.h" />
     <ClInclude Include="Bmp24HeadersOperator.h" />
     <ClInclude Include="Bmp24Loader.h" />
+    <ClInclude Include="Bmp24OptionsCreator.h" />
     <ClInclude Include="Bmp24Saver.h" />
     <ClInclude Include="Bmp24Transformator.h" />
     <ClInclude Include="ChangeFilterOption.h" />
     <ClInclude Include="ChangeFormatOption.h" />
     <ClInclude Include="Communicator.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="ConsoleCommunicator.h" />
     <ClInclude Include="ConsoleDisplayer.h" />
     <ClInclude Include="ConsoleFormatSelector.h" />
@@ -213,7 +219,9 @@
     <ClInclude Include="MasksParser.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuOptionsCreator.h" />
+    <ClInclude Include="Notifier.h" />
     <ClInclude Include="OneArgEvent.h" />
+    <ClInclude Include="OneArgNotifier.h" />
     <ClInclude Include="Option.h" />
     <ClInclude Include="OptionsCreator.h" />
     <ClInclude Include="ProgramEngine.h" />
@@ -224,7 +232,9 @@
     <ClInclude Include="SelectOutputNameOption.h" />
     <ClInclude Include="SelectSourceNameOption.h" />
     <ClInclude Include="SobelMasksOperator.h" />
+    <ClInclude Include="StringsDecorator.h" />
     <ClInclude Include="StringsOperator.h" />
+    <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="Transformator.h" />
     <ClInclude Include="TransformImageOption.h" />
   </ItemGroup>
@@ -238,6 +248,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </Xsd>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="config.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

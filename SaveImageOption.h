@@ -4,10 +4,15 @@ template <class I, class S>
 class SaveImageOption : public Option
 {
 public:
-	SaveImageOption(const std::string& optionName, std::shared_ptr<Communicator> communicator) : Option(optionName, communicator)
+	SaveImageOption(const std::string& optionName, std::shared_ptr<Communicator> communicator, const std::string& directory_path) : Option(optionName, communicator)
 	{
-		imagesSaver = std::shared_ptr<S>(new S());
+		imagesSaver = std::shared_ptr<S>(new S(directory_path));
 		destination = nullptr;
+	}
+
+	void connectNotifiers(std::shared_ptr<OneArgNotifier<I>> destinationChangedNotifier)
+	{
+		destinationChangedNotifier->notified += [this](auto destination) { this->onDestinationChanged(destination); };
 	}
 
 	virtual void execute() override
@@ -27,12 +32,12 @@ public:
 	{
 		return "Save transformated image";
 	}
-
+private:
 	void onDestinationChanged(std::shared_ptr<I> destination)
 	{
 		this->destination = destination;
 	}
-private:
+
 	std::shared_ptr<S> imagesSaver;
 	std::shared_ptr<I> destination;
 };

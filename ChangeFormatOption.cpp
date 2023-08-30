@@ -1,4 +1,6 @@
 #include <algorithm>
+#include <sstream>
+#include <string>
 #include "ChangeFormatOption.h"
 
 ChangeFormatOption::ChangeFormatOption(const std::string& name, std::shared_ptr<Communicator> communicator, const std::vector<std::string>& formats) :
@@ -6,40 +8,51 @@ ChangeFormatOption::ChangeFormatOption(const std::string& name, std::shared_ptr<
 {
     this->formats.push_back("Undo");
     currentFormat = nullptr;
-    formatChanged += [this](auto format) {this->onFormatChanged(format); };
+}
+
+void ChangeFormatOption::connectNotifiers(std::shared_ptr<OneArgNotifier<std::string>> formatChangedNotifier)
+{
+    this->formatChangedNotifier = formatChangedNotifier;
+    formatChangedNotifier->notified += [this](auto format) {this->onFormatChanged(format); };
 }
 
 void ChangeFormatOption::execute()
 {
     displayText("Select images format from below formats.");
-    displayText(getSupportedFormats());
-    auto format = std::shared_ptr<std::string>(new std::string(handleInput()));
+    displayLines(formats);
+    auto format = getSelectedFormat();
+
     if (*format != "Undo" && isFormatSupported(*format))
     {
-        formatChanged.invoke(format);
+        formatChangedNotifier->notifyListeners(format);
     }
     else if (currentFormat == nullptr)
     {
         format = std::shared_ptr<std::string>(new std::string(formats[0]));
-        formatChanged.invoke(format);
+        formatChangedNotifier->notifyListeners(format);
     }
 }
 
-std::string ChangeFormatOption::getSupportedFormats()
+std::shared_ptr<std::string> ChangeFormatOption::getSelectedFormat()
 {
-    std::string text;
-    for (auto format : formats)
+    auto format = std::shared_ptr<std::string>(new std::string(handleInput())); 
+    try
     {
-        text += format + "\n";
+        int index = std::stoi(*format) - 1;
+        if (index < formats.size() && index >= 0)
+        {
+            *format = formats[index];
+        }
     }
-    text.pop_back();
-    return text;
+    catch (std::exception& err)
+    {
+    }
+    return format;
 }
 
 bool ChangeFormatOption::isFormatSupported(const std::string& format)
 {
     return std::find(formats.begin(), formats.end(), format) != formats.end();
-    
 }
 
 void ChangeFormatOption::onFormatChanged(std::shared_ptr<std::string> newFormat)

@@ -6,9 +6,13 @@ template<class T>
 class ImagesLoader
 {
 public:
+	ImagesLoader(const std::string& directory_path) : directory_path(directory_path)
+	{
+	}
+
 	void loadImageContent(std::shared_ptr<T> image)	
 	{
-		std::ifstream imageFile(DIRECTORY_PATH + image->getName(), std::ios_base::binary);
+		std::ifstream imageFile(directory_path + image->getName(), std::ios_base::binary);
 		if (imageFile.is_open())
 		{
 			prepareAndLoadContent(imageFile, image);
@@ -17,6 +21,6 @@ public:
 	}
 private:
 	virtual void prepareAndLoadContent(std::ifstream& imageFile, std::shared_ptr<T> image) = 0;
-	const std::string DIRECTORY_PATH = "./gfx/";
+	const std::string directory_path;
 };
 

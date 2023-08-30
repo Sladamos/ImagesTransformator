@@ -1,5 +1,9 @@
 #include "Bmp24Loader.h"
 
+Bmp24Loader::Bmp24Loader(const std::string& directory_path) : ImagesLoader<Bmp24>(directory_path)
+{
+}
+
 void Bmp24Loader::prepareAndLoadContent(std::ifstream& bitmapFile, std::shared_ptr<Bmp24> bitmap)
 {
 	auto bitmapHeader = bitmap->getImageHeader();

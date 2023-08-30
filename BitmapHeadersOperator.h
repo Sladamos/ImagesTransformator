@@ -4,6 +4,11 @@
 template<class T, typename H>
 class BitmapHeadersOperator : public HeadersOperator<T, H>
 {
+public:
+	BitmapHeadersOperator(const std::string& directory_path) : HeadersOperator<T,H>(directory_path)
+	{
+
+	}
 protected:
 	std::shared_ptr<H> loadImageHeader(std::ifstream& bitmapFile) override
 	{

@@ -1,6 +1,7 @@
 #include "Bmp24Transformator.h"
 
-Bmp24Transformator::Bmp24Transformator(const std::vector<Mask>& masks) : Transformator(masks)
+Bmp24Transformator::Bmp24Transformator(const std::vector<Mask>& masks, Config transformatorConfig) : Transformator(masks),
+maxSectorWidth(transformatorConfig["max_sector_width"]), maxSectorHeight(transformatorConfig["max_sector_height"]), threadPool(transformatorConfig["number_of_threads"])
 {
 }
 
@@ -9,7 +10,9 @@ std::shared_ptr<Bmp24> Bmp24Transformator::transformateImage(std::shared_ptr<Bmp
 	std::shared_ptr<Bmp24> output = nullptr;
 	currentSource = source;
 	if(source != nullptr)
+	{
 		output = transformSource();
+	}
 	currentSource = nullptr;
 	return output;
 }
@@ -18,15 +21,37 @@ std::shared_ptr<Bmp24> Bmp24Transformator::transformSource()
 {
 	std::shared_ptr<Bmp24> output = std::shared_ptr<Bmp24>(new Bmp24(*currentSource));
 	auto content = currentSource->getImageContent();
-	int width = content->getWidth(), height = content->getHeight();
 	Pixels outputPixels = output->getImageContent()->getPixels();
-	Pixels sourcePixels = content->getPixels();
+	int sourceWidth = content->getWidth(), sourceHeight = content->getHeight();
+	int numberOfSectorsInRow = ceil((double)sourceWidth / maxSectorWidth), numberOfSectorsInCol = ceil((double)sourceHeight / maxSectorHeight);
 
-	for (int y = 0; y < height; y++)
-		for (int x = 0; x < width; x++)
-			outputPixels[y][x] = transformatePixel(sourcePixels[y][x]);
-
+	threadPool.start();
+	for (int y = 0, sectorStartY = 0; y < numberOfSectorsInCol; y++, sectorStartY += maxSectorHeight)
+	{
+		int sectorEndY = fmin(sectorStartY + maxSectorHeight, sourceHeight);
+		for (int x = 0, sectorStartX = 0; x < numberOfSectorsInRow; x++, sectorStartX += maxSectorWidth)
+		{
+			int sectorEndX = fmin(sectorStartX + maxSectorWidth, sourceWidth);
+			auto transformateSectorTask = [this, outputPixels, sectorStartX, sectorStartY, sectorEndX, sectorEndY]() { this->transformSector(outputPixels, sectorStartX, sectorStartY, sectorEndX, sectorEndY); };
+			threadPool.queueTask(transformateSectorTask);
+		}
+		
+	}
+	threadPool.safeExit();
 	return output;
+}
+
+void Bmp24Transformator::transformSector(Pixels outputPixels, int xStart, int yStart, int xEnd, int yEnd)
+{
+	auto content = currentSource->getImageContent();
+	Pixels sourcePixels = content->getPixels();
+	for (int y = yStart; y < yEnd; y++)
+	{
+		for (int x = xStart; x < xEnd; x++)
+		{
+			outputPixels[y][x] = transformatePixel(sourcePixels[y][x]);
+		}
+	}
 }
 
 Pixel Bmp24Transformator::transformatePixel(const Pixel& sourcePixel)
@@ -49,13 +74,14 @@ uint8_t Bmp24Transformator::transformatePixelColor(const Pixel& sourcePixel, Pix
 
 int Bmp24Transformator::transformateColorByMask(const Pixel& sourcePixel, const Mask& mask, Pixel::Color color)
 {
-	int colorValue = 0, maskSize = mask.getSize(), y = sourcePixel.y, x = sourcePixel.x;
-
-	for (int i = y - maskSize / 2, z = 0; i <= y + maskSize / 2; i++, z++)
-		for (int j = x - maskSize / 2, f = 0; j <= x + maskSize / 2; j++, f++)
+	int colorValue = 0, y = sourcePixel.y, x = sourcePixel.x;
+	int maskHeight = mask.getNumberOfRows(), maskWidth = mask.getNumberOfCols();
+	const int maskLeftSide = maskWidth / 2, maskUpSide = maskHeight / 2, maskRightSide = ceil((double)maskWidth / 2), maskDownSide = ceil((double)maskHeight / 2);
+	for (int i = y - maskUpSide, z = 0; i < y + maskDownSide; i++, z++)
+		for (int j = x - maskLeftSide, f = 0; j < x + maskRightSide; j++, f++)
 		{
 			Pixel neighbourPixel = getNeighbourPixel(i, j);
-			colorValue += neighbourPixel.getColorValue(color) * mask[z * maskSize + f];
+			colorValue += neighbourPixel.getColorValue(color) * mask[z * maskWidth + f];
 		}
 	return colorValue;
 }

@@ -1,31 +1,55 @@
+#include <algorithm>
 #include "ChangeFilterOption.h"
 #include "SobelMasksOperator.h"
 #include "DampelMasksOperator.h"
 
 using namespace std;
 
-ChangeFilterOption::ChangeFilterOption(const string& name, shared_ptr<Communicator> communicator) : 
+ChangeFilterOption::ChangeFilterOption(const string& name, shared_ptr<Communicator> communicator, const std::string& masksPath) :
     Option(name, communicator)
 {
-    auto masksOperator = shared_ptr<MasksOperator>(new SobelMasksOperator());
+    auto masksOperator = shared_ptr<MasksOperator>(new SobelMasksOperator(masksPath));
     filters.insert({ masksOperator->getName(), masksOperator });
-    masksOperator = shared_ptr<MasksOperator>(new DampelMasksOperator());
+    masksOperator = shared_ptr<MasksOperator>(new DampelMasksOperator(masksPath));
     filters.insert({ masksOperator->getName(), masksOperator });
+}
+
+void ChangeFilterOption::connectNotifiers(std::shared_ptr<OneArgNotifier<std::vector<Mask>>> filterChangedNotifier)
+{
+    this->filterChangedNotifier = filterChangedNotifier;
 }
 
 void ChangeFilterOption::execute()
 {
     displayText("Select transformator filter from below filters.");
-    displayText(getSupportedFilters());
-    auto filter = shared_ptr<string>(new string(handleInput()));
+    displayLines(getSupportedFilters());
+    auto filter = getSelectedFilter();
     if (*filter != "Undo" && isFilterSupported(*filter))
     {
         currentFilter = filter;
         auto masksOperator = filters[*filter];
         auto masks = masksOperator->getMasks();
-        filterChanged.invoke(shared_ptr<vector<Mask>>(new vector<Mask>(masks)));
+        filterChangedNotifier->notifyListeners(shared_ptr<vector<Mask>>(new vector<Mask>(masks)));
         displayText("Filter loaded properly");
     }
+}
+
+shared_ptr<string> ChangeFilterOption::getSelectedFilter()
+{
+    auto filter = shared_ptr<string>(new string(handleInput()));
+    auto filters = getSupportedFilters();
+    try
+    {
+        int index = stoi(*filter) - 1;
+        if (index < filters.size() && index >= 0)
+        {
+            *filter = filters[index];
+        }
+    }
+    catch (exception& err)
+    {
+    }
+    return filter;
 }
 
 string ChangeFilterOption::getDescription()
@@ -40,14 +64,10 @@ string ChangeFilterOption::getDescription()
     }
 }
 
-string ChangeFilterOption::getSupportedFilters()
+vector<string> ChangeFilterOption::getSupportedFilters()
 {
-    string supportedFilters;
-    for (auto& kv : this->filters)
-    {
-        supportedFilters += kv.first + "\n";
-    }
-    supportedFilters.pop_back();
+    vector<string> supportedFilters;
+    transform(filters.begin(), filters.end(), back_inserter(supportedFilters), [](auto filter) {return filter.first; });
     return supportedFilters;
 }
 

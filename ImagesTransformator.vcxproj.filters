@@ -72,10 +72,10 @@
       <Filter>Engines</Filter>
     </ClCompile>
     <ClCompile Include="ConsoleMenu.cpp">
-      <Filter>Menus</Filter>
+      <Filter>Menu</Filter>
     </ClCompile>
     <ClCompile Include="Menu.cpp">
-      <Filter>Menus</Filter>
+      <Filter>Menu</Filter>
     </ClCompile>
     <ClCompile Include="Option.cpp">
       <Filter>Options</Filter>
@@ -107,7 +107,19 @@
     <ClCompile Include="ChangeFilterOption.cpp">
       <Filter>Options</Filter>
     </ClCompile>
-    <ClCompile Include="SelectSourceNameOption.cpp" />
+    <ClCompile Include="SelectSourceNameOption.cpp">
+      <Filter>Options</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadPool.cpp" />
+    <ClCompile Include="Config.cpp">
+      <Filter>Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Bmp24OptionsCreator.cpp">
+      <Filter>Creators\OptionsCreators</Filter>
+    </ClCompile>
+    <ClCompile Include="StringsDecorator.cpp">
+      <Filter>Parsers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Image.h">
@@ -201,10 +213,10 @@
       <Filter>Engines</Filter>
     </ClInclude>
     <ClInclude Include="ConsoleMenu.h">
-      <Filter>Menus</Filter>
+      <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">
-      <Filter>Menus</Filter>
+      <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="Option.h">
       <Filter>Options</Filter>
@@ -254,7 +266,25 @@
     <ClInclude Include="ChangeFilterOption.h">
       <Filter>Options</Filter>
     </ClInclude>
-    <ClInclude Include="SelectSourceNameOption.h" />
+    <ClInclude Include="SelectSourceNameOption.h">
+      <Filter>Options</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPool.h" />
+    <ClInclude Include="Config.h">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="OneArgNotifier.h">
+      <Filter>Events\Notifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="Notifier.h">
+      <Filter>Events\Notifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="Bmp24OptionsCreator.h">
+      <Filter>Creators\OptionsCreators</Filter>
+    </ClInclude>
+    <ClInclude Include="StringsDecorator.h">
+      <Filter>Parsers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">
@@ -299,9 +329,6 @@
     <Filter Include="Engines">
       <UniqueIdentifier>{babebeee-1ae4-4737-9dca-bc08b794aad1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Menus">
-      <UniqueIdentifier>{25396c8a-69a7-442b-a691-4b183e6fa67d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Options">
       <UniqueIdentifier>{83568457-463f-443e-a587-67d50cec477b}</UniqueIdentifier>
     </Filter>
@@ -317,6 +344,15 @@
     <Filter Include="Creators\OptionsCreators">
       <UniqueIdentifier>{cd208e3d-0bd8-41e7-9cc1-0ce649e757e2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{25396c8a-69a7-442b-a691-4b183e6fa67d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{f625c633-92f4-4eaf-b873-056afd58e521}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Notifiers">
+      <UniqueIdentifier>{5a6d2c55-2253-49f4-8119-7925a5b6cba0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Xsd Include="MasksSchema.xsd" />
@@ -325,5 +361,10 @@
     <Xml Include="Masks.xml">
       <Filter>SimpleElements</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="config.json">
+      <Filter>Config</Filter>
+    </None>
   </ItemGroup>
 </Project>

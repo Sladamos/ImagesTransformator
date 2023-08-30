@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include <string>
 #include <sstream>
 #include <iomanip>
@@ -14,10 +15,12 @@ public:
 protected:
 	virtual std::string getDescription() = 0;
 	void displayText(const std::string& text);
+	void displayLines(const std::vector<std::string>& lines);
 	void displayError(const std::string& text);
 	std::string handleInput();
 private:
 	std::string name;
 	std::shared_ptr<Communicator> communicator;
+	const static int EXPECTED_OPTION_WIDTH;
 };
 

@@ -3,12 +3,11 @@
 #include <sstream>
 #include "Menu.h"
 #include "Communicator.h"
+#include "Config.h"
 class ConsoleMenu : public Menu
 {
 public:
-	ConsoleMenu();
+	ConsoleMenu(const Config& appConfig, std::shared_ptr<Notifier> programExitedNotifier);
 	virtual void printOptions() override;
-private:
-	void clearConsole();
 };
 

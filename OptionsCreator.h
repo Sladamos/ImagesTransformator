@@ -1,8 +1,8 @@
 #pragma once
 #include <map>
 #include <string>
-template <class T>
+#include "Option.h"
 class OptionsCreator
 {
-	virtual std::map<std::string, std::map<std::string, std::shared_ptr<Option>>> createOptions(T* instance) = 0;
+	virtual std::map<std::string, std::map<std::string, std::shared_ptr<Option>>> createOptions() = 0;
 };

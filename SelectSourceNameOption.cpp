@@ -4,7 +4,13 @@ SelectSourceNameOption::SelectSourceNameOption(const std::string& name, std::sha
     Option(name, communicator)
 {
     sourceName = nullptr;
-    sourceNameChanged += [this](auto name) {this->onSourceNameChanged(name); };
+}
+
+void SelectSourceNameOption::connectNotifiers(std::shared_ptr<OneArgNotifier<std::string>> formatChangedNotifier, std::shared_ptr<OneArgNotifier<std::string>> sourceNameChangedNotifier)
+{
+    formatChangedNotifier->notified += [this](auto format) {this->onFormatChanged(); };
+    sourceNameChangedNotifier->notified += [this](auto name) {this->onSourceNameChanged(name); };
+    this->sourceNameChangedNotifier = sourceNameChangedNotifier;
 }
 
 void SelectSourceNameOption::execute()
@@ -12,7 +18,7 @@ void SelectSourceNameOption::execute()
     displayText("Give source image name.");
     std::string imageName = handleInput();
     auto sourceName = std::shared_ptr<std::string>(new std::string(imageName));
-    sourceNameChanged.invoke(sourceName);
+    sourceNameChangedNotifier->notifyListeners(sourceName);
 }
 
 std::string SelectSourceNameOption::getDescription()
@@ -29,7 +35,7 @@ std::string SelectSourceNameOption::getDescription()
 
 void SelectSourceNameOption::onFormatChanged(std::shared_ptr<std::string> newFormat)
 {
-    sourceNameChanged.invoke(nullptr);
+    sourceNameChangedNotifier->notifyListeners(nullptr);
 }
 
 void SelectSourceNameOption::onSourceNameChanged(std::shared_ptr<std::string> newSourceName)
